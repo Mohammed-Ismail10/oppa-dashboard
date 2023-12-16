@@ -53,7 +53,7 @@ export default function AddProperty() {
             <div className='text-center d-flex flex-column align-items-center'>
               <span className='fs15 pb-2'>إضافة صورة Privileges</span>
               <label className={`${style.imgPick} p-2 curser-pointer d-inline ${uploadImage ? 'bg-green' : ''}`} htmlFor="addImage">
-                <i class="fa-regular fa-image fs-3 pt-1"></i>
+                <i className="fa-regular fa-image fs-3 pt-1"></i>
                 <span className='text-main fs15 pt-1 d-block'>رفع الصورة</span>
                 <input className="d-none"
                   onChange={(event) => {
@@ -73,11 +73,11 @@ export default function AddProperty() {
           <div className="row">
             <div className="col-6 py-2">
               <label className='fs15 mb-2' htmlFor="fullName">إسم الPrivileges بالعربي</label>
-              <input className={`${style.holder} form-control`} name='fullName' type="text" id='fullName' placeholder='من فضلك ادخل اسمك الكامل' />
+              <input className={`${style.holder} form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الPrivileges fhguvfd' />
             </div>
             <div className="col-6 py-2">
               <label className='fs15 mb-2' htmlFor="userName">إسم الPrivileges بالEN</label>
-              <input className={`${style.holder} form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال اسم المستخدم' />
+              <input className={`${style.holder} form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال إسم الPrivileges بالEN' />
             </div>
 
             <div dir='ltr' className="col-12 py-4">
@@ -85,7 +85,8 @@ export default function AddProperty() {
               <button onClick={() => {
                 setUploadImage(false);
                 setUploadImageDone('');
-              }} className='btn bg-white text-red me-2 fs15 fw-bold' type="reset">إعادة ضبط</button>
+                formik.resetForm();
+              }} className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
             </div>
           </div>
         </form>

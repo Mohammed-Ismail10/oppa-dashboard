@@ -117,8 +117,9 @@ export default function AddVip() {
                   setUploadSvga(false);
                   setUploadSvgaDone('');
                   setUploadSvgaError(false);
+                  formik.resetForm();
                 }}
-                className='btn bg-white text-red me-2 fs15 fw-bold' type="reset">إعادة ضبط</button>
+                className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
             </div>
           </div>
         </form>

@@ -28,6 +28,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import ShowProperties from './components/Vip/ShowProperties.jsx';
 import AddProperty from './components/Vip/AddProperty.jsx';
 import EnableFeature from './components/Vip/EnableFeature.jsx';
+import AddEnableFeature from './components/Vip/AddEnableFeature.jsx';
 
 
 
@@ -62,6 +63,7 @@ function App() {
         { path: 'showproperties', element: <ShowProperties /> },
         { path: 'addproperty', element: <AddProperty /> },
         { path: 'enablefeature', element: <EnableFeature /> },
+        { path: 'addenablefeature', element: <AddEnableFeature /> },
         {
           path: 'items', element: <Items />, children: [
             { index: true, element: <TableItems /> },

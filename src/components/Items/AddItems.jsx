@@ -5,8 +5,6 @@ import { useFormik } from 'formik';
 
 
 export default function AddItems() {
-  const [activeState, setActiveState] = useState(false);
-
   function uploadItemsSubmit(values) {
     console.log(values);
   }
@@ -84,7 +82,7 @@ export default function AddItems() {
               <input className={`${style.holder} form-control`}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.name}
+                value={formik.values.giftName}
                 name='giftName'
                 type="text"
                 id='nameGift'
@@ -124,7 +122,8 @@ export default function AddItems() {
                 setUploadSvga(false);
                 setUploadSvgaDone('');
                 setUploadSvgaError(false);
-              }} className='btn bg-white text-red me-2 fs15 fw-bold' type="reset">إعادة ضبط</button>
+                formik.resetForm();
+              }} className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
             </div>
           </div>
         </form>

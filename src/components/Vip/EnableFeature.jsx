@@ -66,16 +66,6 @@ export default function EnableFeature() {
       classes: 'text-main fs15',
       // attrs: () => ({ 'dir': `ltr` }),
     },
-    // {
-    //   dataField: 'privImg', //must be same name of property in row which come from api
-    //   text: '',
-    //   headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
-    //     <i className="bi bi-file-image me-2"></i>
-    //     صورة الPrivileges
-    //   </span>,
-    //   classes: 'text-main fs15',
-    //   formatter: (cell, row) => <img loading='lazy' src={row.privImg} width={35} alt={`Flag of ${row.vipName}`} />,
-    // },
     {
       dataField: 'giftState', //must be same name of property in row which come from api
       text: 'giftState',
@@ -137,33 +127,37 @@ export default function EnableFeature() {
         <Navbar>
           <Container>
             <Nav className="w-100">
-              <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 border-0 btn fs12 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تغير المعرف (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+              <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mx-1 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة VIP
               </NavLink>
-              <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+              <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-1 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 عرض الخصائص
               </NavLink>
-              <NavLink to={''} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+              <NavLink to={''} className={`${style.shadowBtn} ${style.addItemHover} mx-1 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تمكين خاصية
+              </NavLink>
+              <NavLink to={'/addenablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                إضافة تمكين خاصية
               </NavLink>
               <NavLink to={''} onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} rounded-3 ms-auto border-0 btn fs12 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
                 مسح الكل

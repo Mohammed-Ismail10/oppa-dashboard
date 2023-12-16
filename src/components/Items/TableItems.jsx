@@ -148,11 +148,12 @@ export default function TableItems() {
   function getItem(page) {
     return axios.get(`http://localhost:8080/gifts/dashboard?limit=9&page=${page}`);
   }
-  let { data, isLoading, refetch } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
   console.log(data);
+  console.log(isError);
 
 
 
