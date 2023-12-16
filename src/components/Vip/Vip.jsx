@@ -54,7 +54,15 @@ export default function Vip() {
                 </NavLink>
                 <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
                   <i className="bi bi-plus-circle me-2"></i>
-                  إضافة
+                  إضافة VIP
+                </NavLink>
+                <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+                  <i className="bi bi-plus-circle me-2"></i>
+                  عرض الخصائص
+                </NavLink>
+                <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+                  <i className="bi bi-plus-circle me-2"></i>
+                  تمكين خاصية
                 </NavLink>
                 <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} rounded-3 ms-auto border-0 btn fs12 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
                   مسح الكل

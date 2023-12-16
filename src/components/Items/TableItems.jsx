@@ -46,8 +46,8 @@ const selectRow = {
 
 
 export default function TableItems() {
-  const [activeState, setActiveState] = useState(true);
-  // setActiveState(false);
+  const [activeState, setActiveState] = useState(1);
+  // setActiveState(0);
   // console.log(activeState);
 
 
@@ -56,7 +56,14 @@ export default function TableItems() {
     // console.log(activeState)
   }, [])
 
-  const [prev, setPrev] = useState(null);
+  // const [prev, setPrev] = useState(null);
+
+
+  function update(id) {
+    console.log(id)
+  }
+
+
 
 
   const columns = [
@@ -105,21 +112,20 @@ export default function TableItems() {
         حالة الهدايا
       </span>,
       classes: 'text-main fs15',
-      formatter: (_, { id }) => <span
-        onClick={() => {
-          setActiveState((prevState) => {
-            console.log('prevState: ', !prevState);
-            setPrev(!prevState);
-            console.log('prevState: ', !prevState);
-            console.log('prev: ', prev);
-          });
-          console.log('activeState: ', activeState);
-          // console.log(id);
-        }}
-        className={`badge py-2 px-4 curser-pointer ${activeState ? 'bg-green' : 'bg-red'}`}
-      >
-        {activeState ? 'نشيط' : 'غير نشيط'}
-      </span>
+      formatter: (_, { id }) => activeState == 1 ? <span onClick={() => {
+        setActiveState(0);
+        // console.log(activeState);
+        update(id);
+      }} className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> : <span className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
+      // <span
+      //   onClick={() => {
+      //     setActiveState(0);
+      //     console.log(activeState);
+      //   }}
+      //   className={`badge py-2 px-4 curser-pointer ${activeState == 1 ? 'bg-green' : 'bg-red'}`}
+      // >
+      //   {activeState == 1 ? 'نشيط' : 'غير نشيط'}
+      // </span>
 
 
     },

@@ -25,6 +25,7 @@ import AddVip from './components/Vip/AddVip.jsx';
 import { Provider } from 'react-redux';
 import { store } from './components/Redux/Store.js';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import ShowProperties from './components/Vip/ShowProperties.jsx';
 
 
 
@@ -56,6 +57,7 @@ function App() {
         { path: 'فئات الغرف', element: <RoomCategories /> },
         { path: 'التارجيت', element: <Target /> },
         { path: 'ضبط المستخدم', element: <UserSetting /> },
+        { path: 'showproperties', element: <ShowProperties /> },
         {
           path: 'items', element: <Items />, children: [
             { index: true, element: <TableItems /> },
