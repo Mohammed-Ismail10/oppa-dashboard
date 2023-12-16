@@ -1,0 +1,371 @@
+import React, { useEffect, useState } from 'react';
+import style from './Items.module.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { useDispatch } from 'react-redux';
+import BootstrapTable from 'react-bootstrap-table-next';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+
+// For column checkbox
+const selectRow = {
+  mode: 'checkbox',
+  // clickToSelect: true,
+  selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
+    <div className="border badge p-0">
+      <input
+        type="checkbox"
+        className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none'
+        ref={(input) => {
+          if (input) input.indeterminate = indeterminate;
+        }}
+        {...rest}
+
+        onChange={(e) => console.log(e.target)}
+      />
+      <span className="py-2 badge text-main rounded fs13 border">
+        #
+      </span>
+    </div>
+  ),
+  selectionRenderer: ({ mode, ...rest }) => (
+    <>
+      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
+        onChange={(e) => console.log(e.target.checked)} />
+      <span className='text-main fs15'>{rest.rowIndex + 1}</span>
+    </>
+  )
+};
+
+
+// const rows = [
+//   { id: 1, giftName: 'سيارة', getGift: 'شراء', giftType: 'هدية دخول خاصة', giftPrice: 10000, giftState: 'نشيط', giftImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", time: '7 أيام' },
+//   { id: 2, giftName: 'سيارة', getGift: 'شراء', giftType: 'هدية دخول خاصة', giftPrice: 10000, giftState: 'غير نشيط', giftImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", time: '7 أيام' },
+
+// ];
+
+
+export default function TableItems() {
+  const [activeState, setActiveState] = useState(true);
+  // setActiveState(false);
+  // console.log(activeState);
+
+
+  useEffect(() => {
+    // setActiveState(false);
+    // console.log(activeState)
+  }, [])
+
+  const [prev, setPrev] = useState(null);
+
+
+  const columns = [
+    {
+      dataField: 'giftName', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="fa-solid fa-gift me-2"></i>
+        إسم الهدايا
+      </span>,
+      classes: 'text-main fs15',
+    },
+    {
+      dataField: 'getGift', //must be same name of property in row which come from api
+      text: 'getGift',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="fa-solid fa-hand-holding-heart me-2"></i>
+        الحصول على الهدايا
+      </span>,
+      classes: 'text-main fs15',
+      // attrs: () => ({ 'dir': `ltr` }),
+    },
+    {
+      dataField: 'giftType', //must be same name of property in row which come from api
+      text: 'giftType',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="fa-solid fa-arrow-down-short-wide me-2"></i>
+        نوع الهدايا
+      </span>,
+      classes: 'text-main fs15',
+    },
+    {
+      dataField: 'giftPrice', //must be same name of property in row which come from api
+      text: 'giftPrice',
+      headerFormatter: () => <span className='py-1 badge text-main rounded fs13 border'>
+        <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
+        سعر الهدية
+      </span>,
+      classes: 'text-main fs15',
+    },
+    {
+      dataField: 'giftState', //must be same name of property in row which come from api
+      text: 'giftState',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="bi bi-exclamation-circle me-2"></i>
+        حالة الهدايا
+      </span>,
+      classes: 'text-main fs15',
+      formatter: (_, { id }) => <span
+        onClick={() => {
+          setActiveState((prevState) => {
+            console.log('prevState: ', !prevState);
+            setPrev(!prevState);
+            console.log('prevState: ', !prevState);
+            console.log('prev: ', prev);
+          });
+          console.log('activeState: ', activeState);
+          // console.log(id);
+        }}
+        className={`badge py-2 px-4 curser-pointer ${activeState ? 'bg-green' : 'bg-red'}`}
+      >
+        {activeState ? 'نشيط' : 'غير نشيط'}
+      </span>
+
+
+    },
+    {
+      dataField: 'giftImg', //must be same name of property in row which come from api
+      text: 'giftImg',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="bi bi-file-image me-2"></i>
+        صورة الهدايا
+      </span>,
+      classes: 'text-main fs15',
+      formatter: (cell, row) => <img loading='lazy' src={row.giftImg} width={35} alt={`Flag of ${row.giftName}`} />,
+    },
+    {
+      dataField: 'time', //must be same name of property in row which come from api
+      text: 'time',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="fa-regular fa-clock me-2"></i>
+        الوقت
+      </span>,
+      classes: 'text-main fs15',
+    },
+    {
+      dataField: 'edit', //must be same name of property in row which come from api
+      text: 'edit',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+        <i className="fa-solid fa-pen me-2"></i>
+        التعديل والحذف والطباعة
+      </span>,
+      classes: 'text-main fs15',
+      formatter: (_, { id }) => <>
+        <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+        <i onClick={() => dispatch(handleShowDeleteRow(id))} className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
+        <i className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+      </>
+    },
+  ];
+
+  let dispatch = useDispatch();
+
+
+
+
+
+  function getItem() {
+    return axios.get(`https://fakestoreapi.com/products`);
+  }
+
+  let { data, isLoading } = useQuery('item', getItem, {
+    cacheTime: 60000,
+    refetchInterval: 300000,
+  });
+  // console.log('isFetching', isFetching);
+  // console.log(data);
+  // rowData = data?.data;
+  // console.log(rowData);
+
+  return (
+    <>
+
+      {/* Check if data is loading */}
+      {isLoading ? (
+        <></>
+      ) : (
+        <>
+          {/* table */}
+          <BootstrapTable
+            keyField="id"
+            data={data.data}
+            columns={columns}
+            bordered={false}
+            hover
+            classes={`${style.tableHeader} text-center table-borderless my-4 `}
+            selectRow={selectRow}
+          />
+
+
+          {/* pagination */}
+          <div className='d-flex justify-content-center align-items-center'>
+            <div className='mx-2'>
+              <span className='text-main fs15'>الصفحة</span>
+            </div>
+            <div className='mx-2 d-flex align-items-center'>
+              <i className="fa-solid fa-caret-right curser-pointer"></i>
+              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
+              <i className="fa-solid fa-caret-left curser-pointer"></i>
+            </div>
+            <div className='mx-2'>
+              <Dropdown>
+                <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                  30
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item >25</Dropdown.Item>
+                  <Dropdown.Item >20</Dropdown.Item>
+                  <Dropdown.Item >10</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
+        </>
+      )}
+
+    </>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <div className='pt-4 pb-3'>
+        <Table hover className='text-center table-borderless'>
+          <thead>
+            <tr>
+              <th className='p-0 '>
+                <div className="border badge p-0">
+                  <input className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none' type="checkbox" />
+                  <span className="py-2 badge text-main rounded fs13 border">
+                    #
+                  </span>
+                </div>
+              </th>
+
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="fa-solid fa-gift me-2"></i>
+                إسم الهدايا
+              </span></th>
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="fa-solid fa-hand-holding-heart me-2"></i>
+                الحصول على الهدايا
+              </span></th>
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="fa-solid fa-arrow-down-short-wide me-2"></i>
+                نوع الهدايا
+              </span></th>
+              <th className='p-0 '><span className=" py-1 badge text-main rounded fs13 border">
+                <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
+                سعر الهدية
+              </span></th>
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="bi bi-exclamation-circle me-2"></i>
+                حالة الهدايا
+              </span></th>
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="bi bi-file-image me-2"></i>
+                صورة الهدايا
+              </span></th>
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="fa-regular fa-clock me-2"></i>
+                الوقت
+              </span></th>
+              <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
+                <i className="fa-solid fa-pen me-2"></i>
+                التعديل والحذف والطباعة
+              </span></th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td className='text-main fs15'>
+                <input className='form-check-input me-3 shadow-none border-1 border-dark-subtle' type="checkbox" />
+                1
+              </td>
+              <td className='text-main fs15'>سيارة</td>
+              <td className='text-main fs15'>شراء</td>
+              <td className='text-main fs15'>هدية دخول خاصة</td>
+              <td className='text-main fs15'>10000</td>
+              <td className='text-main fs15'><span className='badge bg-green py-2 px-4'>نشيط</span></td>
+              <td className='text-main fs15'><img src={image} alt="صور الهدايا" width={35} loading='lazy' /></td>
+              <td className='text-main fs15'>7 أيام</td>
+              <td className='text-main fs15'>
+                <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+                <i className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
+                <i className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+              </td>
+            </tr>
+            <tr>
+              <td className='text-main fs15'>
+                <input className='form-check-input me-3 shadow-none border-1 border-dark-subtle' type="checkbox" />
+                1
+              </td>
+              <td className='text-main fs15'>سيارة</td>
+              <td className='text-main fs15'>شراء</td>
+              <td className='text-main fs15'>هدية دخول خاصة</td>
+              <td className='text-main fs15'>10000</td>
+              <td className='text-main fs15'><span className='badge bg-green py-2 px-4'>نشيط</span></td>
+              <td className='text-main fs15'><img src={image} alt="صور الهدايا" width={35} loading='lazy' /></td>
+              <td className='text-main fs15'>7 أيام</td>
+              <td className='text-main fs15'>
+                <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+                <i className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
+                <i className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+              </td>
+            </tr>
+            <tr>
+              <td className='text-main fs15'>
+                <input className='form-check-input me-3 shadow-none border-1 border-dark-subtle' type="checkbox" />
+                1
+              </td>
+              <td className='text-main fs15'>سيارة</td>
+              <td className='text-main fs15'>شراء</td>
+              <td className='text-main fs15'>هدية دخول خاصة</td>
+              <td className='text-main fs15'>10000</td>
+              <td className='text-main fs15'><span className='badge bg-green py-2 px-4'>نشيط</span></td>
+              <td className='text-main fs15'><img src={image} alt="صور الهدايا" width={35} loading='lazy' /></td>
+              <td className='text-main fs15'>7 أيام</td>
+              <td className='text-main fs15'>
+                <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+                <i className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
+                <i className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </div> */}

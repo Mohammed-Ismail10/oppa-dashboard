@@ -1,0 +1,4 @@
+.radio:checked + .iconGender{
+  background-color: #0b6ac8 !important;
+  color: white;
+}

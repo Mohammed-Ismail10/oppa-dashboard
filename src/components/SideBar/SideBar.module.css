@@ -1,0 +1,17 @@
+.fs15 {
+  font-size: 15px !important;
+}
+
+.accordionN {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.textSub{
+  color: #C0C0C0;
+}
+
+.logoutHover:hover{
+  background-color: #F8D7DA !important;
+}

@@ -1,13 +1,97 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap");
+:root {
+  --text-main: #1c274c;
+  --bg-blue: #0b6ac8;
+  --bg-red: #fe130f;
+  --bg-green: #0fe50b;
+  --text-input: #c2c2c2;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: "Cairo", sans-serif !important;
+  font-weight: bold !important;
+  /* height: 100% !important; */
+}
+
+::placeholder {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #c2c2c2 !important;
+  direction: rtl !important;
+}
+::-webkit-input-placeholder {
+  text-align: right;
+}
+
+.text-main {
+  color: var(--text-main) !important;
+}
+
+.text-red {
+  color: var(--bg-red) !important;
+}
+
+.bg-main {
+  background-color: var(--text-main) !important;
+}
+
+.bg-blue {
+  background-color: var(--bg-blue) !important;
+}
+
+.bg-red {
+  background-color: var(--bg-red) !important;
+}
+
+.bg-green {
+  background-color: var(--bg-green) !important;
+}
+
+.subSideBarActive.active {
+  color: #707070 !important;
+}
+
+.sideBarActive.active {
+  border-right: 15px solid var(--text-main) !important;
+}
+
+.itemsActive.active {
+  background-color: var(--bg-blue) !important;
+  color: white !important;
+}
+.addActive.active {
+  background-color: #27ae61 !important;
+  color: white !important;
+}
+
+.deleteActive.active {
+  background-color: var(--bg-red) !important;
+  color: white !important;
+}
+
+.fs30 {
+  font-size: 30px !important;
+}
+.fs15 {
+  font-size: 15px !important;
+}
+.fs13 {
+  font-size: 13px !important;
+}
+.fs12 {
+  font-size: 12px !important;
+}
+
+.curser-pointer {
+  cursor: pointer;
+}
+
+.numPage {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.deleteHover:hover {
+  background-color: var(--bg-red) !important;
+  color: white !important;
 }

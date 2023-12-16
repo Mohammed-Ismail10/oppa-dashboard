@@ -1,0 +1,20 @@
+.shadowBtn{
+  box-shadow: 0 0 3px 0.1px gray !important;
+}
+
+.borderDropdown{
+  border-bottom: 3px solid #1C274C !important;
+}
+
+.itemsHover:hover{
+  background-color: #0b6ac8 !important;
+  color: white !important;
+}
+.addItemHover:hover{
+  background-color: #27AE61 !important;
+  color: white !important;
+}
+
+.tableHeader th {
+  padding: 0px !important;
+}
