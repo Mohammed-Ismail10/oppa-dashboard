@@ -26,6 +26,7 @@ import { Provider } from 'react-redux';
 import { store } from './components/Redux/Store.js';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ShowProperties from './components/Vip/ShowProperties.jsx';
+import AddProperty from './components/Vip/AddProperty.jsx';
 
 
 
@@ -58,6 +59,7 @@ function App() {
         { path: 'التارجيت', element: <Target /> },
         { path: 'ضبط المستخدم', element: <UserSetting /> },
         { path: 'showproperties', element: <ShowProperties /> },
+        { path: 'addproperty', element: <AddProperty /> },
         {
           path: 'items', element: <Items />, children: [
             { index: true, element: <TableItems /> },

@@ -55,7 +55,7 @@ export default function ShowProperties() {
       dataField: 'arName', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
-        <i class="fa-solid fa-crown me-2"></i>
+        <i className="fa-solid fa-crown me-2"></i>
         إسم الPrivileges بالعربي
       </span>,
       classes: 'text-main fs15',
@@ -64,7 +64,7 @@ export default function ShowProperties() {
       dataField: 'enName', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
-        <i class="fa-solid fa-crown me-2"></i>
+        <i className="fa-solid fa-crown me-2"></i>
         إسم الPrivileges بالEN
       </span>,
       classes: 'text-main fs15',
@@ -131,7 +131,7 @@ export default function ShowProperties() {
         <Navbar>
           <Container>
             <Nav className="w-100">
-              <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
+              <NavLink to={'/addproperty'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة خاصية
               </NavLink>
@@ -161,9 +161,9 @@ export default function ShowProperties() {
           <span className='text-main fs15'>الصفحة</span>
         </div>
         <div className='mx-2 d-flex align-items-center'>
-          <i class="fa-solid fa-caret-right curser-pointer"></i>
+          <i className="fa-solid fa-caret-right curser-pointer"></i>
           <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-          <i class="fa-solid fa-caret-left curser-pointer"></i>
+          <i className="fa-solid fa-caret-left curser-pointer"></i>
         </div>
         <div className='mx-2'>
           <Dropdown>
