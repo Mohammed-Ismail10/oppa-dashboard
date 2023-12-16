@@ -27,6 +27,7 @@ import { store } from './components/Redux/Store.js';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ShowProperties from './components/Vip/ShowProperties.jsx';
 import AddProperty from './components/Vip/AddProperty.jsx';
+import EnableFeature from './components/Vip/EnableFeature.jsx';
 
 
 
@@ -60,6 +61,7 @@ function App() {
         { path: 'ضبط المستخدم', element: <UserSetting /> },
         { path: 'showproperties', element: <ShowProperties /> },
         { path: 'addproperty', element: <AddProperty /> },
+        { path: 'enablefeature', element: <EnableFeature /> },
         {
           path: 'items', element: <Items />, children: [
             { index: true, element: <TableItems /> },
