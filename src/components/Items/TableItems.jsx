@@ -41,34 +41,13 @@ const selectRow = {
 // const rows = [
 //   { id: 1, giftName: 'سيارة', getGift: 'شراء', giftType: 'هدية دخول خاصة', giftPrice: 10000, giftState: 'نشيط', giftImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", time: '7 أيام' },
 //   { id: 2, giftName: 'سيارة', getGift: 'شراء', giftType: 'هدية دخول خاصة', giftPrice: 10000, giftState: 'غير نشيط', giftImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", time: '7 أيام' },
-
 // ];
 
 
 export default function TableItems() {
-  const [activeState, setActiveState] = useState(1);
-  // setActiveState(0);
-  // console.log(activeState);
-
-
-  useEffect(() => {
-    // setActiveState(false);
-    // console.log(activeState)
-  }, [])
-
-  // const [prev, setPrev] = useState(null);
-
-
-  function update(id) {
-    console.log(id)
-  }
-
-
-
-
   const columns = [
     {
-      dataField: 'giftName', //must be same name of property in row which come from api
+      dataField: 'title_ar', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="fa-solid fa-gift me-2"></i>
@@ -87,8 +66,8 @@ export default function TableItems() {
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
-      dataField: 'giftType', //must be same name of property in row which come from api
-      text: 'giftType',
+      dataField: 'gift_type', //must be same name of property in row which come from api
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="fa-solid fa-arrow-down-short-wide me-2"></i>
         نوع الهدايا
@@ -96,8 +75,8 @@ export default function TableItems() {
       classes: 'text-main fs15',
     },
     {
-      dataField: 'giftPrice', //must be same name of property in row which come from api
-      text: 'giftPrice',
+      dataField: 'price', //must be same name of property in row which come from api
+      text: '',
       headerFormatter: () => <span className='py-1 badge text-main rounded fs13 border'>
         <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
         سعر الهدية
@@ -105,43 +84,36 @@ export default function TableItems() {
       classes: 'text-main fs15',
     },
     {
-      dataField: 'giftState', //must be same name of property in row which come from api
-      text: 'giftState',
+      dataField: 'active', //must be same name of property in row which come from api
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الهدايا
       </span>,
       classes: 'text-main fs15',
-      formatter: (_, { id }) => activeState == 1 ? <span onClick={() => {
-        setActiveState(0);
-        // console.log(activeState);
-        update(id);
-      }} className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> : <span className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
-      // <span
-      //   onClick={() => {
-      //     setActiveState(0);
-      //     console.log(activeState);
-      //   }}
-      //   className={`badge py-2 px-4 curser-pointer ${activeState == 1 ? 'bg-green' : 'bg-red'}`}
-      // >
-      //   {activeState == 1 ? 'نشيط' : 'غير نشيط'}
-      // </span>
-
-
+      formatter: (_, { id }) => activeState == 1 ?
+        <span onClick={() => {
+          updateActive(id);
+          refetch();
+        }} className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> :
+        <span onClick={() => {
+          updateActive(id);
+          refetch();
+        }} className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
     },
     {
-      dataField: 'giftImg', //must be same name of property in row which come from api
-      text: 'giftImg',
+      dataField: 'image', //must be same name of property in row which come from api
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="bi bi-file-image me-2"></i>
         صورة الهدايا
       </span>,
       classes: 'text-main fs15',
-      formatter: (cell, row) => <img loading='lazy' src={row.giftImg} width={35} alt={`Flag of ${row.giftName}`} />,
+      formatter: (cell, row) => <img loading='lazy' src={row.image} width={35} alt={`Flag of ${row.title_ar}`} />,
     },
     {
-      dataField: 'time', //must be same name of property in row which come from api
-      text: 'time',
+      dataField: 'created_at', //must be same name of property in row which come from api
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="fa-regular fa-clock me-2"></i>
         الوقت
@@ -150,7 +122,7 @@ export default function TableItems() {
     },
     {
       dataField: 'edit', //must be same name of property in row which come from api
-      text: 'edit',
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
@@ -164,24 +136,66 @@ export default function TableItems() {
     },
   ];
 
+
+
   let dispatch = useDispatch();
 
+  let [currentPage, setCurrentPage] = useState(1);
+  const [activeState, setActiveState] = useState(1);
 
 
 
-
-  function getItem() {
-    return axios.get(`https://fakestoreapi.com/products`);
+  function getItem(page) {
+    return axios.get(`http://localhost:8080/gifts/dashboard?limit=9&page=${page}`);
   }
-
-  let { data, isLoading } = useQuery('item', getItem, {
+  let { data, isLoading, refetch } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  // console.log('isFetching', isFetching);
-  // console.log(data);
-  // rowData = data?.data;
-  // console.log(rowData);
+  console.log(data);
+
+
+
+  function updateActive(id) {
+    let { data } = axios.patch(`http://localhost:8080/gifts/dashboard/${id}`);
+    setActiveState(data?.active);
+  }
+
+
+
+
+
+
+  function increase() {
+    currentPage += 1;
+    setCurrentPage(currentPage);
+  }
+
+  function decrease() {
+    currentPage -= 1;
+    if (currentPage <= 0) {
+      currentPage = 1;
+      setCurrentPage(currentPage);
+      getItem(currentPage);
+    }
+    else {
+      setCurrentPage(currentPage);
+      getItem(currentPage);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -194,7 +208,7 @@ export default function TableItems() {
           {/* table */}
           <BootstrapTable
             keyField="id"
-            data={data.data}
+            data={data.data.data}
             columns={columns}
             bordered={false}
             hover
@@ -203,32 +217,40 @@ export default function TableItems() {
           />
 
 
-          {/* pagination */}
-          <div className='d-flex justify-content-center align-items-center'>
-            <div className='mx-2'>
-              <span className='text-main fs15'>الصفحة</span>
-            </div>
-            <div className='mx-2 d-flex align-items-center'>
-              <i className="fa-solid fa-caret-right curser-pointer"></i>
-              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-              <i className="fa-solid fa-caret-left curser-pointer"></i>
-            </div>
-            <div className='mx-2'>
-              <Dropdown>
-                <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                  30
-                </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item >25</Dropdown.Item>
-                  <Dropdown.Item >20</Dropdown.Item>
-                  <Dropdown.Item >10</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </div>
         </>
       )}
+
+      {/* pagination */}
+      <div className='d-flex justify-content-center align-items-center'>
+        <div className='mx-2'>
+          <span className='text-main fs15'>الصفحة</span>
+        </div>
+        <div className='mx-2 d-flex align-items-center'>
+          <i onClick={() => {
+            increase();
+          }} className="fa-solid fa-caret-right curser-pointer"></i>
+          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+          <i onClick={() => {
+            decrease();
+          }} className="fa-solid fa-caret-left curser-pointer"></i>
+        </div>
+        <div className='mx-2'>
+          <Dropdown>
+            <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+              30
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item >25</Dropdown.Item>
+              <Dropdown.Item >20</Dropdown.Item>
+              <Dropdown.Item >10</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div>
+
+
 
     </>
   );
