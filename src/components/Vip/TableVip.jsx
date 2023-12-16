@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Vip.module.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch } from 'react-redux';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import { baseUrl } from '../../helpers/constant.js';
 
 
 // For column checkbox
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true,
+  // clickToSelect: true,
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
     <div className="border badge p-0">
       <input
@@ -29,7 +32,7 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
-      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)}/>
+      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)} />
       <span className='text-main fs15'>{rest.rowIndex + 1}</span>
     </>
   )
@@ -60,7 +63,7 @@ export default function TableVip() {
       dataField: 'vipLevel', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
-        <i class="fa-solid fa-layer-group me-2"></i>
+        <i className="fa-solid fa-layer-group me-2"></i>
         مستوى الVIP
       </span>,
       classes: 'text-main fs15',
@@ -114,21 +117,70 @@ export default function TableVip() {
   let dispatch = useDispatch();
 
 
+  let [currentPage, setCurrentPage] = useState(1);
+  const [activeState, setActiveState] = useState(1);
+
+
+  function getItem(page) {
+    return axios.get(`${baseUrl}/gifts/dashboard?limit=9&page=${page}`);
+  }
+  let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
+    cacheTime: 60000,
+    refetchInterval: 300000,
+  });
+  console.log(data);
+  console.log(isError);
+
+
+
+  function updateActive(id) {
+    let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
+    setActiveState(data?.active);
+  }
+
+
+
+  function increase() {
+    currentPage += 1;
+    setCurrentPage(currentPage);
+  }
+  function decrease() {
+    currentPage -= 1;
+    if (currentPage <= 0) {
+      currentPage = 1;
+      setCurrentPage(currentPage);
+      getItem(currentPage);
+    }
+    else {
+      setCurrentPage(currentPage);
+      getItem(currentPage);
+    }
+  }
+
+
+
+
+
+
+
+
 
 
   return (
     <>
 
       {/* table */}
-      <BootstrapTable
-        keyField="id"
-        data={rows}
-        columns={columns}
-        bordered={false}
-        hover
-        classes={`${style.tableHeader} text-center table-borderless my-4 `}
-        selectRow={selectRow}
-      />
+      {isLoading ? <></> :
+        <BootstrapTable
+          keyField="id"
+          data={rows}
+          columns={columns}
+          bordered={false}
+          hover
+          classes={`${style.tableHeader} text-center table-borderless my-4 `}
+          selectRow={selectRow}
+        />
+      }
 
 
 
@@ -141,9 +193,9 @@ export default function TableVip() {
           <span className='text-main fs15'>الصفحة</span>
         </div>
         <div className='mx-2 d-flex align-items-center'>
-          <i class="fa-solid fa-caret-right curser-pointer"></i>
-          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-          <i class="fa-solid fa-caret-left curser-pointer"></i>
+          <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+          <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
         </div>
         <div className='mx-2'>
           <Dropdown>
@@ -207,7 +259,7 @@ export default function TableVip() {
                 إسم الVIP
               </span></th>
               <th className='p-0'><span className=" py-2 badge text-main rounded fs13 border">
-                <i class="fa-solid fa-layer-group me-2"></i>
+                <i className="fa-solid fa-layer-group me-2"></i>
                 مستوى الVIP
               </span></th>
               <th className='p-0'><span className=" py-1 badge text-main rounded fs13 border">

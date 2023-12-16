@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { baseUrl } from '../../helpers/constant.js';
 
 // For column checkbox
 const selectRow = {
@@ -144,9 +145,8 @@ export default function TableItems() {
   const [activeState, setActiveState] = useState(1);
 
 
-
   function getItem(page) {
-    return axios.get(`http://localhost:8080/gifts/dashboard?limit=9&page=${page}`);
+    return axios.get(`${baseUrl}/gifts/dashboard?limit=9&page=${page}`);
   }
   let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
     cacheTime: 60000,
@@ -158,7 +158,7 @@ export default function TableItems() {
 
 
   function updateActive(id) {
-    let { data } = axios.patch(`http://localhost:8080/gifts/dashboard/${id}`);
+    let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
     setActiveState(data?.active);
   }
 
@@ -201,25 +201,20 @@ export default function TableItems() {
   return (
     <>
 
+      {/* table */}
       {/* Check if data is loading */}
       {isLoading ? (
         <></>
       ) : (
-        <>
-          {/* table */}
-          <BootstrapTable
-            keyField="id"
-            data={data.data.data}
-            columns={columns}
-            bordered={false}
-            hover
-            classes={`${style.tableHeader} text-center table-borderless my-4 `}
-            selectRow={selectRow}
-          />
-
-
-
-        </>
+        <BootstrapTable
+          keyField="id"
+          data={data.data.data}
+          columns={columns}
+          bordered={false}
+          hover
+          classes={`${style.tableHeader} text-center table-borderless my-4 `}
+          selectRow={selectRow}
+        />
       )}
 
       {/* pagination */}
@@ -228,13 +223,9 @@ export default function TableItems() {
           <span className='text-main fs15'>الصفحة</span>
         </div>
         <div className='mx-2 d-flex align-items-center'>
-          <i onClick={() => {
-            increase();
-          }} className="fa-solid fa-caret-right curser-pointer"></i>
+          <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
           <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
-          <i onClick={() => {
-            decrease();
-          }} className="fa-solid fa-caret-left curser-pointer"></i>
+          <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
         </div>
         <div className='mx-2'>
           <Dropdown>

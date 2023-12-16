@@ -11,12 +11,14 @@ import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
-
+import axios from 'axios';
+import { useQuery } from 'react-query';
+import { baseUrl } from '../../helpers/constant.js';
 
 // For column checkbox
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true,
+  // clickToSelect: true,
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
     <div className="border badge p-0">
       <input
@@ -35,7 +37,7 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
-      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)}/>
+      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)} />
       <span className='text-main fs15'>{rest.rowIndex + 1}</span>
     </>
   )
@@ -70,7 +72,7 @@ export default function Otp() {
         رقم الهاتف
       </span>,
       classes: 'text-main fs15',
-      formatter: (cell, row) => `+${cell}`,
+      // formatter: (cell, row) => `+${cell}`,
       attrs: () => ({ 'dir': `ltr` }),
     },
     {
@@ -83,14 +85,14 @@ export default function Otp() {
       classes: 'text-main fs15',
     },
     {
-      dataField: 'accountState', //must be same name of property in row which come from api
+      dataField: 'active', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الحساب
       </span>,
       classes: 'text-main fs15',
-      formatter: (cell, row) => row.accountState === 'نشيط' ? <span className='badge bg-green py-2 px-4'>نشيط</span> : <span className='badge bg-red py-2 px-3'>غير نشيط</span>
+      formatter: (cell, row) => row.active === 1 ? <span className='badge bg-green py-2 px-4'>نشيط</span> : <span className='badge bg-red py-2 px-3'>غير نشيط</span>
     },
     {
       dataField: 'timeStop', //must be same name of property in row which come from api
@@ -103,7 +105,7 @@ export default function Otp() {
       formatter: () => <span className='badge bg-red py-2 px-4 fs12 fw-bold'>غير محددة</span>
     },
     {
-      dataField: 'date', //must be same name of property in row which come from api
+      dataField: 'created_at', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs13 border'>
         <i className="fa-regular fa-calendar me-2"></i>
@@ -134,6 +136,16 @@ export default function Otp() {
 
 
 
+  function getOtp() {
+    return axios.get(`${baseUrl}/admins`);
+  }
+  let { data, isLoading, refetch, isError } = useQuery('otp', getOtp, {
+    cacheTime: 60000,
+    refetchInterval: 300000,
+  });
+
+
+
 
 
   return (
@@ -148,7 +160,7 @@ export default function Otp() {
                   <i className="bi bi-plus-circle me-2"></i>
                   إستعلام المستخدم
                 </NavLink>
-                <NavLink to={'/جميع الملفات'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
+                <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
                   <i className="bi bi-plus-circle me-2"></i>
                   سجل الهدايا
                 </NavLink>
@@ -190,15 +202,16 @@ export default function Otp() {
 
 
         {/* table otp */}
-        <BootstrapTable
-          keyField="id"
-          data={rows}
-          columns={columns}
-          bordered={false}
-          hover
-          classes={`${style.tableHeader} text-center table-borderless my-4 `}
-          selectRow={selectRow}
-        />
+        {isLoading ? <></> :
+          < BootstrapTable
+            keyField="id"
+            data={data.data.data}
+            columns={columns}
+            bordered={false}
+            hover
+            classes={`${style.tableHeader} text-center table-borderless my-4 `}
+            selectRow={selectRow}
+          />}
 
 
         {/* pagination */}

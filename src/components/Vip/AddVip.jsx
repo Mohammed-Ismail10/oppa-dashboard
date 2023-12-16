@@ -30,7 +30,14 @@ export default function AddVip() {
 
 
 
-
+  function reset() {
+    setUploadImage(false);
+    setUploadImageDone('');
+    setUploadSvga(false);
+    setUploadSvgaDone('');
+    setUploadSvgaError(false);
+    formik.resetForm();
+  }
 
 
 
@@ -82,7 +89,7 @@ export default function AddVip() {
                       setUploadSvgaError(true);
                     }
                   }}
-                  name='svga' type="file" id="addSVGA"/>
+                  name='svga' type="file" id="addSVGA" />
               </label>
               {uploadSvgaDone ? <span dir='ltr'>{uploadSvgaDone} تم رفع</span> : uploadSvgaError ? <span>يجب أن يكون امتداد الملف svga</span> : null}
             </div>
@@ -104,21 +111,10 @@ export default function AddVip() {
               <label className='fs15' htmlFor="nameGift">سعر الVIP</label>
               <input className={`${style.holder} form-control`} type="number" placeholder='0.00' />
             </div>
-            {/* <div className="col-6 py-1">
-              <label className='fs15' htmlFor="nameGift">مستوى الVIP</label>
-              <input className={`${style.holder} form-control`} type="text" placeholder='Hot' />
-            </div> */}
             <div dir='ltr' className="col-12 py-5">
               <button className='btn bg-success text-white px-5 fs15 fw-bold' type="submit">إضافة</button>
               <button
-                onClick={() => {
-                  setUploadImage(false);
-                  setUploadImageDone('');
-                  setUploadSvga(false);
-                  setUploadSvgaDone('');
-                  setUploadSvgaError(false);
-                  formik.resetForm();
-                }}
+                onClick={() => reset()}
                 className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
             </div>
           </div>

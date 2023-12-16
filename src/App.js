@@ -50,16 +50,16 @@ function App() {
       path: '', element: <Layout />, children: [
         { index: true, element: <Home /> },
         { path: 'login', element: <Login /> },
-        { path: 'العملاء', element: <Customers /> },
-        { path: 'المشرفين', element: <Otp /> },
+        { path: 'customers', element: <Customers /> },
+        { path: 'moderators', element: <Otp /> },
         { path: 'allfolders', element: <AllFolders /> },
-        { path: 'الكوينز', element: <Coins /> },
-        { path: 'التحكم في الوكالة', element: <ControlAgency /> },
-        { path: 'الدول', element: <Countries /> },
-        { path: 'إنشاء وكالة', element: <CreateAgency /> },
-        { path: 'فئات الغرف', element: <RoomCategories /> },
-        { path: 'التارجيت', element: <Target /> },
-        { path: 'ضبط المستخدم', element: <UserSetting /> },
+        { path: 'coins', element: <Coins /> },
+        { path: 'controlagency', element: <ControlAgency /> },
+        { path: 'countries', element: <Countries /> },
+        { path: 'createagency', element: <CreateAgency /> },
+        { path: 'roomcategories', element: <RoomCategories /> },
+        { path: 'target', element: <Target /> },
+        { path: 'usersetting', element: <UserSetting /> },
         { path: 'showproperties', element: <ShowProperties /> },
         { path: 'addproperty', element: <AddProperty /> },
         { path: 'enablefeature', element: <EnableFeature /> },
@@ -76,8 +76,8 @@ function App() {
             { path: 'add', element: <AddVip /> },
           ]
         },
-        { path: 'الصفحات', element: <Pages /> },
-        { path: 'الإشعارات', element: <Notifications /> },
+        { path: 'pages', element: <Pages /> },
+        { path: 'notifications', element: <Notifications /> },
       ]
     }
   ]);

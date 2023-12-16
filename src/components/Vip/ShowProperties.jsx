@@ -9,6 +9,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+import { baseUrl } from '../../helpers/constant.js';
 
 
 // For column checkbox
@@ -119,7 +122,56 @@ export default function ShowProperties() {
 
   let { showDelete } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
+
+
+
+
   const [activeState, setActiveState] = useState(1);
+  let [currentPage, setCurrentPage] = useState(1);
+
+
+
+
+  function getItem(page) {
+    return axios.get(`${baseUrl}/gifts/dashboard?limit=9&page=${page}`);
+  }
+  let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
+    cacheTime: 60000,
+    refetchInterval: 300000,
+  });
+  console.log(data);
+  console.log(isError);
+
+
+
+  function updateActive(id) {
+    let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
+    setActiveState(data?.active);
+  }
+
+
+
+  function increase() {
+    currentPage += 1;
+    setCurrentPage(currentPage);
+  }
+  function decrease() {
+    currentPage -= 1;
+    if (currentPage <= 0) {
+      currentPage = 1;
+      setCurrentPage(currentPage);
+      getItem(currentPage);
+    }
+    else {
+      setCurrentPage(currentPage);
+      getItem(currentPage);
+    }
+  }
+
+
+
+
+
 
 
 
@@ -161,9 +213,9 @@ export default function ShowProperties() {
           <span className='text-main fs15'>الصفحة</span>
         </div>
         <div className='mx-2 d-flex align-items-center'>
-          <i className="fa-solid fa-caret-right curser-pointer"></i>
-          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-          <i className="fa-solid fa-caret-left curser-pointer"></i>
+          <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+          <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
         </div>
         <div className='mx-2'>
           <Dropdown>

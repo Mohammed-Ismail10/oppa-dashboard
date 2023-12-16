@@ -24,6 +24,12 @@ export default function AddProperty() {
   const [uploadImageDone, setUploadImageDone] = useState('');
 
 
+  function reset() {
+    setUploadImage(false);
+    setUploadImageDone('');
+    formik.resetForm();
+  }
+
 
 
   return (
@@ -81,12 +87,8 @@ export default function AddProperty() {
             </div>
 
             <div dir='ltr' className="col-12 py-4">
-            <button className='btn bg-success text-white px-5 fs15 fw-bold' type="submit">إضافة</button>
-              <button onClick={() => {
-                setUploadImage(false);
-                setUploadImageDone('');
-                formik.resetForm();
-              }} className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
+              <button className='btn bg-success text-white px-5 fs15 fw-bold' type="submit">إضافة</button>
+              <button onClick={() => reset()} className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
             </div>
           </div>
         </form>

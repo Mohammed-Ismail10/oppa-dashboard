@@ -39,15 +39,15 @@ export default function SideBar() {
               <li className={`${style.accordionN} accordion accordion-flush py-2 pe-0`} id="accordionFlushExample1">
                 <div className={`${style.accordionN} accordion-item`}>
                   <h2 className="accordion-header">
-                    <button onClick={() => navigate('العملاء')} className={`${style.accordionN} fs15 px-4 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <button onClick={() => navigate('customers')} className={`${style.accordionN} fs15 px-4 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                       <i className="fa-regular fa-user text-main me-1 fa-fw"></i> إدارة المستخدمين
                     </button>
                   </h2>
                   <div id="flush-collapseOne" className={`${style.accordionN} accordion-collapse collapse`} data-bs-parent="#accordionFlushExample1">
                     <div className="accordion-body p-0 pt-1">
                       <ul className='list-unstyled ps-4'>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'العملاء'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink></li>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'المشرفين'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المشرفين</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'customers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'moderators'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المشرفين</NavLink></li>
                       </ul>
                     </div>
                   </div>
@@ -61,7 +61,7 @@ export default function SideBar() {
               <li className={`${style.accordionN} accordion accordion-flush py-2 pe-0`} id="accordionFlushExample2">
                 <div className={`${style.accordionN} accordion-item`}>
                   <h2 className="accordion-header">
-                    <button onClick={() => navigate('إنشاء وكالة')} className={`${style.accordionN} fs15 px-4 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    <button onClick={() => navigate('createagency')} className={`${style.accordionN} fs15 px-4 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                       <i className="fa-regular fa-user text-main me-1 fa-fw"></i> إدارة النقابة
                     </button>
                   </h2>
@@ -69,10 +69,10 @@ export default function SideBar() {
                     <div className="accordion-body p-0 pt-1">
                       <ul className='list-unstyled ps-4'>
                         <li className={`${style.textSub} py-1`}>
-                          <NavLink to={'إنشاء وكالة'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">إنشاء وكالة</NavLink>
+                          <NavLink to={'createagency'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">إنشاء وكالة</NavLink>
                         </li>
                         <li className={`${style.textSub} py-1`}>
-                          <NavLink to={'التحكم في الوكالة'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">التحكم في الوكالة</NavLink>
+                          <NavLink to={'controlagency'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">التحكم في الوكالة</NavLink>
                         </li>
                       </ul>
                     </div>
@@ -99,12 +99,12 @@ export default function SideBar() {
               </li>
 
               <li className='py-2'>
-                <NavLink to={'الصفحات'} className="fs15 nav-link px-4 sideBarActive text-main text-decoration-none">
+                <NavLink to={'pages'} className="fs15 nav-link px-4 sideBarActive text-main text-decoration-none">
                   <i className="bi bi-book text-main me-1 fa-fw"></i> الصفحات
                 </NavLink>
               </li>
               <li className='py-2'>
-                <NavLink to={'الإشعارات'} className="fs15 nav-link sideBarActive px-4 text-main text-decoration-none">
+                <NavLink to={'notifications'} className="fs15 nav-link sideBarActive px-4 text-main text-decoration-none">
                   <i className="fa-regular fa-bell text-main me-1 fa-fw"></i> الإشعارات
                 </NavLink>
               </li>
@@ -130,18 +130,18 @@ export default function SideBar() {
               <li className={`${style.accordionN} accordion accordion-flush py-2 pe-0`} id="accordionFlushExample5">
                 <div className={`${style.accordionN} accordion-item`}>
                   <h2 className="accordion-header">
-                    <button onClick={() => navigate('الدول')} className={`${style.accordionN} fs15 accordion-button collapsed text-main px-4 p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                    <button onClick={() => navigate('countries')} className={`${style.accordionN} fs15 accordion-button collapsed text-main px-4 p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
                       <i className="bi bi-gear text-main me-1 fa-fw"></i> الإعدادات
                     </button>
                   </h2>
                   <div id="flush-collapseFive" className={`${style.accordionN} accordion-collapse collapse`} data-bs-parent="#accordionFlushExample5">
                     <div className="accordion-body p-0 pt-1">
                       <ul className='list-unstyled ps-4'>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'الدول'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الدول</NavLink></li>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'الكوينز'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الكوينز</NavLink></li>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'التارجيت'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">التارجيت</NavLink></li>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'فئات الغرف'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">فئات الغرف</NavLink></li>
-                        <li className={`${style.textSub} py-1`}><NavLink to={'ضبط المستخدم'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">ضبط المستخدم</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'countries'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الدول</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'coins'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الكوينز</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'target'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">التارجيت</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'roomcategories'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">فئات الغرف</NavLink></li>
+                        <li className={`${style.textSub} py-1`}><NavLink to={'usersetting'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">ضبط المستخدم</NavLink></li>
                       </ul>
                     </div>
                   </div>

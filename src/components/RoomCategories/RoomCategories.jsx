@@ -146,7 +146,7 @@ export default function RoomCategories() {
                   <i className="bi bi-plus-circle me-2"></i>
                   إستعلام المستخدم
                 </NavLink>
-                <NavLink to={'/جميع الملفات'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
+                <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
                   <i className="bi bi-plus-circle me-2"></i>
                   سجل الهدايا
                 </NavLink>
