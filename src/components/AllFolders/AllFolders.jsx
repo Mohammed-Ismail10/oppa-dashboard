@@ -35,7 +35,7 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
-      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)}/>
+      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)} />
       <span className='text-main fs15'>{rest.rowIndex + 1}</span>
     </>
   )
@@ -59,29 +59,29 @@ export default function AllFolders() {
     {
       dataField: 'name', //must be same name of property in row which come from api
       test: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 w-75 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'mId', //must be same name of property in row which come from api
       test: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 w-75 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-user me-2"></i>
         معرف ال (ID)
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'allFoldersInDatabase', //must be same name of property in row which come from api
       test: '',
-      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-file-lines me-2"></i>
         جميع المستندات المتواجدة على قاعدة البيانات
       </span>,
-      classes: 'text-main fs15 d-flex justify-content-between align-items-center px-5',
+      classes: 'text-main fs15 pt-3 d-flex justify-content-between align-items-center px-5',
       formatter: (cell, row) => <>
         <div>
           <i className="bi bi-file-image ms-2"></i>
@@ -106,87 +106,90 @@ export default function AllFolders() {
 
   return (
     <>
-      <section>
+      <div className={`${style.heightItems}`}>
         {/* items nav links */}
-        <div className='pt-4'>
+        <div className='pt-5 mt-3 ps-2'>
           <Navbar>
-            <Container>
-              <Nav className="w-100">
-                <NavLink to={'g'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  إستعلام المستخدم
-                </NavLink>
-                <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  سجل الهدايا
-                </NavLink>
-                <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  تغير المعرف (ID)
-                </NavLink>
-                <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  تحديد شارة (ID)
-                </NavLink>
-                <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-funnel me-2"></i>
-                  فلتر
-                </NavLink>
-                <div className='mx-2 position-relative'>
-                  <input className={`${style.shadowBtn} ${style.searchInput}  form-control px-5 pt-1 bg-body-secondary`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
-                  <i className="fa-solid fa-magnifying-glass position-absolute top-0 pt-2 ps-3"></i>
+            <Nav className="w-100 px-2">
+              <NavLink to={'g'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                إستعلام المستخدم
+              </NavLink>
+              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                سجل الهدايا
+              </NavLink>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                تغير المعرف (ID)
+              </NavLink>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                تحديد شارة (ID)
+              </NavLink>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-funnel me-2"></i>
+                فلتر
+              </NavLink>
+              <div className={`${style.searchWidth} mx-3 position-relative`}>
+                <input className={`${style.shadowSearch} ${style.searchInput} w-100 form-control px-5 py-2 bg-search`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
+                <div className='position-absolute h-100 top-0 d-flex justify-content-center align-items-center px-3'>
+                  <i className="fa-solid fa-magnifying-glass text-main"></i>
                 </div>
-                <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} rounded-3 ms-auto border-0 btn fs12 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
-                  مسح الكل
-                </NavLink>
-              </Nav>
-            </Container>
+              </div>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+                مسح الكل
+              </NavLink>
+            </Nav>
           </Navbar>
         </div>
 
+        <div className='d-flex flex-column h-100 justify-content-between'>
 
-        {/* table all folders */}
-        <BootstrapTable
-          keyField="id"
-          data={rows}
-          columns={columns}
-          bordered={false}
-          hover
-          classes={`${style.tableHeader} text-center table-borderless my-4 `}
-          selectRow={selectRow}
-        />
+          {/* table all folders */}
+          <BootstrapTable
+            keyField="id"
+            data={rows}
+            columns={columns}
+            bordered={false}
+            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} `}
+            selectRow={selectRow}
+            rowClasses={`${style.rowShadow} `}
+          />
 
 
-        {/* pagination */}
-        <div className='d-flex justify-content-center align-items-center'>
-          <div className='mx-2'>
-            <span className='text-main fs15'>الصفحة</span>
+          {/* pagination */}
+          <div className='d-flex justify-content-center align-items-center'>
+            <div className='mx-2'>
+              <span className='text-main fs15'>الصفحة</span>
+            </div>
+            <div className='mx-2 d-flex align-items-center'>
+              <i className="fa-solid fa-caret-right curser-pointer"></i>
+              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
+              <i className="fa-solid fa-caret-left curser-pointer"></i>
+            </div>
+            <div className='mx-2'>
+              <Dropdown>
+                <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                  30
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item >25</Dropdown.Item>
+                  <Dropdown.Item >20</Dropdown.Item>
+                  <Dropdown.Item >10</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           </div>
-          <div className='mx-2 d-flex align-items-center'>
-            <i className="fa-solid fa-caret-right curser-pointer"></i>
-            <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-            <i className="fa-solid fa-caret-left curser-pointer"></i>
-          </div>
-          <div className='mx-2'>
-            <Dropdown>
-              <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                30
-              </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item >25</Dropdown.Item>
-                <Dropdown.Item >20</Dropdown.Item>
-                <Dropdown.Item >10</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
         </div>
 
 
         {/* Modals */}
         <ModalChange />
         <ModalDelete />
-      </section>
+      </div>
     </>
   )
 }

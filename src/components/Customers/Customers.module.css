@@ -24,3 +24,17 @@
 .tableHeader th {
   padding: 0px !important;
 }
+
+.tableWidth {
+  /* width: 100.5% !important; */
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+
+.heightItems {
+  height: 83% !important;
+}
+
+.rowShadow:hover{
+  box-shadow: 0 0 10px 0.1px gray !important;
+}

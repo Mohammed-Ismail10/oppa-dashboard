@@ -1,6 +1,9 @@
 .shadowBtn {
   box-shadow: 0 0 3px 0.0px gray !important;
 }
+.shadowSearch {
+  box-shadow: 0 0 1px 0.0px gray !important;
+}
 
 .borderDropdown {
   border-bottom: 3px solid #1c274c !important;
@@ -23,4 +26,23 @@
 
 .tableHeader th {
   padding: 0px !important;
+}
+
+.tableWidth {
+  width: 81% !important;
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+
+
+.rowShadow:hover{
+  box-shadow: 0 0 10px 0.1px gray !important;
+}
+
+.searchWidth{
+  width: 32% !important;
+}
+
+.heightItems {
+  height: 83% !important;
 }

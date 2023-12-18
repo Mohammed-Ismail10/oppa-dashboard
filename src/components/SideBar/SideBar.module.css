@@ -12,6 +12,19 @@
   color: #C0C0C0;
 }
 
-.logoutHover:hover{
-  background-color: #F8D7DA !important;
+.logoutHover:hover {
+  background-color: red !important;
+  color: white !important;
+}
+
+.logoutHover:hover .logoutImg{
+  content: url('../../Assets/Images/Vector\ \(4\).png');
+}
+
+.heightList{
+  height: 60% !important;
+}
+
+.logoutImg{
+  content: url('../../Assets/Images/logout.png');
 }

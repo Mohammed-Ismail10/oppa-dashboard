@@ -21,52 +21,50 @@ export default function Vip() {
 
   return (
     <>
-      <section>
+      <section className={`${style.heightItems}`}>
         {/* Nav links for Vip */}
-        <div className='pt-4'>
+        <div className='pt-5 mt-3'>
           <Navbar>
-            <Container>
-              <Nav className="w-100">
-                <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  إستعلام المستخدم
-                </NavLink>
-                <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  سجل الهدايا
-                </NavLink>
-                <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  تغير المعرف (ID)
-                </NavLink>
-                <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-funnel me-2"></i>
-                  فلتر
-                </NavLink>
-                <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  إضافة VIP
-                </NavLink>
-                <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  عرض الخصائص
-                </NavLink>
-                <NavLink to={'/enablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  تمكين خاصية
-                </NavLink>
-                <NavLink to={''} onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} rounded-3 ms-auto border-0 btn fs12 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
-                  مسح الكل
-                </NavLink>
-              </Nav>
-            </Container>
+            <Nav className="w-100 px-2">
+              <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                إستعلام المستخدم
+              </NavLink>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                سجل الهدايا
+              </NavLink>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                تغير المعرف (ID)
+              </NavLink>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-funnel me-2"></i>
+                فلتر
+              </NavLink>
+              <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                إضافة VIP
+              </NavLink>
+              <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                عرض الخصائص
+              </NavLink>
+              <NavLink to={'/enablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                تمكين خاصية
+              </NavLink>
+              <NavLink to={''} onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+                مسح الكل
+              </NavLink>
+            </Nav>
           </Navbar>
 
         </div>
 
 
         {/* content VIP */}
-        <div>
+        <div className='h-100'>
           <Outlet />
         </div>
 
@@ -79,3 +77,16 @@ export default function Vip() {
     </>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

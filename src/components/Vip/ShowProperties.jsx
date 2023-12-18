@@ -57,60 +57,60 @@ export default function ShowProperties() {
     {
       dataField: 'arName', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-crown me-2"></i>
         إسم الPrivileges بالعربي
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'enName', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-crown me-2"></i>
         إسم الPrivileges بالEN
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
       dataField: 'privImg', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-file-image me-2"></i>
         صورة الPrivileges
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (cell, row) => <img loading='lazy' src={row.privImg} width={35} alt={`Flag of ${row.vipName}`} />,
     },
     {
       dataField: 'giftState', //must be same name of property in row which come from api
       text: 'giftState',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الحساب
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) => activeState == 1 ? <span className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> : <span className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
     },
     {
       dataField: 'time', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border w-100'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-100'>
         <i className="fa-regular fa-clock me-2"></i>
         أنشئت في
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       attrs: () => ({ 'dir': `ltr` }),
     },
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) => <>
         <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
         <i onClick={() => dispatch(handleShowDeleteRow(id))} className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
@@ -179,57 +179,62 @@ export default function ShowProperties() {
 
   return (
     <>
-      <div className='pt-4'>
+      <div className='pt-5 mt-3'>
         <Navbar>
-          <Container>
-            <Nav className="w-100">
-              <NavLink to={'/addproperty'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إضافة خاصية
-              </NavLink>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} rounded-3 ms-auto border-0 btn fs12 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
-                مسح الكل
-              </NavLink>
-            </Nav>
-          </Container>
+          <Nav className="w-100 px-2">
+            <NavLink to={'/addproperty'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              إضافة خاصية
+            </NavLink>
+            <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+              مسح الكل
+            </NavLink>
+          </Nav>
         </Navbar>
 
       </div>
 
-      {/* table */}
-      <BootstrapTable
-        keyField="id"
-        data={rows}
-        columns={columns}
-        bordered={false}
-        hover
-        classes={`${style.tableHeader} text-center table-borderless my-4 `}
-        selectRow={selectRow}
-      />
 
-      {/* pagination */}
-      <div className='d-flex justify-content-center align-items-center'>
-        <div className='mx-2'>
-          <span className='text-main fs15'>الصفحة</span>
-        </div>
-        <div className='mx-2 d-flex align-items-center'>
-          <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
-          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
-          <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
-        </div>
-        <div className='mx-2'>
-          <Dropdown>
-            <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-              30
-            </Dropdown.Toggle>
+      <div className={`${style.heightItems} d-flex flex-column justify-content-between`}>
 
-            <Dropdown.Menu>
-              <Dropdown.Item >25</Dropdown.Item>
-              <Dropdown.Item >20</Dropdown.Item>
-              <Dropdown.Item >10</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+        {/* table */}
+        {/* {isLoading ? <></> :
+        } */}
+        <BootstrapTable
+          keyField="id"
+          data={rows}
+          columns={columns}
+          bordered={false}
+          classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthShowProperties} ms-1`}
+          selectRow={selectRow}
+          rowClasses={`${style.rowShadow} `}
+        />
+
+        {/* pagination */}
+        <div className='d-flex justify-content-center align-items-center'>
+          <div className='mx-2'>
+            <span className='text-main fs15'>الصفحة</span>
+          </div>
+          <div className='mx-2 d-flex align-items-center'>
+            <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+            <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+            <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+          </div>
+          <div className='mx-2'>
+            <Dropdown>
+              <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                30
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item >25</Dropdown.Item>
+                <Dropdown.Item >20</Dropdown.Item>
+                <Dropdown.Item >10</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         </div>
+
       </div>
 
       <ModalDelete />

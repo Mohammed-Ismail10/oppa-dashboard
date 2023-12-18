@@ -8,12 +8,15 @@ export default function Layout() {
       <section>
         <div className="container-fluid ps-0">
           <div className="row">
-            <div className="col-2 ps-0">
+
+            <div className="col-2 ps-">
               <SideBar />
             </div>
-            <div className="col-10">
+
+            <div className="col-10 px-">
               <Outlet />
             </div>
+            
           </div>
         </div>
       </section>

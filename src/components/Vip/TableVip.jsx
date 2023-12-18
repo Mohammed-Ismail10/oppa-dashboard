@@ -53,58 +53,58 @@ export default function TableVip() {
     {
       dataField: 'vipName', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
-        <i className="fa-solid fa-gift me-2"></i>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+        <i className="fa-solid fa-crown me-2"></i>
         إسم الVIP
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'vipLevel', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-layer-group me-2"></i>
         مستوى الVIP
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
       dataField: 'vipPrice', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-1 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
         سعر الVIP
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'vipImg', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-file-image me-2"></i>
         صورة الVIP
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (cell, row) => <img loading='lazy' src={row.vipImg} width={35} alt={`Flag of ${row.vipName}`} />,
     },
     {
       dataField: 'time', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-regular fa-clock me-2"></i>
         الوقت
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) => <>
         <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
         <i onClick={() => dispatch(handleShowDeleteRow(id))} className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
@@ -120,16 +120,18 @@ export default function TableVip() {
   let [currentPage, setCurrentPage] = useState(1);
   const [activeState, setActiveState] = useState(1);
 
-
+  // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
   function getItem(page) {
-    return axios.get(`${baseUrl}/gifts/dashboard?limit=9&page=${page}`);
+    return axios.get(``);
   }
   let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
+    refetchOnMount: false
   });
   console.log(data);
-  console.log(isError);
+  // console.log(isError);
+  console.log(isLoading);
 
 
 
@@ -169,47 +171,53 @@ export default function TableVip() {
   return (
     <>
 
-      {/* table */}
-      {isLoading ? <></> :
+      <div className='d-flex flex-column h-100 justify-content-between'>
+        {/* table */}
+        {/* {isLoading ? <></> :
+        } */}
         <BootstrapTable
           keyField="id"
           data={rows}
           columns={columns}
           bordered={false}
-          hover
-          classes={`${style.tableHeader} text-center table-borderless my-4 `}
+          classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} ms-1`}
           selectRow={selectRow}
+          rowClasses={`${style.rowShadow} `}
         />
-      }
 
 
 
 
 
 
-      {/* pagination */}
-      <div className='d-flex justify-content-center align-items-center'>
-        <div className='mx-2'>
-          <span className='text-main fs15'>الصفحة</span>
+        {/* pagination */}
+        <div className='d-flex justify-content-center align-items-center'>
+          <div className='mx-2'>
+            <span className='text-main fs15'>الصفحة</span>
+          </div>
+          <div className='mx-2 d-flex align-items-center'>
+            <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+            <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+            <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+          </div>
+          <div className='mx-2'>
+            <Dropdown>
+              <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                30
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item >25</Dropdown.Item>
+                <Dropdown.Item >20</Dropdown.Item>
+                <Dropdown.Item >10</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         </div>
-        <div className='mx-2 d-flex align-items-center'>
-          <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
-          <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
-          <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
-        </div>
-        <div className='mx-2'>
-          <Dropdown>
-            <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-              30
-            </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item >25</Dropdown.Item>
-              <Dropdown.Item >20</Dropdown.Item>
-              <Dropdown.Item >10</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+
+
+
       </div>
     </>
   );

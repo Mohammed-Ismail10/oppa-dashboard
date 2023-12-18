@@ -41,81 +41,81 @@ export default function AddEnableFeature() {
     <>
 
       {/* Nav links for Vip */}
-      <div className='pt-4'>
+      <div className='pt-5 mt-3'>
         <Navbar>
-          <Container>
-            <Nav className="w-100">
-              <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إستعلام المستخدم
-              </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                سجل الهدايا
-              </NavLink>
-              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                تغير المعرف (ID)
-              </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                <i className="bi bi-funnel me-2"></i>
-                فلتر
-              </NavLink>
-              <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إضافة VIP
-              </NavLink>
-              <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                عرض الخصائص
-              </NavLink>
-              <NavLink to={'/enablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                تمكين خاصية
-              </NavLink>
-              <NavLink to={'/addenablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إضافة تمكين خاصية
-              </NavLink>
-            </Nav>
-          </Container>
+          <Nav className="w-100 px-2">
+            <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              إستعلام المستخدم
+            </NavLink>
+            <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              سجل الهدايا
+            </NavLink>
+            <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              تغير المعرف (ID)
+            </NavLink>
+            <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <i className="bi bi-funnel me-2"></i>
+              فلتر
+            </NavLink>
+            <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              إضافة VIP
+            </NavLink>
+            <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              عرض الخصائص
+            </NavLink>
+            <NavLink to={'/enablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              تمكين خاصية
+            </NavLink>
+            <NavLink to={'/addenablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+              <i className="bi bi-plus-circle me-2"></i>
+              إضافة تمكين خاصية
+            </NavLink>
+          </Nav>
         </Navbar>
 
       </div>
 
-      <div className='text-center py-4'>
+      <div className='w-75 d-flex justify-content-center py-5 mt-2'>
         <h2 className='fs-4 fw-bold'>إضافة تمكين خاصية</h2>
       </div>
 
-      <form onSubmit={formik.handleSubmit} className='w-75 mx-auto'>
-        <div className="row">
-          <div className="col-6 py-2">
-            <label className='fs15 mb-2' htmlFor="vipName">إسم الVIP</label>
-            <input className={`${style.holder} form-control`}
+      <form onSubmit={formik.handleSubmit} className={`${style.heightFormEnable} w-75 ms-4 px-5 d-flex flex-column justify-content-between`}>
+        <div className="row px-5">
+
+          <div className="col-6">
+            <label className='fs15 pb-1' htmlFor="vipName">إسم الVIP</label>
+            <input className={`${style.holder} py-3 form-control`}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.vipName}
               name='vipName'
               type="text"
               id='vipName'
-              placeholder='الرجاء إدخال لإسم الVIP' />
+              placeholder='الرجاء إدخال إسم الVIP' />
           </div>
-          <div className="col-6 py-2">
-            <label className='fs15 mb-2' htmlFor="privilegesID">ID الPrivileges</label>
-            <input className={`${style.holder} form-control`}
+          <div className="col-6">
+            <label className='fs15 pb-1' htmlFor="privilegesID">ID الPrivileges</label>
+            <input className={`${style.holder} py-3 form-control`}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.privilegesID}
               name='privilegesID'
               type="text"
               id='privilegesID'
-              placeholder='الرجاء إدخال ID الPrivileges' />
+              placeholder='الرجاء إدخال ID الprivileges' />
           </div>
 
-          <div dir='ltr' className="col-12 py-4">
-            <button className='btn bg-success text-white px-5 fs15 fw-bold' type="submit">إضافة</button>
-            <button onClick={() => formik.resetForm()} className='btn bg-white text-red me-2 fs15 fw-bold' type="button">إعادة ضبط</button>
-          </div>
+        </div>
+
+        <div dir='ltr' className="col-12 py-1 ms-5">
+          <button className={`${style.addBtnWidth} btn text-white px-4 py- fs15 fw-bold`} type="submit">إضافة</button>
+          <button onClick={() => formik.resetForm()} className='btn bg-white text-red me-4 fs15 fw-bold' type="button">إعادة ضبط</button>
         </div>
       </form>
 
