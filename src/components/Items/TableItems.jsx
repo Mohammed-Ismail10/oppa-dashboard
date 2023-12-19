@@ -31,6 +31,7 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
+      {/* {console.log('rest: ', rest)} */}
       <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
         onChange={(e) => console.log(e.target.checked)} />
       <span className='text-main fs15 py-'>{rest.rowIndex + 1}</span>
@@ -40,15 +41,14 @@ const selectRow = {
 };
 
 
-const rows = [
-  { id: 1, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
-  { id: 2, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'غير نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
-  { id: 3, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'غير نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
-];
+// const rows = [
+//   { id: 1, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
+//   { id: 2, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'غير نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
+//   { id: 3, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'غير نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
+// ];
 
 
 
-let rowsData = [];
 
 
 
@@ -67,12 +67,13 @@ export default function TableItems() {
     },
     {
       dataField: 'getGift', //must be same name of property in row which come from api
-      text: 'getGift',
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-hand-holding-heart me-2"></i>
         الحصول على الهدايا
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
+      formatter: () => <span>شراء</span>
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
@@ -101,15 +102,17 @@ export default function TableItems() {
         حالة الهدايا
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) => activeState == 1 ?
-        <span onClick={() => {
-          // updateActive(id);
-          // refetch();
-        }} className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> :
-        <span onClick={() => {
-          // updateActive(id);
-          // refetch();
-        }} className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
+      formatter: (_, { id }) =>
+        data?.data?.data.map((gift) => {
+          if (id == gift.id) {
+            if (gift.active == 1) {
+              return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            }
+            else {
+              return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            }
+          }
+        })
     },
     {
       dataField: 'image', //must be same name of property in row which come from api
@@ -124,7 +127,7 @@ export default function TableItems() {
     {
       dataField: 'created_at', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 w-100 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-clock me-2"></i>
         الوقت
       </span>,
@@ -150,46 +153,40 @@ export default function TableItems() {
 
   let dispatch = useDispatch();
 
-  let [currentPage, setCurrentPage] = useState(1);
-  const [activeState, setActiveState] = useState(1);
 
 
+  
+  let [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPage');
+    return storedPage ? parseInt(storedPage) : 1;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage);
+  }, [currentPage]);
 
 
   // https://fakestoreapi.com/products
   // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
-  function getItem(currentPage) {
-    console.log('page: ', currentPage);
-    return axios.get(`${Url}/gifts/dashboard?limit=9&page=1`);
+  function getItem() {
+    return axios.get(`${Url}/gifts/dashboard?limit=9&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  console.log(data);
-  // rowsData = data?.data;
-  // console.log(rowsData);
-  // console.log(isLoading);
-  // console.log(isFetching);
 
 
-
-  // function updateActive(id) {
-  //   let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
-  //   setActiveState(data?.active);
-  // }
-
-
-
-  // useEffect(()=>{
-  //   getItem(1);
-  // },[])
+  async function updateActive(id) {
+    let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
+    refetch();
+  }
 
 
   function increase() {
     currentPage += 1;
     setCurrentPage(currentPage);
-    getItem(currentPage);
+    refetch();
   }
 
   function decrease() {
@@ -197,15 +194,13 @@ export default function TableItems() {
     if (currentPage <= 0) {
       currentPage = 1;
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
     else {
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
   }
-
-
 
 
 
@@ -223,7 +218,7 @@ export default function TableItems() {
 
       {/* table */}
       {/* Check if data is loading */}
-      {false ? (
+      {isLoading ? (
         <></>
       ) : (
 
@@ -234,7 +229,7 @@ export default function TableItems() {
 
           <BootstrapTable
             keyField="id"
-            data={rows}
+            data={data?.data?.data}
             columns={columns}
             bordered={false}
             classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} ms-1 `}
