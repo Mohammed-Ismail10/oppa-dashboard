@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,7 +11,7 @@ import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { baseUrl } from '../../helpers/constant.js';
+import { Url, baseUrl } from '../../helpers/constant.js';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 
@@ -45,10 +45,10 @@ const selectRow = {
 };
 
 
-const rows = [
-  { id: 1, name: 'يوسف رجب', phone: +201234567890, email: 'yussif.ragab5522@gmail.com', accountState: "نشيط", date: '2023-11-21 T 08:13:16' },
-  { id: 2, name: 'يوسف رجب', phone: +201234567890, email: 'yussif.ragab5522@gmail.com', accountState: "غير نشيط", date: '2023-11-21 T 08:13:16' },
-];
+// const rows = [
+//   { id: 1, name: 'يوسف رجب', phone: +201234567890, email: 'yussif.ragab5522@gmail.com', accountState: "نشيط", date: '2023-11-21 T 08:13:16' },
+//   { id: 2, name: 'يوسف رجب', phone: +201234567890, email: 'yussif.ragab5522@gmail.com', accountState: "غير نشيط", date: '2023-11-21 T 08:13:16' },
+// ];
 
 
 
@@ -59,11 +59,12 @@ export default function Customers() {
     {
       dataField: 'name', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 px-5 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
+      headerClasses: ''
     },
     {
       dataField: 'phone', //must be same name of property in row which come from api
@@ -73,17 +74,19 @@ export default function Customers() {
         رقم الهاتف
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => `+${cell}`,
+      // formatter: (cell, row) => `+${cell}`,
       attrs: () => ({ 'dir': `ltr` }),
+      headerClasses: ``
     },
     {
       dataField: 'email', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='w-100 px- py-2 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-envelope-open me-2"></i>
         البريد الإلكتروني
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
+      headerClasses: `w-50`
     },
     {
       dataField: 'accountState', //must be same name of property in row which come from api
@@ -93,20 +96,29 @@ export default function Customers() {
         حالة الحساب
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => row.accountState === 'نشيط' ? <span className='badge fs15 bg-green py-2 px-4'>نشيط</span> : <span className='badge fs15 bg-red py-2 px-3'>غير نشيط</span>
+      formatter: (_, { id }) => data?.data?.data.map((gift) => {
+        if (id == gift.id) {
+          if (gift.active == 1) {
+            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+          }
+          else {
+            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+          }
+        }
+      })
     },
     {
       dataField: 'timeStop', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 px- w-75 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-clock me-2"></i>
         مدة الإيقاف
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: () => <span className='badge bg-red py-2 px-4 fs15 fw-bold'>غير محددة</span>
+      formatter: () => <span className='badge bg-red py-2 px-5 fs15 fw-bold'>غير محددة</span>
     },
     {
-      dataField: 'date', //must be same name of property in row which come from api
+      dataField: 'created_at', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-calendar me-2"></i>
@@ -123,6 +135,7 @@ export default function Customers() {
         التعديل والحذف والطباعة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
+      headerClasses: '',
       // id => be id in object that come from api
       formatter: (_, { id }) => (<>
         <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
@@ -134,55 +147,52 @@ export default function Customers() {
   ];
 
 
+
   let { showChangeId, showDelete } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
-  let [currentPage, setCurrentPage] = useState(1);
-  const [activeState, setActiveState] = useState(1);
+  let [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPage');
+    return storedPage ? parseInt(storedPage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage);
+  }, [currentPage]);
 
 
-  // https://fakestoreapi.com/products
-  // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
-  function getItem(currentPage) {
-    // console.log('page: ', currentPage);
-    return axios.get(`${baseUrl}/users/dashboard?limit=1&page=1`);
+
+  function getItem() {
+    return axios.get(`${Url}/users/dashboard?limit=8&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  console.log(data);
-  // rowsData = data?.data;
-  // console.log(rowsData);
-  // console.log(isLoading);
-  // console.log(isFetching);
+  // console.log(data?.data)
 
-
-
-  // function updateActive(id) {
-  //   let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
-  //   setActiveState(data?.active);
+  // async function updateActive(id) {
+  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
+  //   refetch();
   // }
-
-
 
 
   function increase() {
     currentPage += 1;
     setCurrentPage(currentPage);
-    getItem(currentPage);
+    refetch();
   }
 
   function decrease() {
     currentPage -= 1;
-    if (currentPage <= 0) {
-      currentPage = 1;
+    if (currentPage < 0) {
+      currentPage = 0;
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
     else {
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
   }
 
@@ -210,8 +220,8 @@ export default function Customers() {
         {/* items nav links */}
         <div className='pt-5 mt-3'>
           <Navbar>
-            <Nav className="w-100 px-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+            <Nav className="w-100 pe-2">
+              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} me-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
@@ -231,9 +241,9 @@ export default function Customers() {
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className='d-flex justify-content-start shadow-sm mx-3'>
+              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearc}`}>
                 <Dropdown dir='ltr'>
-                  <Dropdown.Toggle className='bg-body-secondary border-0 h-100 text-main fw-bold fs15 rounded-0' size='sm' id="dropdown-basic">
+                  <Dropdown.Toggle className='bg-search border-0 h-100 text-main fw-bold fs15 rounded-0 ps-5 pe-4' size='sm' id="dropdown-basic">
                     الوكالة
                   </Dropdown.Toggle>
                   <Dropdown.Menu className='mt-0'>
@@ -242,8 +252,8 @@ export default function Customers() {
                     <Dropdown.Item>Something else</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <div className='position-relative'>
-                  <input className={`${style.searchInput} shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-body-secondary`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
+                <div className='position-relative w-100'>
+                  <input className={`${style.searchInput}  shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-search border-0 border-start`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
                   <i className="fa-solid fa-magnifying-glass position-absolute bottom-0 pb-2 ps-3"></i>
                 </div>
               </div>
@@ -262,14 +272,13 @@ export default function Customers() {
             {/* table customers */}
             <BootstrapTable
               keyField="id"
-              data={rows}
+              data={data?.data?.data}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} `}
+              classes={`${style.tableHeader} text-center position-relative  table-borderless my-4 ${style.tableWidth} `}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />
-
 
 
             {/* pagination */}
@@ -279,7 +288,7 @@ export default function Customers() {
               </div>
               <div className='mx-2 d-flex align-items-center'>
                 <i onClick={() => increase()} className="fa-solid fa-caret-right curser-pointer"></i>
-                <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
+                <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
                 <i onClick={() => decrease()} className="fa-solid fa-caret-left curser-pointer"></i>
               </div>
               <div className='mx-2'>

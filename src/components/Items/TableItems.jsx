@@ -101,7 +101,7 @@ export default function TableItems() {
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الهدايا
       </span>,
-      classes: 'text-main fs15 pt-3 px-0',
+      classes: 'text-main fs15 pt-2 px-0',
       formatter: (_, { id }) =>
         data?.data?.data.map((gift) => {
           if (id == gift.id) {
@@ -158,7 +158,7 @@ export default function TableItems() {
   
   let [currentPage, setCurrentPage] = useState(() => {
     const storedPage = localStorage.getItem('currentPage');
-    return storedPage ? parseInt(storedPage) : 1;
+    return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
@@ -166,7 +166,7 @@ export default function TableItems() {
   }, [currentPage]);
 
 
-  // https://fakestoreapi.com/products
+
   // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
   function getItem() {
     return axios.get(`${Url}/gifts/dashboard?limit=9&page=${currentPage}`);
@@ -191,8 +191,8 @@ export default function TableItems() {
 
   function decrease() {
     currentPage -= 1;
-    if (currentPage <= 0) {
-      currentPage = 1;
+    if (currentPage < 0) {
+      currentPage = 0;
       setCurrentPage(currentPage);
       refetch();
     }

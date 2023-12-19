@@ -1,5 +1,5 @@
 .shadowBtn {
-  box-shadow: 0 0 3px 0.0px gray !important;
+  box-shadow: 0 0 3px 0px gray !important;
 }
 
 .borderDropdown {
@@ -15,7 +15,7 @@
   font-size: 5px !important;
 }
 
-.searchInput::placeholder{
+.searchInput::placeholder {
   color: #1c274c !important;
   font-size: 12px !important;
   font-weight: bold !important;
@@ -23,18 +23,33 @@
 
 .tableHeader th {
   padding: 0px !important;
+  width: 0px !important;
 }
 
 .tableWidth {
-  /* width: 100.5% !important; */
+  /* width: 90% !important; */
   border-spacing: 0 10px !important;
   border-collapse: separate !important;
+  /* table-layout: fixed !important; */
+  /* right: -1%; */
 }
 
 .heightItems {
   height: 83% !important;
 }
 
-.rowShadow:hover{
+.rowShadow:hover {
   box-shadow: 0 0 10px 0.1px gray !important;
+}
+
+.widthEmail {
+  width: 1% !important;
+}
+
+.searchWidth {
+  width: 42% !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 1px 0px gray !important;
 }
