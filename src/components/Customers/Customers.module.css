@@ -23,7 +23,7 @@
 
 .tableHeader th {
   padding: 0px !important;
-  width: 0px !important;
+  /* width: 0px !important; */
 }
 
 .tableWidth {
@@ -40,10 +40,6 @@
 
 .rowShadow:hover {
   box-shadow: 0 0 10px 0.1px gray !important;
-}
-
-.widthEmail {
-  width: 1% !important;
 }
 
 .searchWidth {

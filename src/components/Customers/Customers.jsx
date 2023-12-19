@@ -59,12 +59,11 @@ export default function Customers() {
     {
       dataField: 'name', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 px-5 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      headerClasses: ''
     },
     {
       dataField: 'phone', //must be same name of property in row which come from api
@@ -76,20 +75,18 @@ export default function Customers() {
       classes: 'text-main fs15 pt-3 px-0',
       // formatter: (cell, row) => `+${cell}`,
       attrs: () => ({ 'dir': `ltr` }),
-      headerClasses: ``
     },
     {
       dataField: 'email', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='w-100 px- py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-envelope-open me-2"></i>
         البريد الإلكتروني
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      headerClasses: `w-50`
     },
     {
-      dataField: 'accountState', //must be same name of property in row which come from api
+      dataField: 'active', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
@@ -110,12 +107,12 @@ export default function Customers() {
     {
       dataField: 'timeStop', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 px- w-75 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-clock me-2"></i>
         مدة الإيقاف
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: () => <span className='badge bg-red py-2 px-5 fs15 fw-bold'>غير محددة</span>
+      formatter: () => <span className='badge bg-red py-2 px-4 fs15 fw-bold'>غير محددة</span>
     },
     {
       dataField: 'created_at', //must be same name of property in row which come from api
@@ -135,14 +132,11 @@ export default function Customers() {
         التعديل والحذف والطباعة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      headerClasses: '',
-      // id => be id in object that come from api
-      formatter: (_, { id }) => (<>
+      formatter: (_, { id }) => <>
         <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
         <i onClick={() => dispatch(handleShowDeleteRow(id))} className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
         <i onClick={() => dispatch(handleShowEditRow(id))} className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
       </>
-      )
     },
   ];
 
@@ -163,7 +157,7 @@ export default function Customers() {
 
 
   function getItem() {
-    return axios.get(`${Url}/users/dashboard?limit=8&page=${currentPage}`);
+    return axios.get(`${Url}/users/dashboard?limit=9&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
@@ -217,11 +211,11 @@ export default function Customers() {
       <div className={`${style.heightItems}`}>
 
 
-        {/* items nav links */}
+        {/* customers nav links */}
         <div className='pt-5 mt-3'>
           <Navbar>
-            <Nav className="w-100 pe-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} me-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+            <Nav className="w-100 px-2">
+              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
@@ -241,7 +235,7 @@ export default function Customers() {
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearc}`}>
+              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearch}`}>
                 <Dropdown dir='ltr'>
                   <Dropdown.Toggle className='bg-search border-0 h-100 text-main fw-bold fs15 rounded-0 ps-5 pe-4' size='sm' id="dropdown-basic">
                     الوكالة
@@ -267,20 +261,16 @@ export default function Customers() {
 
         {isLoading ? <></> :
           <div className='d-flex flex-column h-100 justify-content-between'>
-
-
             {/* table customers */}
-            <BootstrapTable
+            < BootstrapTable
               keyField="id"
-              data={data?.data?.data}
+              data={data?.data.data}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} text-center position-relative  table-borderless my-4 ${style.tableWidth} `}
+              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth}`}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />
-
-
             {/* pagination */}
             <div className='d-flex justify-content-center align-items-center'>
               <div className='mx-2'>
@@ -293,8 +283,8 @@ export default function Customers() {
               </div>
               <div className='mx-2'>
                 <Dropdown>
-                  <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                    30
+                  <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                    {currentPage}
                   </Dropdown.Toggle>
                   <DropdownMenu>
                     <Dropdown.Item >25</Dropdown.Item>
@@ -304,7 +294,6 @@ export default function Customers() {
                 </Dropdown>
               </div>
             </div>
-
           </div>}
 
         {/* modals: first => (تغير المعرف). second => (مسح الكل).  */}

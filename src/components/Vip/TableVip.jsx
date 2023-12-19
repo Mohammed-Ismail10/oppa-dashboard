@@ -151,11 +151,9 @@ export default function TableVip() {
     if (currentPage <= 0) {
       currentPage = 1;
       setCurrentPage(currentPage);
-      getItem(currentPage);
     }
     else {
       setCurrentPage(currentPage);
-      getItem(currentPage);
     }
   }
 
@@ -202,7 +200,7 @@ export default function TableVip() {
           </div>
           <div className='mx-2'>
             <Dropdown>
-              <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+              <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
                 30
               </Dropdown.Toggle>
 

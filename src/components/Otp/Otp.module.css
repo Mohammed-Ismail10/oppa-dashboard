@@ -1,5 +1,5 @@
 .shadowBtn {
-  box-shadow: 0 0 3px 0.0px gray !important;
+  box-shadow: 0 0 3px 0px gray !important;
 }
 
 .borderDropdown {
@@ -15,7 +15,7 @@
   font-size: 5px !important;
 }
 
-.searchInput::placeholder{
+.searchInput::placeholder {
   color: #1c274c !important;
   font-size: 12px !important;
   font-weight: bold !important;
@@ -23,4 +23,25 @@
 
 .tableHeader th {
   padding: 0px !important;
+}
+
+.heightItems {
+  height: 83% !important;
+}
+
+.tableWidth {
+  /* width: 93% !important; */
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+.rowShadow:hover {
+  box-shadow: 0 0 10px 0.1px gray !important;
+}
+
+.searchWidth {
+  width: 42% !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 1px 0px gray !important;
 }
