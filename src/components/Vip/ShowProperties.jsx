@@ -33,7 +33,6 @@ const selectRow = {
         #
       </span>
     </div>
-
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
@@ -179,9 +178,10 @@ export default function ShowProperties() {
 
   return (
     <>
+    {/* nav links of show property */}
       <div className='pt-5 mt-3'>
         <Navbar>
-          <Nav className="w-100 px-2">
+          <Nav className="w-100 pe-2">
             <NavLink to={'/addproperty'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إضافة خاصية
@@ -225,7 +225,6 @@ export default function ShowProperties() {
               <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
                 30
               </Dropdown.Toggle>
-
               <Dropdown.Menu>
                 <Dropdown.Item >25</Dropdown.Item>
                 <Dropdown.Item >20</Dropdown.Item>

@@ -161,10 +161,10 @@ export default function EnableFeature() {
   return (
     <>
 
-      {/* Nav links for Vip */}
+      {/* Nav links for Vip enable feature */}
       <div className='pt-5 mt-3'>
         <Navbar>
-          <Nav className="w-100 px-2">
+          <Nav className="w-100 pe-2">
             <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إستعلام المستخدم
