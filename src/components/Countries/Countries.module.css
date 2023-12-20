@@ -21,10 +21,28 @@
   font-weight: bold !important;
 }
 
-.rowShadow:hover {
-  box-shadow: 0 0 3px 0px gray !important;
-}
-
 .tableHeader th {
   padding: 0px !important;
+}
+
+.tableWidth {
+  width: 69% !important;
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+
+.heightItems {
+  height: 83% !important;
+}
+
+.rowShadow:hover {
+  box-shadow: 0 0 10px 0.1px gray !important;
+}
+
+.searchWidth {
+  width: 38.5% !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 1px 0px gray !important;
 }

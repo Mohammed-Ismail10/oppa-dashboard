@@ -23,15 +23,11 @@
 
 .tableHeader th {
   padding: 0px !important;
-  /* width: 0px !important; */
 }
 
 .tableWidth {
-  /* width: 90% !important; */
   border-spacing: 0 10px !important;
   border-collapse: separate !important;
-  /* table-layout: fixed !important; */
-  /* right: -1%; */
 }
 
 .heightItems {
