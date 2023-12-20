@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import style from './RoomCategories.module.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -9,12 +9,14 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 
 // For column checkbox
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true,
+  // clickToSelect: true,
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
     <div className="border badge p-0">
       <input
@@ -53,67 +55,77 @@ export default function RoomCategories() {
     {
       dataField: 'name',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'mId',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-user me-2"></i>
         معرف ال (ID)
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'roomName',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-door-open me-2"></i>
         إسم الغرفة
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'roomType',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className={`${style.refliction} fa-solid fa-arrow-down-short-wide me-2`}></i>
         نوع الغرفة
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'roomImg',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-file-image me-2"></i>
         صورة الغرفة
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (cell, row) => <img src={row.roomImg} width={35} alt={`Flag of ${row.name}`} />,
     },
     {
       dataField: 'roomState',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الغرفة
       </span>,
-      classes: 'text-main fs15',
-      formatter: (cell, row) => row.roomState === 'نشيط' ? <span className='badge bg-green py-2 px-4'>نشيط</span> : <span className='badge bg-red py-2 px-3'>غير نشيط</span>
+      classes: 'text-main fs15 pt-3 px-0',
+      formatter: (_, { id }) =>
+        data?.data?.data.map((room) => {
+          if (id == room.id) {
+            if (room.active == 1) {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            }
+            else {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            }
+          }
+        })
     },
     {
       dataField: 'edit',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs13 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
-      classes: 'text-main fs15',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) => <>
         <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
         <i onClick={() => dispatch(handleShowDeleteRow(id))} className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
@@ -128,99 +140,149 @@ export default function RoomCategories() {
 
 
 
+  let [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPage');
+    return storedPage ? parseInt(storedPage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage);
+  }, [currentPage]);
+
+
+
+  function getItem() {
+    return axios.get(``);
+  }
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+    cacheTime: 60000,
+    refetchInterval: 300000,
+  });
+
+
+  // async function updateActive(id) {
+  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
+  //   refetch();
+  // }
+
+
+  function increase() {
+    currentPage += 1;
+    setCurrentPage(currentPage);
+    refetch();
+  }
+
+  function decrease() {
+    currentPage -= 1;
+    if (currentPage < 0) {
+      currentPage = 0;
+      setCurrentPage(currentPage);
+      refetch();
+    }
+    else {
+      setCurrentPage(currentPage);
+      refetch();
+    }
+  }
+
+
+
+
+
 
 
 
 
   return (
     <>
-      <section>
+      <div className={`${style.heightItems}`}>
 
 
         {/* nav */}
-        <div className='pt-4'>
+        <div className='pt-5 mt-3'>
           <Navbar>
-            <Container>
-              <Nav className="w-100">
-                <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  إستعلام المستخدم
-                </NavLink>
-                <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  سجل الهدايا
-                </NavLink>
-                <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-2 border-0 btn fs12 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-funnel me-2"></i>
-                  فلتر
-                </NavLink>
-                <div className='d-flex justify-content-start shadow-sm'>
-                  <Dropdown dir='ltr'>
-                    <Dropdown.Toggle className='bg-body-secondary border-0 h-100 text-main fw-bold fs15 rounded-0' size='sm' id="dropdown-basic">
-                      الوكالة
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu className='mt-0'>
-                      <Dropdown.Item>Action</Dropdown.Item>
-                      <Dropdown.Item>Another action</Dropdown.Item>
-                      <Dropdown.Item>Something else</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <div className='position-relative'>
-                    <input className={`${style.searchInput} shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-body-secondary`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
-                    <i className="fa-solid fa-magnifying-glass position-absolute bottom-0 pb-2 ps-3"></i>
-                  </div>
+            <Nav className="w-100 pe-2">
+              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                إستعلام المستخدم
+              </NavLink>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                سجل الهدايا
+              </NavLink>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-funnel me-2"></i>
+                فلتر
+              </NavLink>
+              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearch}`}>
+                <Dropdown dir='ltr'>
+                  <Dropdown.Toggle className='bg-search border-0 h-100 text-main fw-bold fs15 rounded-0 ps-5 pe-4' size='sm' id="dropdown-basic">
+                    الوكالة
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className='mt-0'>
+                    <Dropdown.Item>Action</Dropdown.Item>
+                    <Dropdown.Item>Another action</Dropdown.Item>
+                    <Dropdown.Item>Something else</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <div className='position-relative w-100'>
+                  <input className={`${style.searchInput}  shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-search border-0 border-start`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
+                  <i className="fa-solid fa-magnifying-glass position-absolute bottom-0 pb-2 ps-3"></i>
                 </div>
-                <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} rounded-3 ms-auto border-0 btn fs12 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
-                  مسح الكل
-                </NavLink>
-              </Nav>
-            </Container>
+              </div>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+                مسح الكل
+              </NavLink>
+            </Nav>
           </Navbar>
         </div>
 
 
-        {/* Table coins*/}
-        <BootstrapTable
-          keyField="id"
-          data={rows}
-          columns={columns}
-          bordered={false}
-          hover
-          classes={`${style.tableHeader} text-center table-borderless my-4 `}
-          selectRow={selectRow}
-        />
+        {isLoading ? <></> :
+          <div className='d-flex flex-column h-100 justify-content-between'>
+            {/* Table */}
+            <BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless my-4 `}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
+            />
 
+            {/* pagination */}
+            <div className='d-flex justify-content-center align-items-center'>
+              <div className='mx-2'>
+                <span className='text-main fs15'>الصفحة</span>
+              </div>
+              <div className='mx-2 d-flex align-items-center'>
+                <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+                <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+                <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+              </div>
+              <div className='mx-2'>
+                <Dropdown>
+                  <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                    {currentPage}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item >25</Dropdown.Item>
+                    <Dropdown.Item >20</Dropdown.Item>
+                    <Dropdown.Item >10</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </div>
 
-        {/* pagination */}
-        <div className='d-flex justify-content-center align-items-center'>
-          <div className='mx-2'>
-            <span className='text-main fs15'>الصفحة</span>
           </div>
-          <div className='mx-2 d-flex align-items-center'>
-            <i className="fa-solid fa-caret-right curser-pointer"></i>
-            <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-            <i className="fa-solid fa-caret-left curser-pointer"></i>
-          </div>
-          <div className='mx-2'>
-            <Dropdown>
-              <Dropdown.Toggle className={`${style.borderDropdown} px-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                30
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item >25</Dropdown.Item>
-                <Dropdown.Item >20</Dropdown.Item>
-                <Dropdown.Item >10</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        </div>
+        }
 
 
         {/* modals */}
         <ModalDelete />
 
-
-      </section>
+      </div>
     </>
   )
 }
