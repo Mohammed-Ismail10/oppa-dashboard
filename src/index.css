@@ -8,6 +8,12 @@
   --gray: #8d98aa;
 }
 
+/* .accordion .accordion-item{
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: red;
+} */
+
 .selection-cell {
   padding-block: 14px !important;
 }
@@ -67,6 +73,12 @@ body {
   color: #707070 !important;
 }
 
+.accordion-button::after {
+  margin-right: 0 !important;
+}
+[data-bs-target="#flush-collapseSix"]::after {
+  background-image: url("./Assets/Images/coins.png") !important;
+}
 
 .sideBarActive.active::before {
   content: "";
@@ -75,7 +87,7 @@ body {
   width: 2% !important;
   height: 120% !important;
   top: -5% !important;
-  right: -.7% !important;
+  right: -1% !important;
   border-radius: 100% / 5px;
   box-shadow: 0 0 6.8px 0 var(--text-main);
 }

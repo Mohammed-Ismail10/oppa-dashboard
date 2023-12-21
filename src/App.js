@@ -29,6 +29,12 @@ import ShowProperties from './components/Vip/ShowProperties.jsx';
 import AddProperty from './components/Vip/AddProperty.jsx';
 import EnableFeature from './components/Vip/EnableFeature.jsx';
 import AddEnableFeature from './components/Vip/AddEnableFeature.jsx';
+import RechargeBalance from './components/RechargeBalance/RechargeBalance.jsx';
+import SilverCoins from './components/SilverCoins/SilverCoins.jsx';
+import Complaints from './components/Complaints/Complaints.jsx';
+import ExchangeCurrencies from './components/ExchangeCurrencies/ExchangeCurrencies.jsx';
+import FamilyLevel from './components/FamilyLevel/FamilyLevel.jsx';
+import Backgrounds from './components/Backgrounds/Backgrounds.jsx';
 
 
 
@@ -64,6 +70,12 @@ function App() {
         { path: 'addproperty', element: <AddProperty /> },
         { path: 'enablefeature', element: <EnableFeature /> },
         { path: 'addenablefeature', element: <AddEnableFeature /> },
+        { path: 'rechargebalance', element: <RechargeBalance /> },
+        { path: 'familylevel', element: <FamilyLevel /> },
+        { path: 'silvercoins', element: <SilverCoins /> },
+        { path: 'complaints', element: <Complaints /> },
+        { path: 'exchangecurrencies', element: <ExchangeCurrencies /> },
+        { path: 'backgrounds', element: <Backgrounds /> },
         {
           path: 'items', element: <Items />, children: [
             { index: true, element: <TableItems /> },
