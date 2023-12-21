@@ -146,10 +146,10 @@ export default function ShowProperties() {
 
 
 
-  function getItem() {
+  function getProperty() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('property', getProperty, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

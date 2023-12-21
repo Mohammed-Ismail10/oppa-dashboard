@@ -138,10 +138,10 @@ export default function Countries() {
 
 
 
-  function getItem() {
+  function getCountries() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('country', getCountries, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

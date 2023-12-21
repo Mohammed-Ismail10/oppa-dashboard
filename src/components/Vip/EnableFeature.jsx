@@ -130,11 +130,10 @@ export default function EnableFeature() {
   }, [currentPage]);
 
 
-//  i want change name this function later
-  function getItem() {
+  function getFeature() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('feature', getFeature, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

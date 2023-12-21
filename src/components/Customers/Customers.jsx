@@ -156,10 +156,10 @@ export default function Customers() {
 
 
 
-  function getItem() {
+  function getCustomers() {
     return axios.get(`${Url}/users/dashboard?limit=9&page=${currentPage}`);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('customer', getCustomers, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

@@ -158,10 +158,10 @@ export default function Otp() {
 
 
 
-  function getItem() {
+  function getModerators() {
     return axios.get(`${Url}/admins?limit=9&page=${currentPage}`);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('moderator', getModerators, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

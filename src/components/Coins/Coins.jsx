@@ -125,10 +125,10 @@ export default function Coins() {
 
 
 
-  function getItem() {
+  function getCoins() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('coins', getCoins, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

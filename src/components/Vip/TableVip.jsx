@@ -128,10 +128,10 @@ export default function TableVip() {
 
 
 
-  function getItem() {
+  function getVip() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('vip', getVip, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
