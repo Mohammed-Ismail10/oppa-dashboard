@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import style from './Vip.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -80,7 +80,7 @@ export default function ShowProperties() {
         صورة الPrivileges
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.privImg} width={35} alt={`Flag of ${row.vipName}`} />,
+      formatter: (cell, row) => <img loading='lazy' src={row.privImg} width={55} alt={`Flag of ${row.vipName}`} />,
     },
     {
       dataField: 'giftState', //must be same name of property in row which come from api
@@ -90,7 +90,17 @@ export default function ShowProperties() {
         حالة الحساب
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) => activeState == 1 ? <span className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> : <span className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
+      formatter: (_, { id }) =>
+      data?.data?.data.map((pro) => {
+        if (id == pro.id) {
+          if (pro.active == 1) {
+            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+          }
+          else {
+            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+          }
+        }
+      })
     },
     {
       dataField: 'time', //must be same name of property in row which come from api
@@ -125,48 +135,49 @@ export default function ShowProperties() {
 
 
 
-  const [activeState, setActiveState] = useState(1);
-  let [currentPage, setCurrentPage] = useState(1);
+  let [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPageShowProperty');
+    return storedPage ? parseInt(storedPage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentPageShowProperty', currentPage);
+  }, [currentPage]);
 
 
 
-
-  function getItem(page) {
-    return axios.get(`${baseUrl}/gifts/dashboard?limit=9&page=${page}`);
+  function getItem() {
+    return axios.get(``);
   }
-  let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  console.log(data);
-  console.log(isError);
 
 
-
-  function updateActive(id) {
-    let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
-    setActiveState(data?.active);
-  }
-
-
+  // async function updateActive(id) {
+  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
+  //   refetch();
+  // }
 
   function increase() {
     currentPage += 1;
     setCurrentPage(currentPage);
+    refetch();
   }
+
   function decrease() {
     currentPage -= 1;
-    if (currentPage <= 0) {
-      currentPage = 1;
+    if (currentPage < 0) {
+      currentPage = 0;
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
     else {
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
   }
-
 
 
 

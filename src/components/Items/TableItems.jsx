@@ -101,7 +101,7 @@ export default function TableItems() {
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الهدايا
       </span>,
-      classes: 'text-main fs15 pt-2 px-0',
+      classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
         data?.data?.data.map((gift) => {
           if (id == gift.id) {
@@ -121,8 +121,8 @@ export default function TableItems() {
         <i className="bi bi-file-image me-2"></i>
         صورة الهدايا
       </span>,
-      classes: 'text-main fs15 pt-2 px-0 pb-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.image} width={30} alt={`Flag of ${row.title_ar}`} />,
+      classes: 'text-main fs15 p-0',
+      formatter: (cell, row) => <img loading='lazy' src={row.image} width={55} alt={`Flag of ${row.title_ar}`} />,
     },
     {
       dataField: 'created_at', //must be same name of property in row which come from api
@@ -157,12 +157,12 @@ export default function TableItems() {
 
   
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPage');
+    const storedPage = localStorage.getItem('currentPageItems');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPage', currentPage);
+    localStorage.setItem('currentPageItems', currentPage);
   }, [currentPage]);
 
 
@@ -251,9 +251,8 @@ export default function TableItems() {
             <div className='mx-2'>
               <Dropdown>
                 <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                  {currentPage}
+                  30
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
                   <Dropdown.Item >25</Dropdown.Item>
                   <Dropdown.Item >20</Dropdown.Item>

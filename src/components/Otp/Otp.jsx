@@ -148,12 +148,12 @@ export default function Otp() {
 
 
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPage');
+    const storedPage = localStorage.getItem('currentPageModerators');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPage', currentPage);
+    localStorage.setItem('currentPageModerators', currentPage);
   }, [currentPage]);
 
 

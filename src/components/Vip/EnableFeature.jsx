@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { handleShowChangeId, handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -77,7 +77,17 @@ export default function EnableFeature() {
         حالة الحساب
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) => activeState == 1 ? <span className={`badge py-2 px-4 curser-pointer bg-green`}>نشيط</span> : <span className={`badge py-2 px-4 curser-pointer bg-red`}>غير نشيط</span>
+      formatter: (_, { id }) =>
+        data?.data?.data.map((feature) => {
+          if (id == feature.id) {
+            if (feature.active == 1) {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            }
+            else {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            }
+          }
+        })
     },
     {
       dataField: 'time', //must be same name of property in row which come from api
@@ -110,43 +120,48 @@ export default function EnableFeature() {
   let dispatch = useDispatch();
 
 
-  const [activeState, setActiveState] = useState(1);
-  let [currentPage, setCurrentPage] = useState(1);
+  let [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPageItems');
+    return storedPage ? parseInt(storedPage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentPageItems', currentPage);
+  }, [currentPage]);
 
 
-  function getItem(page) {
-    return axios.get(`${baseUrl}/gifts/dashboard?limit=9&page=${page}`);
+//  i want change name this function later
+  function getItem() {
+    return axios.get(``);
   }
-  let { data, isLoading, refetch, isError } = useQuery('item', getItem, {
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  console.log(data);
-  console.log(isError);
 
 
-
-  function updateActive(id) {
-    let { data } = axios.patch(`${baseUrl}/gifts/dashboard/${id}`);
-    setActiveState(data?.active);
-  }
-
+  // async function updateActive(id) {
+  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
+  //   refetch();
+  // }
 
 
   function increase() {
     currentPage += 1;
     setCurrentPage(currentPage);
+    refetch();
   }
+
   function decrease() {
     currentPage -= 1;
-    if (currentPage <= 0) {
-      currentPage = 1;
+    if (currentPage < 0) {
+      currentPage = 0;
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
     else {
       setCurrentPage(currentPage);
-      getItem(currentPage);
+      refetch();
     }
   }
 
@@ -238,7 +253,6 @@ export default function EnableFeature() {
               <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
                 30
               </Dropdown.Toggle>
-
               <Dropdown.Menu>
                 <Dropdown.Item >25</Dropdown.Item>
                 <Dropdown.Item >20</Dropdown.Item>
