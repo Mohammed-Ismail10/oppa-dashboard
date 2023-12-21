@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
@@ -93,9 +92,9 @@ export default function Customers() {
         حالة الحساب
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) => data?.data?.data.map((gift) => {
-        if (id == gift.id) {
-          if (gift.active == 1) {
+      formatter: (_, { id }) => data?.data?.data.map((customer) => {
+        if (id == customer.id) {
+          if (customer.active == 1) {
             return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
           }
           else {

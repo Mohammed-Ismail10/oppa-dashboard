@@ -1,0 +1,53 @@
+.shadowBtn {
+  box-shadow: 0 0 3px 0px gray !important;
+}
+
+.borderDropdown {
+  border-bottom: 3px solid #1c274c !important;
+}
+
+.itemsHover:hover {
+  background-color: #0b6ac8 !important;
+  color: white !important;
+}
+
+.fs5 {
+  font-size: 5px !important;
+}
+
+.searchInput::placeholder {
+  color: #1c274c !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.tableHeader th {
+  padding: 0px !important;
+}
+
+.tableWidth {
+  width: 95% !important;
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+
+.heightItems {
+  height: 83% !important;
+}
+
+.rowShadow:hover {
+  box-shadow: 0 0 10px 0.1px gray !important;
+}
+
+.searchWidth {
+  width: 38.5% !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 1px 0px gray !important;
+}
+
+.addItemHover:hover {
+  background-color: #27ae61 !important;
+  color: white !important;
+}

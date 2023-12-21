@@ -17,7 +17,7 @@ import coinsImg from '../../Assets/Images/coins.png'
 // For column checkbox
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true,
+  // clickToSelect: true,
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
     <div className="border badge p-0">
       <input
@@ -133,11 +133,6 @@ export default function Coins() {
     refetchInterval: 300000,
   });
 
-
-  // async function updateActive(id) {
-  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
-  //   refetch();
-  // }
 
 
   function increase() {
