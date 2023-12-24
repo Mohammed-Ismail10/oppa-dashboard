@@ -35,6 +35,7 @@ import Complaints from './components/Complaints/Complaints.jsx';
 import ExchangeCurrencies from './components/ExchangeCurrencies/ExchangeCurrencies.jsx';
 import FamilyLevel from './components/FamilyLevel/FamilyLevel.jsx';
 import Backgrounds from './components/Backgrounds/Backgrounds.jsx';
+import TableFamilyLevel from './components/FamilyLevel/TableFamilyLevel.jsx';
 
 
 
@@ -71,7 +72,11 @@ function App() {
         { path: 'enablefeature', element: <EnableFeature /> },
         { path: 'addenablefeature', element: <AddEnableFeature /> },
         { path: 'rechargebalance', element: <RechargeBalance /> },
-        { path: 'familylevel', element: <FamilyLevel /> },
+        {
+          path: 'familylevel', element: <FamilyLevel />, children: [
+            { index: true, element: <TableFamilyLevel /> }
+          ]
+        },
         { path: 'silvercoins', element: <SilverCoins /> },
         { path: 'complaints', element: <Complaints /> },
         { path: 'exchangecurrencies', element: <ExchangeCurrencies /> },

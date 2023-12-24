@@ -85,7 +85,7 @@ export default function Customers() {
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'active', //must be same name of property in row which come from api
+      dataField: 'suspend', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
@@ -94,11 +94,11 @@ export default function Customers() {
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) => data?.data?.data.map((customer) => {
         if (id == customer.id) {
-          if (customer.active == 1) {
-            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+          if (customer.suspend == 1) {
+            return <span key={id}  className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
           }
           else {
-            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            return <span key={id}  className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
           }
         }
       })
@@ -162,7 +162,7 @@ export default function Customers() {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  // console.log(data?.data)
+  // console.log(data?.data.data)
 
   // async function updateActive(id) {
   //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);

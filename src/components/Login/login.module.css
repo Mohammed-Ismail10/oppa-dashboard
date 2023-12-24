@@ -1,3 +1,19 @@
 .bgBtn {
-  background-color: #4698C1 !important;
+  background-color: #4698c1 !important;
+}
+
+.fs35 {
+  font-size: 35px !important;
+}
+
+.fs18 {
+  font-size: 18px !important;
+}
+
+.textEye {
+  color: #4b5563 !important;
+}
+
+.textInput {
+  color: #9fa6b2 !important;
 }

@@ -26,8 +26,8 @@ body {
 
 ::placeholder {
   font-size: 14px !important;
-  font-weight: 500 !important;
-  color: #c2c2c2 !important;
+  font-weight: 700 !important;
+  color: #9FA6B2 !important;
   direction: rtl !important;
 }
 ::-webkit-input-placeholder {
@@ -47,6 +47,10 @@ body {
 }
 .text-green {
   color: var(--bg-green) !important;
+}
+
+.text-input {
+  color: var(--text-input) !important;
 }
 
 .bg-main {
@@ -119,6 +123,10 @@ body {
   font-size: 12px !important;
 }
 
+.fs20 {
+  font-size: 20px !important;
+}
+
 .curser-pointer {
   cursor: pointer;
 }
@@ -131,4 +139,16 @@ body {
 .deleteHover:hover {
   background-color: var(--bg-red) !important;
   color: white !important;
+}
+
+.custom-modal-balance .modal-dialog {
+  max-width: 1130px;
+}
+
+/* .modal-content {
+  border-radius: 0 !important;
+} */
+
+.custom-modal-change .modal-dialog {
+  max-width: 600px;
 }

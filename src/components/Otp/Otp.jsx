@@ -95,10 +95,10 @@ export default function Otp() {
       formatter: (_, { id }) => data?.data?.data.map((moder) => {
         if (id == moder.id) {
           if (moder.active == 1) {
-            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            return <span key={id} onClick={() => { updateActive(id);  }} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
           }
           else {
-            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            return <span key={id} onClick={() => { updateActive(id);  }} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
           }
         }
       })
@@ -165,12 +165,12 @@ export default function Otp() {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  // console.log(data?.data)
+  console.log(data?.data.data)
 
-  // async function updateActive(id) {
-  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
-  //   refetch();
-  // }
+  async function updateActive(id) {
+    let { data } = await axios.patch(`${Url}/admins/dashboard/${id}`);
+    refetch();
+  }
 
 
   function increase() {
