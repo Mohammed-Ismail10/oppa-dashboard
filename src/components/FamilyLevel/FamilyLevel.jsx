@@ -14,7 +14,7 @@ export default function FamilyLevel() {
 
   return (
     <>
-      <div className={`${style.heightItems}`}>
+      <div className={`${style.heightItems} `}>
 
         {/* nav */}
         <div className='pt-5 mt-3'>

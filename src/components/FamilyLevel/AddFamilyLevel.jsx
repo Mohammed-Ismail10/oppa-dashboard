@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react'
-import style from './AddProperty.module.css';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import style from './AddFamilyLevel.module.css';
 import { useFormik } from 'formik';
 
 
-export default function AddProperty() {
+
+
+export default function AddFamilyLevel() {
 
   function uploadItemsSubmit(values) {
     console.log(values);
@@ -37,30 +37,17 @@ export default function AddProperty() {
 
 
 
+
   return (
     <>
-      <div className={`container-fluid ${style.heightAddPro}`}>
-
-        <div className='pt-5 mt-3'>
-          <Navbar>
-            <Nav className="w-100 px-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إضافة خاصية
-              </NavLink>
-            </Nav>
-          </Navbar>
-
-        </div>
-
-        <div className='pt-5 h-100'>
+      <div className="container-fluid h-100 pt-5">
 
           <form onSubmit={formik.handleSubmit} className='w-75 mx-auto d-flex flex-column justify-content-between h-100'>
             <div>
               {/* upload image */}
               <div className='d-flex justify-content-start'>
                 <div className='text-center d-flex flex-column align-items-center mx-4'>
-                  <span className='fs15 pb-2'>إضافة صورة Privileges</span>
+                  <span className='fs15 pb-2'>إضافة الصورة</span>
                   <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
                     <img className={`${uploadImage ? `${style.uploadImgDone}` : `${style.uploadImg}`}`} src={``} alt="" />
                     <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
@@ -80,13 +67,25 @@ export default function AddProperty() {
 
               {/* the rest of form */}
               <div className="row">
-                <div className="col-6">
-                  <label className='fs15 pb-1' htmlFor="fullName">إسم الPrivileges بالعربي</label>
-                  <input className={`${style.holder} py-3 form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الPrivileges بالعربي' />
+                <div className="col-6 pb-4">
+                  <label className='fs15 pb-2' htmlFor="fullName">إسم الID</label>
+                  <input className={`${style.holder} py-3 form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الID' />
                 </div>
-                <div className="col-6">
-                  <label className='fs15 pb-1' htmlFor="userName">إسم الPrivileges بالEN</label>
-                  <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال إسم الPrivileges بالEN' />
+                <div className="col-6 pb-4">
+                  <label className='fs15 pb-2' htmlFor="userName">إسم العائلة</label>
+                  <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='ماكسيم' />
+                </div>
+                <div className="col-6 pb-4">
+                  <label className='fs15 pb-2' htmlFor="userName">الخبرة</label>
+                  <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='1000000.00' />
+                </div>
+                <div className="col-6 pb-4">
+                  <label className='fs15 pb-2' htmlFor="userName">الأعضاء</label>
+                  <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='5' />
+                </div>
+                <div className="col-6 pb-4">
+                  <label className='fs15 pb-2' htmlFor="userName">المسؤولين</label>
+                  <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='4' />
                 </div>
               </div>
             </div>
@@ -98,8 +97,9 @@ export default function AddProperty() {
             </div>
 
           </form>
-        </div>
+
       </div>
+
     </>
   )
 }

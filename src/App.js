@@ -36,6 +36,7 @@ import ExchangeCurrencies from './components/ExchangeCurrencies/ExchangeCurrenci
 import FamilyLevel from './components/FamilyLevel/FamilyLevel.jsx';
 import Backgrounds from './components/Backgrounds/Backgrounds.jsx';
 import TableFamilyLevel from './components/FamilyLevel/TableFamilyLevel.jsx';
+import AddFamilyLevel from './components/FamilyLevel/AddFamilyLevel.jsx';
 
 
 
@@ -74,7 +75,8 @@ function App() {
         { path: 'rechargebalance', element: <RechargeBalance /> },
         {
           path: 'familylevel', element: <FamilyLevel />, children: [
-            { index: true, element: <TableFamilyLevel /> }
+            { index: true, element: <TableFamilyLevel /> },
+            { path: 'add', element: <AddFamilyLevel /> },
           ]
         },
         { path: 'silvercoins', element: <SilverCoins /> },
