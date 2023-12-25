@@ -37,8 +37,8 @@ export default function SideBar() {
 
         <div className={`${style.heightList} pt-4`}>
           <ul className='list-unstyled'>
-
             <div className="accordion accordion-flush" id="accordionFlushExample">
+
 
               <div className='py-2 mt-1'>
                 <NavLink to={'/'} className="position-relative fs15 nav-link text-main text-decoration-none sideBarActive ps-5 d-flex align-items-center">
@@ -54,7 +54,7 @@ export default function SideBar() {
                     <span>إدارة المستخدمين</span>
                   </NavLink>
                 </h2>
-                <div id="flush-collapseOne" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapseOne" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
                       <li className={`${style.textSub} py-1`}><NavLink to={'customers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink></li>
@@ -71,7 +71,6 @@ export default function SideBar() {
                 </NavLink>
               </div>
 
-
               <div className={`${style.accordionN} accordion-item py-2 mt-1 pe-0`}>
                 <h2 className="accordion-header">
                   <NavLink to={'/rechargebalance'} onClick={() => navigate('/rechargebalance')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -79,7 +78,7 @@ export default function SideBar() {
                     <span>إدارة التطبيق</span>
                   </NavLink>
                 </h2>
-                <div id="flush-collapseTwo" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapseTwo" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
                       <li className={`${style.textSub} py-1`}>
@@ -120,7 +119,6 @@ export default function SideBar() {
                 </div>
               </div>
 
-
               <div className='py-2 mt-1'>
                 <NavLink to={'pages'} className="position-relative fs15 nav-link ps-5 sideBarActive text-main text-decoration-none d-flex align-items-center">
                   <img className='me-3' src={pages} alt="pages" />
@@ -141,7 +139,7 @@ export default function SideBar() {
                     <i className="fa-solid fa-paper-plane text-main me-3 fa-fw fs-5"></i> إهداء
                   </NavLink>
                 </h2>
-                <div id="flush-collapseThree" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapseThree" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
                       <li className={`${style.textSub} py-1`}><NavLink to={'items'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">السلع</NavLink></li>
@@ -157,7 +155,7 @@ export default function SideBar() {
                     <i className="bi bi-gear text-main me-3 fa-fw fs-5"></i> الإعدادات
                   </NavLink>
                 </h2>
-                <div id="flush-collapseFour" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapseFour" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
                       <li className={`${style.textSub} py-1`}><NavLink to={'countries'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الدول</NavLink></li>
@@ -170,9 +168,8 @@ export default function SideBar() {
                 </div>
               </div>
 
+
             </div>
-
-
           </ul>
         </div>
 

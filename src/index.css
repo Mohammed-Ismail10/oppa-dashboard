@@ -29,6 +29,7 @@ body {
   font-weight: 500 !important;
   color: #9fa6b2 !important;
   direction: rtl !important;
+  text-align: right !important;
 }
 ::-webkit-input-placeholder {
   text-align: right !important;
@@ -37,6 +38,8 @@ body {
 .loginEmail::placeholder {
   font-size: 14px !important;
   font-weight: 700 !important;
+  direction: rtl !important;
+  text-align: right !important;
 }
 
 .text-main {

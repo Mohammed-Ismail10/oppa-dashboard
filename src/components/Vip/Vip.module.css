@@ -18,7 +18,6 @@
 .tableHeader th {
   padding: 0px !important;
   margin-bottom: 24px !important;
-  /* width: 20px !important; */
 }
 
 .tableWidth {
@@ -27,7 +26,6 @@
   border-collapse: separate !important;
 }
 .tableWidthEnable {
-  width: 58% !important;
   border-spacing: 0 10px !important;
   border-collapse: separate !important;
 }

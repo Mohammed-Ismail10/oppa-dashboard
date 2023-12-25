@@ -53,7 +53,7 @@ export default function EnableFeature() {
     {
       dataField: 'arName', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-crown me-2"></i>
         ID فئة الVIP
       </span>,
@@ -62,7 +62,7 @@ export default function EnableFeature() {
     {
       dataField: 'enName', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-crown me-2"></i>
         ID الPrivileges
       </span>,
@@ -70,9 +70,9 @@ export default function EnableFeature() {
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
-      dataField: 'giftState', //must be same name of property in row which come from api
-      text: 'giftState',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      dataField: 'active', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الحساب
       </span>,
@@ -92,7 +92,7 @@ export default function EnableFeature() {
     {
       dataField: 'time', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-100'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-regular fa-clock me-2"></i>
         أنشئت في
       </span>,
@@ -102,7 +102,7 @@ export default function EnableFeature() {
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
@@ -121,12 +121,12 @@ export default function EnableFeature() {
 
 
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageItems');
+    const storedPage = localStorage.getItem('currentPageFeature');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPageItems', currentPage);
+    localStorage.setItem('currentPageFeature', currentPage);
   }, [currentPage]);
 
 
@@ -176,7 +176,7 @@ export default function EnableFeature() {
     <>
 
       {/* Nav links for Vip enable feature */}
-      <div className='pt-5 mt-3'>
+      <div className='pt-5 mt-3 ms-2'>
         <Navbar>
           <Nav className="w-100 pe-2">
             <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
@@ -220,49 +220,50 @@ export default function EnableFeature() {
       </div>
 
 
-      <div className={`${style.heightItems} d-flex flex-column justify-content-between`}>
+      {/* table */}
+      {isLoading ? <></> :
+        <div className={`${style.heightItems} d-flex flex-column justify-content-between`}>
 
 
-        {/* table */}
-        {/* {isLoading?<></>:
-    } */}
-        <BootstrapTable
-          keyField="id"
-          data={rows}
-          columns={columns}
-          bordered={false}
-          classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthEnable} ms-1`}
-          selectRow={selectRow}
-          rowClasses={`${style.rowShadow} `}
+          <BootstrapTable
+            keyField="id"
+            data={rows}
+            columns={columns}
+            bordered={false}
+            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthEnable} w-100`}
+            selectRow={selectRow}
+            rowClasses={`${style.rowShadow} `}
 
-        />
+          />
 
-        {/* pagination */}
-        <div className='d-flex justify-content-center align-items-center'>
-          <div className='mx-2'>
-            <span className='text-main fs15'>الصفحة</span>
+          {/* pagination */}
+          <div className='d-flex justify-content-center align-items-center'>
+            <div className='mx-2'>
+              <span className='text-main fs15'>الصفحة</span>
+            </div>
+            <div className='mx-2 d-flex align-items-center'>
+              <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
+              <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+            </div>
+            <div className='mx-2'>
+              <Dropdown>
+                <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                  30
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item >25</Dropdown.Item>
+                  <Dropdown.Item >20</Dropdown.Item>
+                  <Dropdown.Item >10</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           </div>
-          <div className='mx-2 d-flex align-items-center'>
-            <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
-            <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-            <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
-          </div>
-          <div className='mx-2'>
-            <Dropdown>
-              <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                30
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item >25</Dropdown.Item>
-                <Dropdown.Item >20</Dropdown.Item>
-                <Dropdown.Item >10</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+
+
         </div>
 
-
-      </div>
+      }
 
       <ModalDelete />
     </>
