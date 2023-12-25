@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +17,7 @@ export default function Items() {
 
   return (
     <>
-      <section className={`${style.heightItems}`}>
+      <div className={`${style.heightItems}`}>
 
         {/* items nav links */}
         <div className='pt-5 mt-3'>
@@ -59,7 +58,7 @@ export default function Items() {
         {/* modals: first => (تغير المعرف). second => (مسح الكل). */}
         <ModalChange />
         <ModalDelete />
-      </section>
+      </div>
     </>
   )
 }

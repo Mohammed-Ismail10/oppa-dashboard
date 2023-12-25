@@ -37,6 +37,8 @@ import FamilyLevel from './components/FamilyLevel/FamilyLevel.jsx';
 import Backgrounds from './components/Backgrounds/Backgrounds.jsx';
 import TableFamilyLevel from './components/FamilyLevel/TableFamilyLevel.jsx';
 import AddFamilyLevel from './components/FamilyLevel/AddFamilyLevel.jsx';
+import TableSilverCoins from './components/SilverCoins/TableSilverCoins.jsx';
+import AddSilverCoins from './components/SilverCoins/AddSilverCoins.jsx';
 
 
 
@@ -79,7 +81,12 @@ function App() {
             { path: 'add', element: <AddFamilyLevel /> },
           ]
         },
-        { path: 'silvercoins', element: <SilverCoins /> },
+        {
+          path: 'silvercoins', element: <SilverCoins />, children: [
+            { index: true, element: <TableSilverCoins /> },
+            { path: 'add', element: <AddSilverCoins /> },
+          ]
+        },
         { path: 'complaints', element: <Complaints /> },
         { path: 'exchangecurrencies', element: <ExchangeCurrencies /> },
         { path: 'backgrounds', element: <Backgrounds /> },

@@ -23,9 +23,7 @@ export default function AddItems() {
 
 
   const [uploadImage, setUploadImage] = useState(false);
-  const [uploadImageDone, setUploadImageDone] = useState('');
   const [uploadSvga, setUploadSvga] = useState(false);
-  const [uploadSvgaDone, setUploadSvgaDone] = useState('');
   const [uploadSvgaError, setUploadSvgaError] = useState(false);
 
 
@@ -36,9 +34,7 @@ export default function AddItems() {
 
   function reset() {
     setUploadImage(false);
-    setUploadImageDone('');
     setUploadSvga(false);
-    setUploadSvgaDone('');
     setUploadSvgaError(false);
     formik.resetForm();
     // Reset file inputs
@@ -69,19 +65,16 @@ export default function AddItems() {
                 <span className='fs15 pb-2'>إضافة صورة</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
                   <img className={`${uploadImage ? `${style.uploadImgDone}` : `${style.uploadImg}`}`} src={``} alt="" />
-                  {/* <i className="fa-regular fa-image fs-3 pt-1"></i> */}
                   <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
                   <input className="d-none"
                     ref={imageInputRef}
                     onChange={(event) => {
                       formik.setFieldValue('image', event.currentTarget.files[0]);
                       setUploadImage(true);
-                      setUploadImageDone(event.currentTarget.files[0].name);
                       console.log(event.currentTarget.files[0])
                     }}
                     name='image' type="file" accept='image/*' id="addImage" />
                 </label>
-                {/* {uploadImageDone ? <span dir='ltr'>{uploadImageDone} تم رفع</span> : null} */}
               </div>
 
               <div className='text-center d-flex flex-column align-items-center mx-4 '>
@@ -95,7 +88,6 @@ export default function AddItems() {
                       if (event.currentTarget.files[0].name.endsWith('.svga')) {
                         formik.setFieldValue('svga', event.currentTarget.files[0]);
                         setUploadSvga(true);
-                        setUploadSvgaDone(event.currentTarget.files[0].name);
                         setUploadSvgaError(false);
                       }
                       else {
@@ -104,7 +96,6 @@ export default function AddItems() {
                     }}
                     name='svga' type="file" id="addSVGA" />
                 </label>
-                {/* {uploadSvgaDone ? <span dir='ltr'>{uploadSvgaDone} تم رفع</span> : uploadSvgaError ? <span>يجب أن يكون امتداد الملف svga</span> : null} */}
               </div>
             </div>
 

@@ -87,7 +87,7 @@ export default function Coins() {
       dataField: 'coins',
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <img className='me-2' src={coinsImg} alt="" />
+        <img className='me-2' src={coinsImg} alt="coins" width={20} />
         الكوينز
       </span>,
       classes: 'text-main fs15 pt-3 pb-0',
@@ -153,19 +153,6 @@ export default function Coins() {
       refetch();
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

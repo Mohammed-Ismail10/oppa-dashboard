@@ -1,0 +1,35 @@
+.shadowBtn {
+  box-shadow: 0 0 3px 0.1px gray !important;
+}
+
+.borderDropdown {
+  border-bottom: 3px solid #1c274c !important;
+}
+
+.itemsHover:hover {
+  background-color: #0b6ac8 !important;
+  color: white !important;
+}
+.addItemHover:hover {
+  background-color: #27ae61 !important;
+  color: white !important;
+}
+
+.tableHeader th {
+  padding: 0px !important;
+  margin-bottom: 24px !important;
+  /* width: 20px !important; */
+}
+
+.tableWidth {
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+
+.heightItems {
+  height: 83% !important;
+}
+
+.rowShadow:hover{
+  box-shadow: 0 0 10px 0.1px gray !important;
+}
