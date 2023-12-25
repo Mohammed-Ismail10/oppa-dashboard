@@ -2,7 +2,12 @@ import image from '../../Assets/Images/Ellipse 2.png';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import style from './SideBar.module.css';
 import logoutIcon from '../../Assets/Images/logout.png';
-
+import home from '../../Assets/Images/home.png';
+import user from '../../Assets/Images/user.png';
+import allfiles from '../../Assets/Images/allfiles.png';
+import robot from '../../Assets/Images/robot1.png';
+import pages from '../../Assets/Images/pages.png';
+import notif from '../../Assets/Images/notif.png';
 
 
 
@@ -35,16 +40,18 @@ export default function SideBar() {
 
             <div className="accordion accordion-flush" id="accordionFlushExample">
 
-              <div className='py-2'>
-                <NavLink to={'/'} className="position-relative fs15 nav-link text-main text-decoration-none sideBarActive ps-5">
-                  <i className="bi bi-house-door text-main me-1 fa-fw"></i> الرئيسية
+              <div className='py-2 mt-1'>
+                <NavLink to={'/'} className="position-relative fs15 nav-link text-main text-decoration-none sideBarActive ps-5 d-flex align-items-center">
+                  <img className='me-3' src={home} alt="home" />
+                  <span>الرئيسية</span>
                 </NavLink>
               </div>
 
-              <div className={`${style.accordionN} accordion-item py-2 pe-0`}>
+              <div className={`${style.accordionN} accordion-item py-2 mt-1 pe-0`}>
                 <h2 className="accordion-header">
                   <NavLink to={'/customers'} onClick={() => navigate('/customers')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    <i className="fa-regular fa-user text-main me-1 fa-fw"></i> إدارة المستخدمين
+                    <img className='me-3' src={user} alt="user" />
+                    <span>إدارة المستخدمين</span>
                   </NavLink>
                 </h2>
                 <div id="flush-collapseOne" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
@@ -57,15 +64,19 @@ export default function SideBar() {
                 </div>
               </div>
 
-              <div className='py-2'>
-                <NavLink to={'allfolders'} className="position-relative fs15 nav-link ps-5 sideBarActive text-main text-decoration-none"><i className="fa-regular fa-folder text-main me-1 fa-fw"></i> جميع الملفات</NavLink>
+              <div className='py-2 mt-1'>
+                <NavLink to={'allfolders'} className="position-relative fs15 nav-link ps-5 sideBarActive text-main text-decoration-none d-flex align-items-center">
+                  <img className='me-3' src={allfiles} alt="allfiles" />
+                  <span>جميع الملفات</span>
+                </NavLink>
               </div>
 
 
-              <div className={`${style.accordionN} accordion-item py-2 pe-0`}>
+              <div className={`${style.accordionN} accordion-item py-2 mt-1 pe-0`}>
                 <h2 className="accordion-header">
                   <NavLink to={'/rechargebalance'} onClick={() => navigate('/rechargebalance')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    <i className="fa-solid fa-robot text-main me-1 fa-fw"></i> إدارة التطبيق
+                    <img className='me-3' src={robot} alt="robot" />
+                    <span>إدارة التطبيق</span>
                   </NavLink>
                 </h2>
                 <div id="flush-collapseTwo" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
@@ -110,22 +121,24 @@ export default function SideBar() {
               </div>
 
 
-              <div className='py-2'>
-                <NavLink to={'pages'} className="position-relative fs15 nav-link ps-5 sideBarActive text-main text-decoration-none">
-                  <i className="bi bi-book text-main me-1 fa-fw"></i> الصفحات
+              <div className='py-2 mt-1'>
+                <NavLink to={'pages'} className="position-relative fs15 nav-link ps-5 sideBarActive text-main text-decoration-none d-flex align-items-center">
+                  <img className='me-3' src={pages} alt="pages" />
+                  <span>الصفحات</span>
                 </NavLink>
               </div>
 
-              <div className='py-2'>
-                <NavLink to={'notifications'} className="position-relative fs15 nav-link sideBarActive ps-5 text-main text-decoration-none">
-                  <i className="fa-regular fa-bell text-main me-1 fa-fw"></i> الإشعارات
+              <div className='py-2 mt-1'>
+                <NavLink to={'notifications'} className="position-relative fs15 nav-link sideBarActive ps-5 text-main text-decoration-none d-flex align-items-center">
+                  <img className='me-3' src={notif} alt="notification" />
+                  <span>الإشعارات</span>
                 </NavLink>
               </div>
 
-              <div className={`${style.accordionN} accordion-item py-2 pe-0`}>
+              <div className={`${style.accordionN} accordion-item py-2 mt-1 pe-0`}>
                 <h2 className="accordion-header">
                   <NavLink to={'/items'} onClick={() => navigate('/items')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <i className="fa-solid fa-paper-plane text-main me-1 fa-fw"></i> إهداء
+                    <i className="fa-solid fa-paper-plane text-main me-3 fa-fw fs-5"></i> إهداء
                   </NavLink>
                 </h2>
                 <div id="flush-collapseThree" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
@@ -138,10 +151,10 @@ export default function SideBar() {
                 </div>
               </div>
 
-              <div className={`${style.accordionN} accordion-item py-2 pe-0`}>
+              <div className={`${style.accordionN} accordion-item py-2 mt-1 pe-0`}>
                 <h2 className="accordion-header">
                   <NavLink to={'/countries'} onClick={() => navigate('/countries')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                    <i className="bi bi-gear text-main me-1 fa-fw"></i> الإعدادات
+                    <i className="bi bi-gear text-main me-3 fa-fw fs-5"></i> الإعدادات
                   </NavLink>
                 </h2>
                 <div id="flush-collapseFour" className='ps-5 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">

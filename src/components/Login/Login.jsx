@@ -52,7 +52,7 @@ export default function Login() {
                   <label htmlFor='email'>بريد إلكتروني</label>
                   <input
                     placeholder='عنوان البريد الإلكتروني أو رقم الهاتف'
-                    className={`${style.textInput} form-control border-1 shadow-none my-2 fw-bold py-3 rounded-4`}
+                    className={`${style.textInput} form-control border-1 shadow-none my-2 fw-bold py-3 rounded-4 loginEmail`}
                     id='email'
                     type="email"
                     name='email'
@@ -65,7 +65,7 @@ export default function Login() {
                   <label htmlFor='password'>كلمة المرور </label>
                   <input
                     placeholder='كلمة المرور'
-                    className={`${style.textInput} form-control border-1 shadow-none mt-2 fw-bold py-3 rounded-4`}
+                    className={`${style.textInput} form-control border-1 shadow-none mt-2 fw-bold py-3 rounded-4 loginEmail`}
                     id='password'
                     type={`${showPassword ? 'text' : 'password'}`}
                     name='password'
