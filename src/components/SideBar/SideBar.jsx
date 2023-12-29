@@ -1,5 +1,5 @@
 import image from '../../Assets/Images/Ellipse 2.png';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import style from './SideBar.module.css';
 import logoutIcon from '../../Assets/Images/logout.png';
 import home from '../../Assets/Images/home.png';
@@ -8,6 +8,10 @@ import allfiles from '../../Assets/Images/allfiles.png';
 import robot from '../../Assets/Images/robot1.png';
 import pages from '../../Assets/Images/pages.png';
 import notif from '../../Assets/Images/notif.png';
+import { useDispatch } from 'react-redux';
+import { handleShowLogOut } from '../Redux/ModalsSlice.js';
+import ModalLogout from '../ModalLogOut/ModalLogout.jsx';
+import { useEffect, useState } from 'react';
 
 
 
@@ -15,11 +19,34 @@ import notif from '../../Assets/Images/notif.png';
 export default function SideBar() {
 
   const navigate = useNavigate();
+  let dispatch = useDispatch();
+
+
+  const [path, setPath] = useState(false);
+
+  let { pathname } = useLocation();
+  console.log();
+
+
+
+  let token = null;
+
+
+
+  useEffect(() => {
+    if (pathname == '/vip' || pathname == '/vip/add' || pathname == '/showproperties' || pathname == '/addproperty' || pathname == '/enablefeature' || pathname == '/addenablefeature') {
+      setPath(true);
+    }
+    else {
+      setPath(false);
+    }
+  }, [path])
+
 
 
   return (
     <>
-      <div className="vh-100 shadow d-flex flex-column justify-content-between pt-3">
+      <div className="vh-100 overflow-y-hidden shadow d-flex flex-column justify-content-between pt-3">
 
         <div className='overflow-hidden pb-2'>
           <div>
@@ -49,7 +76,7 @@ export default function SideBar() {
 
               <div className={`${style.accordionN} accordion-item py-2 mt-1 pe-0`}>
                 <h2 className="accordion-header">
-                  <NavLink to={'/customers'} onClick={() => navigate('/customers')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  <NavLink to={'/users/customers'} onClick={() => navigate('/users/customers')} className={`${style.accordionN} position-relative nav-link sideBarActive fs15 ps-5 accordion-button collapsed text-main p-0 fw-bold`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                     <img className='me-3' src={user} alt="user" />
                     <span>إدارة المستخدمين</span>
                   </NavLink>
@@ -57,8 +84,8 @@ export default function SideBar() {
                 <div id="flush-collapseOne" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
-                      <li className={`${style.textSub} py-1`}><NavLink to={'customers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink></li>
-                      <li className={`${style.textSub} py-1`}><NavLink to={'moderators'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المشرفين</NavLink></li>
+                      <li className={`${style.textSub} py-1`}><NavLink to={'/users/customers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink></li>
+                      <li className={`${style.textSub} py-1`}><NavLink to={'/users/moderators'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المشرفين</NavLink></li>
                     </ul>
                   </div>
                 </div>
@@ -142,8 +169,11 @@ export default function SideBar() {
                 <div id="flush-collapseThree" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
-                      <li className={`${style.textSub} py-1`}><NavLink to={'items'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">السلع</NavLink></li>
-                      <li className={`${style.textSub} py-1`}><NavLink to={'vip'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">VIP</NavLink></li>
+                      <li className={`${style.textSub} py-1`}><NavLink to={'items'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">السلع</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'vip'} className={`fs12 nav-link text-decoration-none fw-semibold ${path ? 'subSideBarActive' : ''}`}>VIP</NavLink>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -175,15 +205,18 @@ export default function SideBar() {
 
 
         {/* logout */}
-        <div className="text-center mb-4 pb-1">
-          <Link to={'login'} className={`text-red fs15 text-decoration-none ${style.logoutHover} w-100 d-block py-2 pe-3`}>
-            <img className={`${style.logoutImg} me-2`} alt="logout" />
+        <div className="mb-4 pb-1">
+          <Link onClick={() => dispatch(handleShowLogOut())} className={`text-red fs15 text-decoration-none ${style.logoutHover} d-block py-2 ps-5`}>
+            <img className={`${style.logoutImg} me-2 ps-2`} alt="logout" />
             تسجيل الخروج
           </Link>
         </div>
 
 
       </div>
+
+
+      <ModalLogout />
     </>
   )
 }

@@ -9,11 +9,12 @@ import style from './Otp.module.css';
 import { DropdownMenu } from 'react-bootstrap';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow } from '../Redux/ModalsSlice.js';
+import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Url, baseUrl } from '../../helpers/constant.js';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 // For column checkbox
 const selectRow = {
@@ -58,7 +59,7 @@ export default function Otp() {
     {
       dataField: 'name', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
@@ -67,7 +68,7 @@ export default function Otp() {
     {
       dataField: 'phone', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-telephone-plus me-2"></i>
         رقم الهاتف
       </span>,
@@ -78,7 +79,7 @@ export default function Otp() {
     {
       dataField: 'email', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-regular fa-envelope-open me-2"></i>
         البريد الإلكتروني
       </span>,
@@ -87,7 +88,7 @@ export default function Otp() {
     {
       dataField: 'active', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الحساب
       </span>,
@@ -95,10 +96,10 @@ export default function Otp() {
       formatter: (_, { id }) => data?.data?.data.map((moder) => {
         if (id == moder.id) {
           if (moder.active == 1) {
-            return <span key={id} onClick={() => { updateActive(id);  }} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
           }
           else {
-            return <span key={id} onClick={() => { updateActive(id);  }} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
           }
         }
       })
@@ -106,7 +107,7 @@ export default function Otp() {
     {
       dataField: 'timeStop', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-regular fa-clock me-2"></i>
         مدة الإيقاف
       </span>,
@@ -116,7 +117,7 @@ export default function Otp() {
     {
       dataField: 'created_at', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='w-100 py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-regular fa-calendar me-2"></i>
         تاريخ التسجيل
       </span>,
@@ -126,7 +127,7 @@ export default function Otp() {
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
@@ -139,7 +140,7 @@ export default function Otp() {
     },
   ];
 
-  let { showChangeId, showDelete } = useSelector(({ modals }) => modals);
+  let { showChangeId, showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
 
@@ -159,7 +160,7 @@ export default function Otp() {
 
 
   function getModerators() {
-    return axios.get(`${Url}/admins?limit=9&page=${currentPage}`);
+    return axios.get(`${Url}/admins?limit=10&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('moderator', getModerators, {
     cacheTime: 60000,
@@ -200,49 +201,41 @@ export default function Otp() {
     <>
       <div className={`${style.heightItems}`}>
         {/* moderators nav links */}
-        <div className='pt-5 mt-3'>
-          <Navbar>
-            <Nav className="w-100 pe-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+        <div className='pt-5 mt-3 ps-3'>
+          <Navbar >
+            <Nav className="pe-2 flex-wrap">
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تغير المعرف (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تحديد شارة (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearch}`}>
-                <Dropdown dir='ltr'>
-                  <Dropdown.Toggle className='bg-search border-0 h-100 text-main fw-bold fs15 rounded-0 ps-5 pe-4' size='sm' id="dropdown-basic">
-                    الوكالة
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className='mt-0'>
-                    <Dropdown.Item>Action</Dropdown.Item>
-                    <Dropdown.Item>Another action</Dropdown.Item>
-                    <Dropdown.Item>Something else</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <div className='position-relative w-100'>
-                  <input className={`${style.searchInput}  shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-search border-0 border-start`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
-                  <i className="fa-solid fa-magnifying-glass position-absolute bottom-0 pb-2 ps-3"></i>
-                </div>
+              <div className={`${style.searchWidth} position-relative mt-3 mt-xl- mt-xxl-0`}>
+                <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
+                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+            </Nav>
+
+            <Nav className={`${style.flexNone} align-items-start mb-5 mb-xxl-1 pb-1 pb-xxl-0 ms-xxl-auto`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>
+
           </Navbar>
         </div>
 
@@ -250,15 +243,27 @@ export default function Otp() {
         {/* table otp */}
         {isLoading ? <></> :
           <div className='d-flex flex-column h-100 justify-content-between'>
-            < BootstrapTable
-              keyField="id"
-              data={data?.data.data}
-              columns={columns}
-              bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth}`}
-              selectRow={selectRow}
-              rowClasses={`${style.rowShadow} `}
-            />
+
+            <div className={`${style.heightTable} overflow-auto`}>
+
+              < BootstrapTable
+                keyField="id"
+                data={data?.data?.data}
+                columns={columns}
+                bordered={false}
+                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+                selectRow={selectRow}
+                rowClasses={`${style.rowShadow} `}
+              />
+            </div>
+
+
+
+
+
+
+
+
 
             {/* pagination */}
             <div className='d-flex justify-content-center align-items-center'>
@@ -293,6 +298,7 @@ export default function Otp() {
         {/* modals: first => (تغير المعرف). second => (مسح الكل).  */}
         <ModalChange />
         <ModalDelete />
+        <ModalUserQuery />
       </div>
     </>
   )

@@ -1,14 +1,17 @@
 import React, { useRef, useState } from 'react'
 import style from './AddProperty.module.css';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 
 export default function AddProperty() {
 
+  let navigate = useNavigate();
+
   function uploadItemsSubmit(values) {
     console.log(values);
+    navigate('/showproperties');
   }
 
   let formik = useFormik({
@@ -81,12 +84,12 @@ export default function AddProperty() {
               {/* the rest of form */}
               <div className="row">
                 <div className="col-6">
-                  <label className='fs15 pb-1' htmlFor="fullName">إسم الPrivileges بالعربي</label>
-                  <input className={`${style.holder} py-3 form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الPrivileges بالعربي' />
+                  <label className='fs15 pb-1' htmlFor="fullName">إسم الـ Privileges بالعربي</label>
+                  <input className={`${style.holder} py-3 form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الـ Privileges بالعربي' />
                 </div>
                 <div className="col-6">
-                  <label className='fs15 pb-1' htmlFor="userName">إسم الPrivileges بالEN</label>
-                  <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال إسم الPrivileges بالEN' />
+                  <label className='fs15 pb-1' htmlFor="userName">إسم الـ Privileges بالــ EN</label>
+                  <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال إسم الـ Privileges بالــ EN' />
                 </div>
               </div>
             </div>

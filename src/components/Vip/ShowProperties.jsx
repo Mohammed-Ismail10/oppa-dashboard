@@ -58,7 +58,7 @@ export default function ShowProperties() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-crown me-2"></i>
-        إسم الPrivileges بالعربي
+        إسم الـ Privileges بالعربي
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
@@ -67,7 +67,7 @@ export default function ShowProperties() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-crown me-2"></i>
-        إسم الPrivileges بالEN
+        إسم الـ Privileges بالــ EN
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
@@ -77,7 +77,7 @@ export default function ShowProperties() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-file-image me-2"></i>
-        صورة الPrivileges
+        صورة الـ Privileges
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (cell, row) => <img loading='lazy' src={row.privImg} width={55} alt={`Flag of ${row.vipName}`} />,
@@ -91,16 +91,16 @@ export default function ShowProperties() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-      data?.data?.data.map((pro) => {
-        if (id == pro.id) {
-          if (pro.active == 1) {
-            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+        data?.data?.data.map((pro) => {
+          if (id == pro.id) {
+            if (pro.active == 1) {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            }
+            else {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            }
           }
-          else {
-            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
-          }
-        }
-      })
+        })
     },
     {
       dataField: 'time', //must be same name of property in row which come from api
@@ -189,7 +189,7 @@ export default function ShowProperties() {
 
   return (
     <>
-    {/* nav links of show property */}
+      {/* nav links of show property */}
       <div className='pt-5 mt-3'>
         <Navbar>
           <Nav className="w-100 pe-2">
@@ -211,16 +211,19 @@ export default function ShowProperties() {
         {/* table */}
         {/* {isLoading ? <></> :
         } */}
-        <BootstrapTable
-          keyField="id"
-          data={rows}
-          columns={columns}
-          bordered={false}
-          classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthShowProperties} ms-1`}
-          selectRow={selectRow}
-          rowClasses={`${style.rowShadow} `}
-        />
+        <div className={`${style.heightTable} overflow-auto`}>
+          <BootstrapTable
+            keyField="id"
+            data={rows}
+            columns={columns}
+            bordered={false}
+            classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidthShowProperties} ms-1`}
+            selectRow={selectRow}
+            rowClasses={`${style.rowShadow} `}
+          />
+        </div>
 
+        
         {/* pagination */}
         <div className='d-flex justify-content-center align-items-center'>
           <div className='mx-2'>

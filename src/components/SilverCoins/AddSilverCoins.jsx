@@ -26,7 +26,7 @@ export default function AddSilverCoins() {
 
           <div className="row pe-5 me-5 mt-5">
             <div className="col-6 pb-4">
-              <label className='fs15 pb-1' htmlFor="nameGift">إسم الID</label>
+              <label className='fs15 pb-1' htmlFor="nameGift">إسم الــ ID</label>
               <input className={`${style.holder} form-control py-3`}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -34,7 +34,7 @@ export default function AddSilverCoins() {
                 name='giftName'
                 type="text"
                 id='nameGift'
-                placeholder='الرجاء إدخال إسم الID' />
+                placeholder='الرجاء إدخال إسم الــ ID' />
             </div>
 
             <div className="col-6 pb-4">

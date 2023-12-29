@@ -8,24 +8,37 @@
   --gray: #8d98aa;
 }
 
-/* .accordion .accordion-item{
-  background-color: transparent !important;
-  box-shadow: none !important;
-  color: red;
+html {
+  position: fixed !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* .tooltip-hover:hover {
+  overflow: visible !important;
 } */
 
+
 .selection-cell {
-  padding-block: 14px !important;
+  padding-block: 0.875rem !important;
+  padding-inline: 0 !important;
+  /* text-overflow: st !important; */
+  /* white-space: ; */
+  /* white-space: nowrap !important;
+  width: 30px !important; */
 }
 
 body {
   font-family: "Cairo", sans-serif !important;
   font-weight: bold !important;
+  /* position: fixed !important; */
+  /* background-color: red !important; */
+  /* width: 100vw !important; */
   /* height: 100% !important; */
 }
 
 ::placeholder {
-  font-size: 15px !important;
+  font-size: 0.9375rem !important;
   font-weight: 500 !important;
   color: #9fa6b2 !important;
   direction: rtl !important;
@@ -35,8 +48,13 @@ body {
   text-align: right !important;
 }
 
+.table-responsive tbody {
+  height: 25rem !important;
+  overflow-y: auto !important;
+}
+
 .loginEmail::placeholder {
-  font-size: 14px !important;
+  font-size: 0.875rem !important;
   font-weight: 700 !important;
   direction: rtl !important;
   text-align: right !important;
@@ -101,7 +119,7 @@ body {
   top: -5% !important;
   right: -1% !important;
   border-radius: 100% / 5px;
-  box-shadow: 0 0 6.8px 0 var(--text-main);
+  box-shadow: 0 0 0.425rem 0 var(--text-main);
 }
 
 .itemsActive.active {
@@ -119,20 +137,20 @@ body {
 }
 
 .fs30 {
-  font-size: 30px !important;
+  font-size: 1.875rem !important;
 }
 .fs15 {
-  font-size: 15px !important;
+  font-size: 0.9375rem !important;
 }
 .fs13 {
-  font-size: 13px !important;
+  font-size: 0.8125rem !important;
 }
 .fs12 {
-  font-size: 12px !important;
+  font-size: 0.75rem !important;
 }
 
 .fs20 {
-  font-size: 20px !important;
+  font-size: 1.25rem !important;
 }
 
 .curser-pointer {
@@ -140,8 +158,8 @@ body {
 }
 
 .numPage {
-  width: 30px !important;
-  height: 30px !important;
+  width: 1.875rem !important;
+  height: 1.875rem !important;
 }
 
 .deleteHover:hover {
@@ -150,7 +168,7 @@ body {
 }
 
 .custom-modal-balance .modal-dialog {
-  max-width: 1130px;
+  max-width: 70.625rem;
 }
 
 /* .modal-content {
@@ -158,5 +176,5 @@ body {
 } */
 
 .custom-modal-change .modal-dialog {
-  max-width: 600px;
+  max-width: 37.5rem;
 }

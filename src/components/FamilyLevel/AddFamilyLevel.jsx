@@ -68,8 +68,8 @@ export default function AddFamilyLevel() {
               {/* the rest of form */}
               <div className="row">
                 <div className="col-6 pb-4">
-                  <label className='fs15 pb-2' htmlFor="fullName">إسم الID</label>
-                  <input className={`${style.holder} py-3 form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الID' />
+                  <label className='fs15 pb-2' htmlFor="fullName">إسم الــ ID</label>
+                  <input className={`${style.holder} py-3 form-control`} name='fullName' type="text" id='fullName' placeholder='الرجاء إدخال إسم الــ ID' />
                 </div>
                 <div className="col-6 pb-4">
                   <label className='fs15 pb-2' htmlFor="userName">إسم العائلة</label>

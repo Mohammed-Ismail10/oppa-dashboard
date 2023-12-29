@@ -39,6 +39,7 @@ import TableFamilyLevel from './components/FamilyLevel/TableFamilyLevel.jsx';
 import AddFamilyLevel from './components/FamilyLevel/AddFamilyLevel.jsx';
 import TableSilverCoins from './components/SilverCoins/TableSilverCoins.jsx';
 import AddSilverCoins from './components/SilverCoins/AddSilverCoins.jsx';
+import MyComponent from './components/compooo/MyComponent.jsx';
 
 
 
@@ -60,8 +61,8 @@ function App() {
       path: '', element: <Layout />, children: [
         { index: true, element: <Home /> },
         { path: 'login', element: <Login /> },
-        { path: 'customers', element: <Customers /> },
-        { path: 'moderators', element: <Otp /> },
+        { path: '/users/customers', element: <Customers /> },
+        { path: '/users/moderators', element: <Otp /> },
         { path: 'allfolders', element: <AllFolders /> },
         { path: 'coins', element: <Coins /> },
         { path: 'controlagency', element: <ControlAgency /> },
@@ -104,6 +105,7 @@ function App() {
         },
         { path: 'pages', element: <Pages /> },
         { path: 'notifications', element: <Notifications /> },
+        { path: 'ay', element: <MyComponent /> },
       ]
     }
   ]);

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-let initialState = { showChangeId: false, showEditRow: false, showDelete: false, showDeleteRow: false, rowId: null, showAddBalance: null };
+let initialState = { showChangeId: false, showEditRow: false, showDelete: false, showDeleteRow: false, rowId: null, showAddBalance: null, showUserQuery: false, showLogOut: false };
 
 
 
@@ -42,9 +42,23 @@ let modalsSlice = createSlice({
     handleCloseAddBalance: (initialState) => {
       initialState.showAddBalance = false;
     },
+    handleShowUserQuery: (initialState, { payload }) => {
+      initialState.showUserQuery = true;
+      initialState.rowId = payload;
+    },
+    handleCloseUserQuery: (initialState) => {
+      initialState.showUserQuery = false;
+    },
+    handleShowLogOut: (initialState, { payload }) => {
+      initialState.showLogOut = true;
+      initialState.rowId = payload;
+    },
+    handleCloseLogOut: (initialState) => {
+      initialState.showLogOut = false;
+    },
   }
 });
 
 
 export let modalsReducer = modalsSlice.reducer;
-export let { handleShowChangeId, handleCloseChangeId, handleShowDelete, handleCloseDelete, handleShowDeleteRow, handleCloseDeleteRow, handleShowEditRow, handleCloseEditRow, handleShowAddBalance, handleCloseAddBalance } = modalsSlice.actions;
+export let { handleShowChangeId, handleCloseChangeId, handleShowDelete, handleCloseDelete, handleShowDeleteRow, handleCloseDeleteRow, handleShowEditRow, handleCloseEditRow, handleShowAddBalance, handleCloseAddBalance, handleShowUserQuery, handleCloseUserQuery, handleShowLogOut, handleCloseLogOut } = modalsSlice.actions;

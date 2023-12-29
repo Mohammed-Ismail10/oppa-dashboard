@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { handleShowChangeId } from '../Redux/ModalsSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Vip.module.css';
@@ -12,12 +12,13 @@ export default function AddEnableFeature() {
   let dispatch = useDispatch();
 
 
-
+  let navigate = useNavigate();
 
 
 
   function enableFeatureSubmit(values) {
     console.log(values);
+    navigate('/enablefeature');
   }
 
 
@@ -89,7 +90,7 @@ export default function AddEnableFeature() {
         <div className="row px-5">
 
           <div className="col-6">
-            <label className='fs15 pb-1' htmlFor="vipName">إسم الVIP</label>
+            <label className='fs15 pb-1' htmlFor="vipName">إسم الــ VIP</label>
             <input className={`${style.holder} py-3 form-control`}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -97,10 +98,10 @@ export default function AddEnableFeature() {
               name='vipName'
               type="text"
               id='vipName'
-              placeholder='الرجاء إدخال إسم الVIP' />
+              placeholder='الرجاء إدخال إسم الــ VIP' />
           </div>
           <div className="col-6">
-            <label className='fs15 pb-1' htmlFor="privilegesID">ID الPrivileges</label>
+            <label className='fs15 pb-1' htmlFor="privilegesID">ID الـ Privileges</label>
             <input className={`${style.holder} py-3 form-control`}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -108,7 +109,7 @@ export default function AddEnableFeature() {
               name='privilegesID'
               type="text"
               id='privilegesID'
-              placeholder='الرجاء إدخال ID الprivileges' />
+              placeholder='الرجاء إدخال ID الـ privileges' />
           </div>
 
         </div>

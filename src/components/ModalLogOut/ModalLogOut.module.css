@@ -1,0 +1,13 @@
+.shadowBtn {
+  box-shadow: 0 0 5px 0px gray !important;
+}
+
+.sureHover:hover {
+  background-color: #27ae61 !important;
+  color: white !important;
+}
+
+.backHover:hover {
+  background-color: #fe130f !important;
+  color: white !important;
+}

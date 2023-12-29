@@ -167,15 +167,18 @@ export default function TableSilverCoins() {
         <div className='d-flex flex-column h-100 justify-content-between'>
 
 
-          <BootstrapTable
-            keyField="id"
-            data={rows}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} w-100`}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-          />
+          <div className={`${style.heightTable} overflow-auto `}>
+
+            <BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
+            />
+          </div>
 
 
           {/* pagination */}

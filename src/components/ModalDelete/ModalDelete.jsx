@@ -32,6 +32,7 @@ export default function ModalDelete() {
     <>
       <Modal size='lg' centered animation={false} show={showDelete} onHide={handleCloseDeleteBig}>
         <Modal.Body className='p-5'>
+
           <div className='fs30 text-center pb-5 fw-bolder text-black'>
             هل أنت متأكد من أنك تريد المسح
           </div>
@@ -51,6 +52,8 @@ export default function ModalDelete() {
 
       <Modal size='lg' centered animation={false} show={showDeleteRow} onHide={handleCloseDeleteRowBig}>
         <Modal.Body className='p-5'>
+
+
           <div className='fs30 text-center pb-5 fw-bolder text-black'>
             هل أنت متأكد من أنك تريد المسح
           </div>

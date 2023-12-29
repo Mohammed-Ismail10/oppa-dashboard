@@ -196,10 +196,10 @@ export default function RechargeBalance() {
       <div className={`${style.heightItems}`}>
 
         {/* nav */}
-        <div className='pt-5 mt-3'>
+        <div className='pt-5 mt-3 ps-3'>
           <Navbar>
             <Nav className="w-100 pe-2">
-              <NavLink onClick={() => dispatch(handleShowAddBalance())} className={`${style.shadowBtn} ${style.addItemHover}  mx-3 border-0 btn fs15 text-main fw-bold nav-link ${showAddBalance ? 'addActive' : ''} bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowAddBalance())} className={`${style.shadowBtn} ${style.addItemHover}  me-3 border-0 btn fs15 text-main fw-bold nav-link ${showAddBalance ? 'addActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة الرصيد
               </NavLink>
@@ -216,15 +216,20 @@ export default function RechargeBalance() {
         {isLoading ? <></> :
           <div className='d-flex flex-column h-100 justify-content-between'>
             {/* Table */}
-            <BootstrapTable
-              keyField="id"
-              data={rows}
-              columns={columns}
-              bordered={false}
-              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless my-4 `}
-              selectRow={selectRow}
-              rowClasses={`${style.rowShadow} `}
-            />
+
+
+            <div className={`${style.heightTable} overflow-auto `}>
+
+              <BootstrapTable
+                keyField="id"
+                data={rows}
+                columns={columns}
+                bordered={false}
+                classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+                selectRow={selectRow}
+                rowClasses={`${style.rowShadow} `}
+              />
+            </div>
 
             {/* pagination */}
             <div className='d-flex justify-content-center align-items-center'>

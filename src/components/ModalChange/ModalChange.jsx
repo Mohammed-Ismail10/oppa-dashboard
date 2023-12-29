@@ -7,6 +7,7 @@ import { handleCloseChangeId, handleCloseEditRow } from '../Redux/ModalsSlice.js
 import style from './ModelChange.module.css';
 import * as Yup from 'yup';
 import axios from 'axios';
+import closeBtn from '../../Assets/Images/closeBtn.png';
 
 
 export default function ModalChange() {
@@ -47,7 +48,10 @@ export default function ModalChange() {
   return (
     <>
       <Modal className='custom-modal-change' centered animation={false} show={showChangeId} onHide={handleCloseChangeIdBig}>
-        <Modal.Body>
+        <Modal.Body className='position-relative '>
+
+        <img onClick={() => handleCloseChangeIdBig()} className='position-absolute end-0 me-3 curser-pointer' src={closeBtn} alt="closeBtn" />
+
           <div className={`${style.widthImg} text-center mx-auto ratio ratio-1x1 rounded-circle overflow-hidden  mb-5`}>
             <img src={image} alt="personal img" loading='lazy' width={100} />
           </div>
@@ -104,7 +108,10 @@ export default function ModalChange() {
 
       {/* Modal for edit one row in users and otp */}
       <Modal className='custom-modal-change' centered animation={false} show={showEditRow} onHide={handleCloseEditRowBig}>
-        <Modal.Body>
+        <Modal.Body className='position-relative'>
+
+        <img onClick={() => handleCloseEditRowBig()} className='position-absolute end-0 me-3 curser-pointer' src={closeBtn} alt="closeBtn" />
+
           <div className={`${style.widthImg} text-center mx-auto ratio ratio-1x1 rounded-circle overflow-hidden  mb-5`}>
             <img src={image} alt="personal img" loading='lazy' width={100} />
           </div>

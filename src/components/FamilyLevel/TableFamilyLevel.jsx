@@ -54,7 +54,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'mid', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-user me-2"></i>
         معرف ال (ID)
       </span>,
@@ -63,7 +63,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'familyLevel', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <img className='me-2' src={layers} alt="layers" width={17} />
         مستوى العائلة
       </span>,
@@ -73,7 +73,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'familyImg', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
         صورة العائلة
       </span>,
@@ -83,7 +83,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'exp', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-75'>
         <img className='me-1 p-1' src={star} alt="star" width={26} />
         الخبرة
       </span>,
@@ -92,7 +92,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'users', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-users me-2"></i>
         الأعضاء
       </span>,
@@ -101,7 +101,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'officials', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <img className='me-2' src={correct} alt="correct" width={18} />
         المسؤولين
       </span>,
@@ -110,7 +110,7 @@ export default function TableFamilyLevel() {
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
@@ -184,15 +184,18 @@ export default function TableFamilyLevel() {
 
         <div className='d-flex flex-column h-100 justify-content-between'>
 
-          <BootstrapTable
-            keyField="id"
-            data={rows}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} ms-1 `}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-          />
+          <div className={`${style.heightTable} overflow-auto `}>
+
+            <BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
+            />
+          </div>
 
           {/* pagination */}
           <div className='d-flex justify-content-center align-items-center'>

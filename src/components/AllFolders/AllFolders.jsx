@@ -8,14 +8,15 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import ModalChange from '../ModalChange/ModalChange.jsx';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowChangeId, handleShowDelete } from '../Redux/ModalsSlice.js';
+import { handleShowChangeId, handleShowDelete, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 
 // For column checkbox
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true,
+  // clickToSelect: true,
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
     <div className="border badge p-0">
       <input
@@ -96,7 +97,7 @@ export default function AllFolders() {
   ];
 
 
-  let { showChangeId, showDelete } = useSelector(({ modals }) => modals);
+  let { showChangeId, showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
 
@@ -108,36 +109,36 @@ export default function AllFolders() {
     <>
       <div className={`${style.heightItems}`}>
         {/* items nav links */}
-        <div className='pt-5 mt-3 ps-2'>
+        <div className='pt-5 mt-3 ps-3'>
           <Navbar>
-            <Nav className="w-100 px-2">
-              <NavLink to={'g'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
+            <Nav className="w-100 px-2 flex-wrap">
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تغير المعرف (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 d-flex align-items-center text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تحديد شارة (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`${style.searchWidth} mx-3 position-relative`}>
-                <input className={`${style.shadowSearch} ${style.searchInput} w-100 form-control px-5 py-2 bg-search`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
-                <div className='position-absolute h-100 top-0 d-flex justify-content-center align-items-center px-3'>
-                  <i className="fa-solid fa-magnifying-glass text-main"></i>
-                </div>
+              <div className={`${style.searchWidth} position-relative mt-3 mt-xxl-0`}>
+                <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
+                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+            </Nav>
+            <Nav className={`${style.flexNone} align-items-start mb-5 mb-xxl-1 pb-1 pb-xxl-0 ms-xxl-auto`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>
@@ -147,15 +148,22 @@ export default function AllFolders() {
         <div className='d-flex flex-column h-100 justify-content-between'>
 
           {/* table all folders */}
-          <BootstrapTable
-            keyField="id"
-            data={rows}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} `}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-          />
+          <div className={`${style.heightTable} overflow-auto`}>
+
+            < BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
+            />
+          </div>
+
+
+
+
 
 
           {/* pagination */}
@@ -189,6 +197,7 @@ export default function AllFolders() {
         {/* Modals */}
         <ModalChange />
         <ModalDelete />
+        <ModalUserQuery />
       </div>
     </>
   )

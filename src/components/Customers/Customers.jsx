@@ -8,11 +8,15 @@ import style from './Customers.module.css';
 import { DropdownMenu } from 'react-bootstrap';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow } from '../Redux/ModalsSlice.js';
+import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { Url, baseUrl } from '../../helpers/constant.js';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
+import { Tooltip } from 'react-tooltip';
+
+
 
 
 // For column checkbox
@@ -58,11 +62,21 @@ export default function Customers() {
     {
       dataField: 'name', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
-      classes: 'text-main fs15 pt-3 px-0',
+      classes: 'text-main fs15 pt-3 px-0 d-block',
+      style: {
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        width: '200px',
+      },
+      formatter: (cell, row) => (
+        <span data-tooltip-id={"tooltip"} data-tooltip-content={cell}>{cell}</span>
+      ),
+
     },
     {
       dataField: 'phone', //must be same name of property in row which come from api
@@ -82,7 +96,16 @@ export default function Customers() {
         <i className="fa-regular fa-envelope-open me-2"></i>
         البريد الإلكتروني
       </span>,
-      classes: 'text-main fs15 pt-3 px-0',
+      classes: 'text-main fs15 pt-3 px-0 d-block',
+      style: {
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        width: '200px',
+      },
+      formatter: (cell, row) => (
+        <span data-tooltip-id={"tooltip"} data-tooltip-content={cell}>{cell}</span>
+      ),
     },
     {
       dataField: 'suspend', //must be same name of property in row which come from api
@@ -95,10 +118,10 @@ export default function Customers() {
       formatter: (_, { id }) => data?.data?.data.map((customer) => {
         if (id == customer.id) {
           if (customer.suspend == 1) {
-            return <span key={id}  className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
           }
           else {
-            return <span key={id}  className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
           }
         }
       })
@@ -141,7 +164,7 @@ export default function Customers() {
 
 
 
-  let { showChangeId, showDelete } = useSelector(({ modals }) => modals);
+  let { showChangeId, showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
   let [currentPage, setCurrentPage] = useState(() => {
@@ -156,7 +179,7 @@ export default function Customers() {
 
 
   function getCustomers() {
-    return axios.get(`${Url}/users/dashboard?limit=9&page=${currentPage}`);
+    return axios.get(`${Url}/users/dashboard?limit=20&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('customer', getCustomers, {
     cacheTime: 60000,
@@ -211,49 +234,41 @@ export default function Customers() {
 
 
         {/* customers nav links */}
-        <div className='pt-5 mt-3'>
-          <Navbar>
-            <Nav className="w-100 pe-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+        <div className='pt-5 mt-3 ps-3'>
+          <Navbar >
+            <Nav className="pe-2 flex-wrap">
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تغير المعرف (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تحديد شارة (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearch}`}>
-                <Dropdown dir='ltr'>
-                  <Dropdown.Toggle className='bg-search border-0 h-100 text-main fw-bold fs15 rounded-0 ps-5 pe-4' size='sm' id="dropdown-basic">
-                    الوكالة
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className='mt-0'>
-                    <Dropdown.Item>Action</Dropdown.Item>
-                    <Dropdown.Item>Another action</Dropdown.Item>
-                    <Dropdown.Item>Something else</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <div className='position-relative w-100'>
-                  <input className={`${style.searchInput}  shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-search border-0 border-start`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
-                  <i className="fa-solid fa-magnifying-glass position-absolute bottom-0 pb-2 ps-3"></i>
-                </div>
+              <div className={`${style.searchWidth} position-relative mt-3 mt-xl- mt-xxl-0`}>
+                <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
+                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+            </Nav>
+
+            <Nav className={`${style.flexNone} align-items-start mb-5 mb-xxl-1 pb-1 pb-xxl-0 ms-xxl-auto`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>
+
           </Navbar>
         </div>
 
@@ -261,23 +276,32 @@ export default function Customers() {
         {isLoading ? <></> :
           <div className='d-flex flex-column h-100 justify-content-between'>
             {/* table customers */}
-            < BootstrapTable
-              keyField="id"
-              data={data?.data.data}
-              columns={columns}
-              bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth}`}
-              selectRow={selectRow}
-              rowClasses={`${style.rowShadow} `}
-            />
+            <div className={`${style.heightTable} overflow-auto `}>
+
+              < BootstrapTable
+                keyField="id"
+                data={data?.data.data}
+                columns={columns}
+                bordered={false}
+                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+                selectRow={selectRow}
+                rowClasses={`${style.rowShadow} `}
+              />
+            </div>
+
+
+
+
+
+
             {/* pagination */}
-            <div className='d-flex justify-content-center align-items-center'>
+            <div className='d-flex justify-content-center align-items-center '>
               <div className='mx-2'>
                 <span className='text-main fs15'>الصفحة</span>
               </div>
               <div className='mx-2 d-flex align-items-center'>
                 <i onClick={() => increase()} className="fa-solid fa-caret-right curser-pointer"></i>
-                <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+                <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
                 <i onClick={() => decrease()} className="fa-solid fa-caret-left curser-pointer"></i>
               </div>
               <div className='mx-2'>
@@ -298,6 +322,8 @@ export default function Customers() {
         {/* modals: first => (تغير المعرف). second => (مسح الكل).  */}
         <ModalChange />
         <ModalDelete />
+        <ModalUserQuery />
+        <Tooltip id='tooltip' style={{ backgroundColor: 'white', color: 'black' }} />
       </div>
     </>
   )

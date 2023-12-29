@@ -1,14 +1,16 @@
 import { useFormik } from 'formik';
 import React, { useRef, useState } from 'react';
 import style from './AddVip.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddVip() {
 
 
-
+let navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
     console.log(values);
+    navigate('/vip');
   }
 
   let formik = useFormik({
@@ -106,16 +108,20 @@ export default function AddVip() {
             {/* the rest of form */}
             <div className="row">
               <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="nameGift">إسم الVIP</label>
-                <input className={`${style.holder} py-3 form-control`} type="text" placeholder='الرجاء إدخال إسم الVIP' />
+                <label className='fs15 pb-1' htmlFor="nameGift">إسم الــ VIP</label>
+                <input className={`${style.holder} py-3 form-control`} type="text" placeholder='الرجاء إدخال إسم الــ VIP' />
               </div>
               <div className="col-6 pb-4">
                 <label className='fs15 pb-1' htmlFor="nameGift">مدة الإنتهاء</label>
-                <input className={`${style.holder} py-3 form-control`} type="text" placeholder='5 أيام' />
+                <input className={`${style.holder} py-3 form-control`} type="text" placeholder='0' />
               </div>
               <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="nameGift">سعر الVIP</label>
+                <label className='fs15 pb-1' htmlFor="nameGift">سعر الــ VIP</label>
                 <input className={`${style.holder} py-3 form-control`} type="number" placeholder='0.00' />
+              </div>
+              <div className="col-6 pb-4">
+                <label className='fs15 pb-1' htmlFor="nameGift">مستوى الــ VIP</label>
+                <input className={`${style.holder} py-3 form-control`} type="text" placeholder='Hot' />
               </div>
 
             </div>

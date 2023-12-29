@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { handleShowChangeId, handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import style from './Vip.module.css';
@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { baseUrl } from '../../helpers/constant.js';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 
 // For column checkbox
@@ -55,7 +56,7 @@ export default function EnableFeature() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-crown me-2"></i>
-        ID فئة الVIP
+        ID فئة الــ VIP
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
@@ -64,7 +65,7 @@ export default function EnableFeature() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-crown me-2"></i>
-        ID الPrivileges
+        ID الــ Privileges
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
@@ -116,7 +117,7 @@ export default function EnableFeature() {
   ];
 
 
-  let { showChangeId, showDelete } = useSelector(({ modals }) => modals);
+  let { showChangeId, showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
 
@@ -176,42 +177,45 @@ export default function EnableFeature() {
     <>
 
       {/* Nav links for Vip enable feature */}
-      <div className='pt-5 mt-3 ms-2'>
+      <div className='pt-5 mt-3 ps-3'>
         <Navbar>
-          <Nav className="w-100 pe-2">
-            <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+          <Nav className="w-100 pe-2 flex-wrap">
+            <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إستعلام المستخدم
             </NavLink>
-            <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+            <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               سجل الهدايا
             </NavLink>
-            <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+            <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               تغير المعرف (ID)
             </NavLink>
-            <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+            <NavLink to={'العملاء'} className={`${style.shadowBtn} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
               <i className="bi bi-funnel me-2"></i>
               فلتر
             </NavLink>
-            <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+            <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إضافة VIP
             </NavLink>
-            <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+            <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               عرض الخصائص
             </NavLink>
-            <NavLink to={''} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+            <NavLink to={''} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               تمكين خاصية
             </NavLink>
-            <NavLink to={'/addenablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+            <NavLink to={'/addenablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إضافة تمكين خاصية
             </NavLink>
-            <NavLink to={''} onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+          </Nav>
+
+          <Nav className={`${style.flexNone} align-items-start mb-4 mb-xxl-1 pb-2 pb-xxl-0 ms-xxl-auto`}>
+            <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
               مسح الكل
             </NavLink>
           </Nav>
@@ -224,18 +228,18 @@ export default function EnableFeature() {
       {isLoading ? <></> :
         <div className={`${style.heightItems} d-flex flex-column justify-content-between`}>
 
+          <div className={`${style.heightTable} overflow-auto`}>
+            <BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthEnable} ms-1`}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
 
-          <BootstrapTable
-            keyField="id"
-            data={rows}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthEnable} w-100`}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-
-          />
-
+            />
+          </div>
           {/* pagination */}
           <div className='d-flex justify-content-center align-items-center'>
             <div className='mx-2'>
@@ -266,6 +270,7 @@ export default function EnableFeature() {
       }
 
       <ModalDelete />
+      <ModalUserQuery />
     </>
   )
 }

@@ -54,8 +54,8 @@ export default function ModalAddBalance() {
               <div className="row py-5">
 
                 <div className="col-6 py-2">
-                  <label className='fs20 pb-2' htmlFor="normalId">معرف الID</label>
-                  <input name='normalId' value={formik.values.normalId} onChange={formik.handleChange} className="form-control py-3 fw-medium" type="text" id='normalId' placeholder='الرجاء إدخال معرف الID' />
+                  <label className='fs20 pb-2' htmlFor="normalId">معرف الــ ID</label>
+                  <input name='normalId' value={formik.values.normalId} onChange={formik.handleChange} className="form-control py-3 fw-medium" type="text" id='normalId' placeholder='الرجاء إدخال معرف الــ ID' />
                 </div>
                 <div className="col-6 py-2">
                   <label className='fs20 pb-2' htmlFor="price">المبلغ</label>

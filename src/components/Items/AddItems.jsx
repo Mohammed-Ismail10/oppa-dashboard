@@ -3,12 +3,16 @@ import style from './AddItems.module.css';
 import { useFormik } from 'formik';
 import img from '../../Assets/Images/uploadImage.png'
 import svga from '../../Assets/Images/uploadSvga.png'
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function AddItems() {
+  let navigate = useNavigate();
+  
   function uploadItemsSubmit(values) {
     console.log(values);
+    navigate('/items')
   }
 
   let formik = useFormik({
@@ -56,7 +60,7 @@ export default function AddItems() {
   return (
     <>
       <div className="container-fluid pt-5 h-100">
-        <form className='w-75 mx-auto d-flex flex-column justify-content-between h-100' onSubmit={formik.handleSubmit}>
+        <form className='w-75 mx-auto d-flex flex-column justify-content-between h-100 ' onSubmit={formik.handleSubmit}>
           <div>
             {/* upload images */}
             <div className='d-flex justify-content-center me-5'>
@@ -117,7 +121,7 @@ export default function AddItems() {
 
               <div className="col-6 pb-4">
                 <label className='fs15 pb-1' htmlFor="expired">مدة الإنتهاء</label>
-                <input className={`${style.holder} py-3 form-control`} name='time' type="text" id='expired' placeholder='5 أيام' />
+                <input className={`${style.holder} py-3 form-control`} name='time' type="text" id='expired' placeholder='0' />
               </div>
 
               <div className="col-6 pb-4">
@@ -132,7 +136,6 @@ export default function AddItems() {
 
               <div className="col-6 pb-4">
                 <label className='fs15 pb-1' htmlFor="typeGift">نوع الهدايا</label>
-                {/* <input className={`${style.holder} py-3 form-control`} name='type' type="text" id='typeGift' placeholder='Hot' /> */}
                 <select className={`text-gray fs15 fw-medium form-select py-3`} id="inputGroupSelect01">
                   <option selected>Hot</option>
                   <option value="1">One</option>
@@ -145,7 +148,7 @@ export default function AddItems() {
           </div>
 
 
-          <div dir='ltr' className="col-12 py-1">
+          <div dir='ltr' className="col-12 py-1 mt-5">
             <button className={`${style.addBtnWidth} btn text-white px-4 fs15 fw-bold`} type="submit">إضافة</button>
             <button onClick={() => reset()} className='btn bg-white text-red me-4 fs15 fw-bold' type="button">إعادة ضبط</button>
           </div>

@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import style from './FamilyLevel.module.css';
 import { Nav, Navbar } from 'react-bootstrap';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 export default function FamilyLevel() {
 
@@ -17,7 +18,7 @@ export default function FamilyLevel() {
       <div className={`${style.heightItems} `}>
 
         {/* nav */}
-        <div className='pt-5 mt-3'>
+        <div className='pt-5 mt-3 ps-3'>
           <Navbar>
             <Nav className="w-100 pe-2">
               <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link bg-white addActive`}>
@@ -40,6 +41,7 @@ export default function FamilyLevel() {
 
         {/* modals */}
         <ModalDelete />
+        <ModalUserQuery />
 
       </div>
     </>

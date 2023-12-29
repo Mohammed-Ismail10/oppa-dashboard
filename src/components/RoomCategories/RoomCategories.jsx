@@ -4,13 +4,14 @@ import style from './RoomCategories.module.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { handleShowDelete, handleShowDeleteRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 
 // For column checkbox
@@ -55,7 +56,7 @@ export default function RoomCategories() {
     {
       dataField: 'name',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-user me-2"></i>
         الإسم
       </span>,
@@ -64,7 +65,7 @@ export default function RoomCategories() {
     {
       dataField: 'mId',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-user me-2"></i>
         معرف ال (ID)
       </span>,
@@ -73,7 +74,7 @@ export default function RoomCategories() {
     {
       dataField: 'roomName',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-door-open me-2"></i>
         إسم الغرفة
       </span>,
@@ -82,7 +83,7 @@ export default function RoomCategories() {
     {
       dataField: 'roomType',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className={`${style.refliction} fa-solid fa-arrow-down-short-wide me-2`}></i>
         نوع الغرفة
       </span>,
@@ -91,7 +92,7 @@ export default function RoomCategories() {
     {
       dataField: 'roomImg',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
         صورة الغرفة
       </span>,
@@ -101,7 +102,7 @@ export default function RoomCategories() {
     {
       dataField: 'roomState',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الغرفة
       </span>,
@@ -121,7 +122,7 @@ export default function RoomCategories() {
     {
       dataField: 'edit',
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
@@ -135,7 +136,7 @@ export default function RoomCategories() {
   ];
 
 
-  let { showDelete } = useSelector(({ modals }) => modals);
+  let { showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
 
@@ -199,38 +200,28 @@ export default function RoomCategories() {
 
 
         {/* nav */}
-        <div className='pt-5 mt-3'>
+        <div className='pt-5 mt-3 ps-3'>
           <Navbar>
-            <Nav className="w-100 pe-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+            <Nav className="w-100 pe-2 flex-wrap ps-xl- ps-4">
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover}  mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover}  mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn}  mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`d-flex justify-content-start shadow-s mx-3 ${style.searchWidth} ${style.shadowSearch}`}>
-                <Dropdown dir='ltr'>
-                  <Dropdown.Toggle className='bg-search border-0 h-100 text-main fw-bold fs15 rounded-0 ps-5 pe-4' size='sm' id="dropdown-basic">
-                    الوكالة
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className='mt-0'>
-                    <Dropdown.Item>Action</Dropdown.Item>
-                    <Dropdown.Item>Another action</Dropdown.Item>
-                    <Dropdown.Item>Something else</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <div className='position-relative w-100'>
-                  <input className={`${style.searchInput}  shadow-none h-100 rounded-0 form-control ps-5 pe-0 py-0 bg-search border-0 border-start`} type="search" placeholder='يمكنك البحث هنا' name="" id="" />
-                  <i className="fa-solid fa-magnifying-glass position-absolute bottom-0 pb-2 ps-3"></i>
-                </div>
+              <div className={`${style.searchWidth} position-relative mt-3 mt-xl- mt-xxl-0`}>
+                <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
+                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-4 px-3 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
+            </Nav>
+            <Nav className={`${style.flexNone} align-items-start mb-5  mb-xl-0 pb-1 pb-xl-0 ms-xxl-auto`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>
@@ -241,15 +232,18 @@ export default function RoomCategories() {
         {isLoading ? <></> :
           <div className='d-flex flex-column h-100 justify-content-between'>
             {/* Table */}
-            <BootstrapTable
-              keyField="id"
-              data={rows}
-              columns={columns}
-              bordered={false}
-              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless my-4 `}
-              selectRow={selectRow}
-              rowClasses={`${style.rowShadow} `}
-            />
+            <div className={`${style.heightTable} overflow-auto `}>
+
+              <BootstrapTable
+                keyField="id"
+                data={rows}
+                columns={columns}
+                bordered={false}
+                classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+                selectRow={selectRow}
+                rowClasses={`${style.rowShadow} `}
+              />
+            </div>
 
             {/* pagination */}
             <div className='d-flex justify-content-center align-items-center'>
@@ -281,6 +275,7 @@ export default function RoomCategories() {
 
         {/* modals */}
         <ModalDelete />
+        <ModalUserQuery />
 
       </div>
     </>

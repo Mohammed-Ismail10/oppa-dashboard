@@ -55,7 +55,7 @@ export default function TableVip() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-crown me-2"></i>
-        إسم الVIP
+        إسم الـ VIP
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
@@ -64,7 +64,7 @@ export default function TableVip() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-layer-group me-2"></i>
-        مستوى الVIP
+        مستوى الـ VIP
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
@@ -74,7 +74,7 @@ export default function TableVip() {
       text: '',
       headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border'>
         <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
-        سعر الVIP
+        سعر الـ VIP
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
@@ -83,7 +83,7 @@ export default function TableVip() {
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-file-image me-2"></i>
-        صورة الVIP
+        صورة الـ VIP
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (cell, row) => <img loading='lazy' src={row.vipImg} width={55} alt={`Flag of ${row.vipName}`} />,
@@ -172,15 +172,20 @@ export default function TableVip() {
       {isLoading ? <></> :
         <div className='d-flex flex-column h-100 justify-content-between'>
           {/* table */}
-          < BootstrapTable
-            keyField="id"
-            data={rows}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} ms-1`}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-          />
+
+          <div className={`${style.heightTable} overflow-auto`}>
+            < BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
+            />
+          </div>
+
+
 
           {/* pagination */}
           <div className='d-flex justify-content-center align-items-center'>

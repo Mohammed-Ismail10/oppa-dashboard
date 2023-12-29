@@ -7,6 +7,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Url, baseUrl } from '../../helpers/constant.js';
+import dollar from '../../Assets/Images/dollarC.png'
+
 
 // For column checkbox
 const selectRow = {
@@ -59,7 +61,7 @@ export default function TableItems() {
     {
       dataField: 'title_ar', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-'>
         <i className="fa-solid fa-gift me-2"></i>
         إسم الهدايا
       </span>,
@@ -68,7 +70,7 @@ export default function TableItems() {
     {
       dataField: 'getGift', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-'>
         <i className="fa-solid fa-hand-holding-heart me-2"></i>
         الحصول على الهدايا
       </span>,
@@ -79,7 +81,7 @@ export default function TableItems() {
     {
       dataField: 'gift_type', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-'>
         <i className="fa-solid fa-arrow-down-short-wide me-2"></i>
         نوع الهدايا
       </span>,
@@ -88,8 +90,8 @@ export default function TableItems() {
     {
       dataField: 'price', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border'>
-        <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
+      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-'>
+        <img className='me-2' src={dollar} alt="dollar" />
         سعر الهدية
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
@@ -97,7 +99,7 @@ export default function TableItems() {
     {
       dataField: 'active', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الهدايا
       </span>,
@@ -117,7 +119,7 @@ export default function TableItems() {
     {
       dataField: 'image', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-'>
         <i className="bi bi-file-image me-2"></i>
         صورة الهدايا
       </span>,
@@ -127,7 +129,7 @@ export default function TableItems() {
     {
       dataField: 'created_at', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 w-100 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 w-75 badge text-main rounded fs15 border'>
         <i className="fa-regular fa-clock me-2"></i>
         الوقت
       </span>,
@@ -155,7 +157,7 @@ export default function TableItems() {
 
 
 
-  
+
   let [currentPage, setCurrentPage] = useState(() => {
     const storedPage = localStorage.getItem('currentPageItems');
     return storedPage ? parseInt(storedPage) : 0;
@@ -169,7 +171,7 @@ export default function TableItems() {
 
   // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
   function getItem() {
-    return axios.get(`${Url}/gifts/dashboard?limit=9&page=${currentPage}`);
+    return axios.get(`${Url}/gifts/dashboard?limit=10&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
@@ -221,50 +223,53 @@ export default function TableItems() {
       {isLoading ? (
         <></>
       ) : (
+        <>
+
+          <div className='d-flex flex-column h-100 justify-content-between'>
 
 
-        <div className='d-flex flex-column h-100 justify-content-between'>
-
-
-
-          <BootstrapTable
-            keyField="id"
-            data={data?.data?.data}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidth} ms-1 `}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-          />
-
-
-          {/* pagination */}
-          <div className='d-flex justify-content-center align-items-center'>
-            <div className='mx-2'>
-              <span className='text-main fs15'>الصفحة</span>
+            <div className={`${style.heightTable} overflow-auto`}>
+              <BootstrapTable
+                keyField="id"
+                data={data?.data?.data}
+                columns={columns}
+                bordered={false}
+                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+                selectRow={selectRow}
+                rowClasses={`${style.rowShadow} `}
+                wrapperClasses="table-responsive"
+              />
             </div>
-            <div className='mx-2 d-flex align-items-center'>
-              <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
-              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
-              <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+
+
+            {/* pagination */}
+            <div className='d-flex justify-content-center align-items-center'>
+              <div className='mx-2'>
+                <span className='text-main fs15'>الصفحة</span>
+              </div>
+              <div className='mx-2 d-flex align-items-center'>
+                <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+                <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
+                <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+              </div>
+              <div className='mx-2'>
+                <Dropdown>
+                  <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                    30
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item >25</Dropdown.Item>
+                    <Dropdown.Item >20</Dropdown.Item>
+                    <Dropdown.Item >10</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
-            <div className='mx-2'>
-              <Dropdown>
-                <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                  30
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item >25</Dropdown.Item>
-                  <Dropdown.Item >20</Dropdown.Item>
-                  <Dropdown.Item >10</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+
+
+
           </div>
-
-
-
-        </div>
+        </>
       )}
 
 

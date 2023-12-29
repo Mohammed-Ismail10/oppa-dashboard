@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { NavLink, Outlet } from 'react-router-dom';
 import style from './SilverCoins.module.css';
-import { handleShowDelete } from '../Redux/ModalsSlice.js';
+import { handleShowDelete, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import { Nav, Navbar } from 'react-bootstrap';
+import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 
 
 export default function SilverCoins() {
 
-  let { showDelete } = useSelector(({ modals }) => modals);
+  let { showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
 
@@ -20,10 +21,10 @@ export default function SilverCoins() {
       <div className={`${style.heightItems}`}>
 
         {/* items nav links */}
-        <div className='pt-5 mt-3 ms-3'>
+        <div className='pt-5 mt-3 ps-3'>
           <Navbar>
             <Nav className="w-100 pe-2">
-              <NavLink to={'/silvercoins'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover}  me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
@@ -49,6 +50,7 @@ export default function SilverCoins() {
 
         {/* modals: first => (تغير المعرف). second => (مسح الكل). */}
         <ModalDelete />
+        <ModalUserQuery />
       </div>
     </>
   )
