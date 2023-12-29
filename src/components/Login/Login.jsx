@@ -2,14 +2,33 @@ import React, { useState } from 'react';
 import logo from '../../Assets/Images/Group 1000002471.png';
 import style from './login.module.css';
 import { useFormik } from 'formik';
+import axios from 'axios';
+import { Url } from '../../helpers/constant.js';
+import { useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { saveUsername } from '../Redux/UserSlice.js';
 
-export default function Login() {
+export default function Login({ saveToken }) {
 
+  let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [dataLogin, setDataLogin] = useState(null);
+  let dispatch = useDispatch();
 
 
-  function loginSubmit(values) {
-    console.log(values)
+
+
+  async function loginSubmit(values) {
+    let { data } = await axios.post(`${Url}/auth/admin/login`, values);
+    setDataLogin(data?.data);
+    setDataLogin(() => data?.data);
+    if (data?.data.accessToken) {
+      localStorage.setItem('accessToken', data?.data.accessToken);
+      dispatch(saveUsername(data?.data.profile.name));
+      navigate('/');
+    }
+
   }
 
 
@@ -28,15 +47,6 @@ export default function Login() {
 
 
 
-
-
-
-
-
-
-
-
-
   return (
     <>
       <section>
@@ -46,6 +56,10 @@ export default function Login() {
               <img src={logo} alt="Oppa logo" width={100} loading='lazy' />
               <h2 className={`${style.fs35} fw-normal my-4 pt-2`}>تسجيل الدخول</h2>
             </div>
+
+            {dataLogin !== null ? dataLogin.statusCode !== 201 && dataLogin.statusCode !== null && dataLogin.statusCode !== undefined ? <Alert variant={'danger'}>{dataLogin.message}</Alert> : null : null}
+
+
             <div>
               <form onSubmit={formik.handleSubmit}>
                 <div>
@@ -60,6 +74,8 @@ export default function Login() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur} />
                 </div>
+
+
 
                 <div className='position-relative pt-2 pb-3'>
                   <label htmlFor='password'>كلمة المرور </label>
@@ -80,6 +96,7 @@ export default function Login() {
                       onClick={() => setShowPassword(!showPassword)}
                       className={`${style.textEye} fa-regular fa-eye-slash position-absolute end-0 top-50 mt-2 me-3 curser-pointer`}></i>}
                 </div>
+
 
                 <button type='submit' className={`${style.bgBtn} ${style.fs18} text-white w-100 btn mt-4 fw-bold py-2 rounded-3`}>تسجيل الدخول</button>
 

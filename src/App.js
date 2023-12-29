@@ -8,9 +8,7 @@ import Customers from './components/Customers/Customers.jsx';
 import Otp from './components/Otp/Otp.jsx';
 import AllFolders from './components/AllFolders/AllFolders.jsx';
 import Coins from './components/Coins/Coins.jsx';
-import ControlAgency from './components/ControlAgency/ControlAgency.jsx';
 import Countries from './components/Countries/Countries.jsx';
-import CreateAgency from './components/CreateAgency/CreateAgency.jsx';
 import RoomCategories from './components/RoomCategories/RoomCategories.jsx';
 import Target from './components/Target/Target.jsx';
 import UserSetting from './components/UserSetting/UserSetting.jsx';
@@ -42,6 +40,10 @@ import AddSilverCoins from './components/SilverCoins/AddSilverCoins.jsx';
 import MyComponent from './components/compooo/MyComponent.jsx';
 import TableShowProperty from './components/Vip/TableShowProperty.jsx';
 import TableEnableFeature from './components/Vip/TableEnableFeature.jsx';
+import { useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import InverseProtected from './components/InverseProtected/InverseProtected.jsx';
 
 
 
@@ -52,69 +54,75 @@ let queryClient = new QueryClient();
 
 
 
-
-
-
-
 function App() {
+
+
+  // const [userToken, setUserToken] = useState(null);
+
+  // function saveToken() {
+  //   let encode = localStorage.getItem('accessToken');
+  //   let decode = jwtDecode(encode);
+  //   setUserToken(decode);
+  //   console.log(userToken)
+  // }
+
+
 
   let routers = createBrowserRouter([
     {
       path: '', element: <Layout />, children: [
-        { index: true, element: <Home /> },
-        { path: 'login', element: <Login /> },
-        { path: '/users/customers', element: <Customers /> },
-        { path: '/users/moderators', element: <Otp /> },
-        { path: 'allfolders', element: <AllFolders /> },
-        { path: '/setting/coins', element: <Coins /> },
-        // { path: 'controlagency', element: <ControlAgency /> },
-        { path: '/setting/countries', element: <Countries /> },
-        // { path: 'createagency', element: <CreateAgency /> },
-        { path: '/setting/roomcategories', element: <RoomCategories /> },
-        { path: '/setting/target', element: <Target /> },
-        { path: '/setting/usersetting', element: <UserSetting /> },
+        { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
+        { path: 'login', element: <InverseProtected><Login /></InverseProtected> },
+        { path: '/users/customers', element: <ProtectedRoute><Customers /></ProtectedRoute> },
+        { path: '/users/moderators', element: <ProtectedRoute><Otp /></ProtectedRoute> },
+        { path: 'allfolders', element: <ProtectedRoute><AllFolders /></ProtectedRoute> },
+        { path: '/setting/coins', element: <ProtectedRoute><Coins /></ProtectedRoute> },
+        { path: '/setting/countries', element: <ProtectedRoute><Countries /></ProtectedRoute> },
+        { path: '/setting/roomcategories', element: <ProtectedRoute><RoomCategories /></ProtectedRoute> },
+        { path: '/setting/target', element: <ProtectedRoute><Target /></ProtectedRoute> },
+        { path: '/setting/usersetting', element: <ProtectedRoute><UserSetting /></ProtectedRoute> },
         {
-          path: '/gift/vip/showproperties', element: <ShowProperties />, children: [
-            { index: true, element: <TableShowProperty /> },
-            { path: 'add', element: <AddProperty /> }
+          path: '/gift/vip/showproperties', element: <ProtectedRoute><ShowProperties /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableShowProperty /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddProperty /></ProtectedRoute> }
           ]
         },
         {
-          path: '/gift/vip/enablefeature', element: <EnableFeature />, children: [
-            { index: true, element: <TableEnableFeature /> },
-            { path: 'add', element: <AddEnableFeature /> }
+          path: '/gift/vip/enablefeature', element: <ProtectedRoute><EnableFeature /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableEnableFeature /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddEnableFeature /></ProtectedRoute> }
           ]
         },
-        { path: '/app/rechargebalance', element: <RechargeBalance /> },
+        { path: '/app/rechargebalance', element: <ProtectedRoute><RechargeBalance /></ProtectedRoute> },
         {
-          path: '/app/familylevel', element: <FamilyLevel />, children: [
-            { index: true, element: <TableFamilyLevel /> },
-            { path: 'add', element: <AddFamilyLevel /> },
-          ]
-        },
-        {
-          path: '/app/silvercoins', element: <SilverCoins />, children: [
-            { index: true, element: <TableSilverCoins /> },
-            { path: 'add', element: <AddSilverCoins /> },
-          ]
-        },
-        { path: '/app/complaints', element: <Complaints /> },
-        { path: '/app/exchangecurrencies', element: <ExchangeCurrencies /> },
-        { path: '/app/rooms/backgrounds', element: <Backgrounds /> },
-        {
-          path: '/gift/items', element: <Items />, children: [
-            { index: true, element: <TableItems /> },
-            { path: 'add', element: <AddItems /> },
+          path: '/app/familylevel', element: <ProtectedRoute><FamilyLevel /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableFamilyLevel /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddFamilyLevel /></ProtectedRoute> },
           ]
         },
         {
-          path: '/gift/vip', element: <Vip />, children: [
-            { index: true, element: <TableVip /> },
-            { path: 'add', element: <AddVip /> },
+          path: '/app/silvercoins', element: <ProtectedRoute><SilverCoins /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableSilverCoins /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddSilverCoins /></ProtectedRoute> },
           ]
         },
-        { path: 'pages', element: <Pages /> },
-        { path: 'notifications', element: <Notifications /> },
+        { path: '/app/complaints', element: <ProtectedRoute><Complaints /></ProtectedRoute> },
+        { path: '/app/exchangecurrencies', element: <ProtectedRoute><ExchangeCurrencies /></ProtectedRoute> },
+        { path: '/app/rooms/backgrounds', element: <ProtectedRoute><Backgrounds /></ProtectedRoute> },
+        {
+          path: '/gift/items', element: <ProtectedRoute><Items /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableItems /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddItems /></ProtectedRoute> },
+          ]
+        },
+        {
+          path: '/gift/vip', element: <ProtectedRoute><Vip /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableVip /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddVip /></ProtectedRoute> },
+          ]
+        },
+        { path: 'pages', element: <ProtectedRoute><Pages /></ProtectedRoute> },
+        { path: 'notifications', element: <ProtectedRoute><Notifications /></ProtectedRoute> },
         { path: 'ay', element: <MyComponent /> },
       ]
     }

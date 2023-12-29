@@ -32,7 +32,11 @@ export default function ModalLogout() {
           </div>
           <div className='row justify-content-between mt-5'>
             <div className="col-5">
-              <button onClick={() => { handleCloseLogOutBig(); navigate('/login'); }} className={`${style.shadowBtn} ${style.sureHover} text-black py-2 fs30 fw-bolder p-0 btn w-100`}>تأكيد</button>
+              <button onClick={() => {
+                handleCloseLogOutBig();
+                navigate('/login');
+                localStorage.removeItem('accessToken');
+              }} className={`${style.shadowBtn} ${style.sureHover} text-black py-2 fs30 fw-bolder p-0 btn w-100`}>تأكيد</button>
             </div>
             <div className="col-5">
               <button onClick={handleCloseLogOutBig} className={`${style.shadowBtn} ${style.backHover} text-black py-2 fs30 fw-bolder p-0 btn w-100`}>تراجع</button>

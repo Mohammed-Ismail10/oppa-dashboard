@@ -194,7 +194,7 @@ export default function TableVip() {
             </div>
             <div className='mx-2 d-flex align-items-center'>
               <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
-              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage}</div>
+              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
               <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
             </div>
             <div className='mx-2'>

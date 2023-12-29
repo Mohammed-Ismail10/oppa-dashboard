@@ -8,7 +8,7 @@ import allfiles from '../../Assets/Images/allfiles.png';
 import robot from '../../Assets/Images/robot1.png';
 import pages from '../../Assets/Images/pages.png';
 import notif from '../../Assets/Images/notif.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { handleShowLogOut } from '../Redux/ModalsSlice.js';
 import ModalLogout from '../ModalLogOut/ModalLogout.jsx';
 import { useEffect, useState } from 'react';
@@ -21,31 +21,12 @@ export default function SideBar() {
   const navigate = useNavigate();
   let dispatch = useDispatch();
 
-
-  const [path, setPath] = useState(false);
-
-  let { pathname } = useLocation();
-  console.log();
-
-
-
-  let token = null;
-
-
-
-  useEffect(() => {
-    if (pathname == '/vip' || pathname == '/vip/add' || pathname == '/showproperties' || pathname == '/addproperty' || pathname == '/enablefeature' || pathname == '/addenablefeature') {
-      setPath(true);
-    }
-    else {
-      setPath(false);
-    }
-  }, [path])
-
+  let { username } = useSelector(({ user }) => user);
 
 
   return (
     <>
+
       <div className="vh-100 overflow-y-hidden shadow d-flex flex-column justify-content-between pt-3">
 
         <div className='overflow-hidden pb-2'>
@@ -55,8 +36,8 @@ export default function SideBar() {
             </div>
             <div className='d-flex justify-content-around align-items-center'>
               <span></span>
-              <h2 className='mb-0 text-main h4 fw-bold'>يوسف رجب</h2>
-              <Link to={'usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
+              <h2 className='mb-0 text-main h4 fw-bold'>{username}</h2>
+              <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
             </div>
           </div>
         </div>

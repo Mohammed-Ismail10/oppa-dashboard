@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './AllFolders.module.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleShowChangeId, handleShowDelete, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
+import axios from 'axios';
+import { useQuery } from 'react-query';
 
 
 // For column checkbox
@@ -102,6 +104,54 @@ export default function AllFolders() {
 
 
 
+  let [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPageAllFolders');
+    return storedPage ? parseInt(storedPage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('currentPageAllFolders', currentPage);
+  }, [currentPage]);
+
+
+
+  function getFolders() {
+    return axios.get(``);
+  }
+  let { data, isLoading, refetch, isError, isFetching } = useQuery('folders', getFolders, {
+    cacheTime: 60000,
+    refetchInterval: 300000,
+  });
+
+
+
+  function increase() {
+    currentPage += 1;
+    setCurrentPage(currentPage);
+    refetch();
+  }
+
+  function decrease() {
+    currentPage -= 1;
+    if (currentPage < 0) {
+      currentPage = 0;
+      setCurrentPage(currentPage);
+      refetch();
+    }
+    else {
+      setCurrentPage(currentPage);
+      refetch();
+    }
+  }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -172,9 +222,9 @@ export default function AllFolders() {
               <span className='text-main fs15'>الصفحة</span>
             </div>
             <div className='mx-2 d-flex align-items-center'>
-              <i className="fa-solid fa-caret-right curser-pointer"></i>
-              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">1</div>
-              <i className="fa-solid fa-caret-left curser-pointer"></i>
+              <i onClick={() => increase()} className="fa-solid fa-caret-right curser-pointer"></i>
+              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
+              <i onClick={() => decrease()} className="fa-solid fa-caret-left curser-pointer"></i>
             </div>
             <div className='mx-2'>
               <Dropdown>
