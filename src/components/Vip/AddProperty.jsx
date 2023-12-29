@@ -42,21 +42,8 @@ export default function AddProperty() {
 
   return (
     <>
-      <div className={`container-fluid ${style.heightAddPro}`}>
+      <div className={`container-fluid ${style.heightAddPro} pt-5 h-100`}>
 
-        <div className='pt-5 mt-3'>
-          <Navbar>
-            <Nav className="w-100 px-2">
-              <NavLink to={''} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إضافة خاصية
-              </NavLink>
-            </Nav>
-          </Navbar>
-
-        </div>
-
-        <div className='pt-5 h-100'>
 
           <form onSubmit={formik.handleSubmit} className='w-75 mx-auto d-flex flex-column justify-content-between h-100'>
             <div>
@@ -101,7 +88,6 @@ export default function AddProperty() {
             </div>
 
           </form>
-        </div>
       </div>
     </>
   )

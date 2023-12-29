@@ -1,15 +1,11 @@
 import React from 'react'
-import { Container, Nav, Navbar } from 'react-bootstrap'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { handleShowChangeId } from '../Redux/ModalsSlice.js';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useNavigate } from 'react-router-dom'
 import style from './Vip.module.css';
 import { useFormik } from 'formik';
 
 
 export default function AddEnableFeature() {
-  let { showChangeId } = useSelector(({ modals }) => modals);
-  let dispatch = useDispatch();
+
 
 
   let navigate = useNavigate();
@@ -42,10 +38,10 @@ export default function AddEnableFeature() {
     <>
 
       {/* Nav links for Vip */}
-      <div className='pt-5 mt-3'>
+      {/* <div className='pt-5 mt-3 ps-3'>
         <Navbar>
           <Nav className="w-100 px-2">
-            <NavLink to={'/vip'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+            <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إستعلام المستخدم
             </NavLink>
@@ -80,7 +76,7 @@ export default function AddEnableFeature() {
           </Nav>
         </Navbar>
 
-      </div>
+      </div> */}
 
       <div className='w-75 d-flex justify-content-center py-5 mt-2'>
         <h2 className='fs-4 fw-bold'>إضافة تمكين خاصية</h2>

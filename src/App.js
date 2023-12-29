@@ -40,6 +40,8 @@ import AddFamilyLevel from './components/FamilyLevel/AddFamilyLevel.jsx';
 import TableSilverCoins from './components/SilverCoins/TableSilverCoins.jsx';
 import AddSilverCoins from './components/SilverCoins/AddSilverCoins.jsx';
 import MyComponent from './components/compooo/MyComponent.jsx';
+import TableShowProperty from './components/Vip/TableShowProperty.jsx';
+import TableEnableFeature from './components/Vip/TableEnableFeature.jsx';
 
 
 
@@ -64,41 +66,49 @@ function App() {
         { path: '/users/customers', element: <Customers /> },
         { path: '/users/moderators', element: <Otp /> },
         { path: 'allfolders', element: <AllFolders /> },
-        { path: 'coins', element: <Coins /> },
-        { path: 'controlagency', element: <ControlAgency /> },
-        { path: 'countries', element: <Countries /> },
-        { path: 'createagency', element: <CreateAgency /> },
-        { path: 'roomcategories', element: <RoomCategories /> },
-        { path: 'target', element: <Target /> },
-        { path: 'usersetting', element: <UserSetting /> },
-        { path: 'showproperties', element: <ShowProperties /> },
-        { path: 'addproperty', element: <AddProperty /> },
-        { path: 'enablefeature', element: <EnableFeature /> },
-        { path: 'addenablefeature', element: <AddEnableFeature /> },
-        { path: 'rechargebalance', element: <RechargeBalance /> },
+        { path: '/setting/coins', element: <Coins /> },
+        // { path: 'controlagency', element: <ControlAgency /> },
+        { path: '/setting/countries', element: <Countries /> },
+        // { path: 'createagency', element: <CreateAgency /> },
+        { path: '/setting/roomcategories', element: <RoomCategories /> },
+        { path: '/setting/target', element: <Target /> },
+        { path: '/setting/usersetting', element: <UserSetting /> },
         {
-          path: 'familylevel', element: <FamilyLevel />, children: [
+          path: '/gift/vip/showproperties', element: <ShowProperties />, children: [
+            { index: true, element: <TableShowProperty /> },
+            { path: 'add', element: <AddProperty /> }
+          ]
+        },
+        {
+          path: '/gift/vip/enablefeature', element: <EnableFeature />, children: [
+            { index: true, element: <TableEnableFeature /> },
+            { path: 'add', element: <AddEnableFeature /> }
+          ]
+        },
+        { path: '/app/rechargebalance', element: <RechargeBalance /> },
+        {
+          path: '/app/familylevel', element: <FamilyLevel />, children: [
             { index: true, element: <TableFamilyLevel /> },
             { path: 'add', element: <AddFamilyLevel /> },
           ]
         },
         {
-          path: 'silvercoins', element: <SilverCoins />, children: [
+          path: '/app/silvercoins', element: <SilverCoins />, children: [
             { index: true, element: <TableSilverCoins /> },
             { path: 'add', element: <AddSilverCoins /> },
           ]
         },
-        { path: 'complaints', element: <Complaints /> },
-        { path: 'exchangecurrencies', element: <ExchangeCurrencies /> },
-        { path: 'backgrounds', element: <Backgrounds /> },
+        { path: '/app/complaints', element: <Complaints /> },
+        { path: '/app/exchangecurrencies', element: <ExchangeCurrencies /> },
+        { path: '/app/rooms/backgrounds', element: <Backgrounds /> },
         {
-          path: 'items', element: <Items />, children: [
+          path: '/gift/items', element: <Items />, children: [
             { index: true, element: <TableItems /> },
             { path: 'add', element: <AddItems /> },
           ]
         },
         {
-          path: 'vip', element: <Vip />, children: [
+          path: '/gift/vip', element: <Vip />, children: [
             { index: true, element: <TableVip /> },
             { path: 'add', element: <AddVip /> },
           ]
