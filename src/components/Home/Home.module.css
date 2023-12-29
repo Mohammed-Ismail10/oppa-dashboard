@@ -1,0 +1,15 @@
+.searchInput::placeholder {
+  color: #1c274c !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 1px 0px gray !important;
+}
+
+.roundedChart {
+  border-radius: 0.5rem !important;
+  box-shadow: 0 0 10px 0px gray !important;
+  overflow: hidden !important;
+}

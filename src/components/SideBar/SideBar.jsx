@@ -21,7 +21,9 @@ export default function SideBar() {
   const navigate = useNavigate();
   let dispatch = useDispatch();
 
-  let { username } = useSelector(({ user }) => user);
+
+
+
 
 
   return (
@@ -36,7 +38,7 @@ export default function SideBar() {
             </div>
             <div className='d-flex justify-content-around align-items-center'>
               <span></span>
-              <h2 className='mb-0 text-main h4 fw-bold'>{username}</h2>
+              <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
               <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
             </div>
           </div>

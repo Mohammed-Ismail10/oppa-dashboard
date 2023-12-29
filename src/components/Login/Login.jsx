@@ -25,7 +25,7 @@ export default function Login({ saveToken }) {
     setDataLogin(() => data?.data);
     if (data?.data.accessToken) {
       localStorage.setItem('accessToken', data?.data.accessToken);
-      dispatch(saveUsername(data?.data.profile.name));
+      localStorage.setItem('username', data?.data.profile.name);
       navigate('/');
     }
 

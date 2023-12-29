@@ -36,6 +36,7 @@ export default function ModalLogout() {
                 handleCloseLogOutBig();
                 navigate('/login');
                 localStorage.removeItem('accessToken');
+                localStorage.removeItem('username');
               }} className={`${style.shadowBtn} ${style.sureHover} text-black py-2 fs30 fw-bolder p-0 btn w-100`}>تأكيد</button>
             </div>
             <div className="col-5">

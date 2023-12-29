@@ -14,7 +14,7 @@ export default function Layout() {
 
   return (
     <>
-      <section className=''>
+      <section className='h-100'>
         <div className="container-fluid ps-0 h-100">
           <div className="d-flex h-100">
 
@@ -23,7 +23,7 @@ export default function Layout() {
             </div>}
 
 
-            <div className={`${pathname == '/login' ? 'col-xxl-12 col-lg-12' : 'col-xxl-10 col-lg-9'}     `}>
+            <div className={`${pathname == '/login' ? 'col-xxl-12 col-lg-12' : 'col-xxl-10 col-lg-9'} overflow-scroll h-100 bg-success`}>
               <Outlet />
             </div>
 
