@@ -12,8 +12,22 @@
   border-radius: 0.5rem !important;
   box-shadow: 0 0 10px 0px gray !important;
   overflow: hidden !important;
+  height: 20rem !important;
 }
 
-/* .heightChart {
-  height: 49rem !important;
-} */
+.headerChart {
+  padding-inline: 1rem !important;
+}
+
+@media screen and (min-width: 1500px) {
+  .headerChart {
+    padding-inline: 3rem !important;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .headerChart {
+    padding-inline: 12rem !important;
+  }
+}
+
+

@@ -171,7 +171,7 @@ export default function TableItems() {
 
   // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
   function getItem() {
-    return axios.get(`${Url}/gifts/dashboard?limit=10&page=${currentPage}`);
+    return axios.get(`${Url}/gifts/dashboard?limit=20&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,

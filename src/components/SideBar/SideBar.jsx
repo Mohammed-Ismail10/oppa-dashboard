@@ -29,12 +29,11 @@ export default function SideBar() {
   return (
     <>
 
-      <div className="vh-100 overflow-y-hidden shadow d-flex flex-column justify-content-between pt-3">
+      <div className="h-100 shadow d-flex flex-column justify-content-between pt-3 position-fixed">
 
 
-        <div className='overflow-hidden pb-2'>
-          <div>
-            <div className='text-center mt-3 overflow-hidden'>
+        <div className='pb-2'>
+            <div className='text-center mt-3'>
               <img className='h-50 w-50' src={image} alt="personal img" loading='lazy' />
             </div>
             <div className='d-flex justify-content-around align-items-center'>
@@ -42,12 +41,10 @@ export default function SideBar() {
               <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
               <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
             </div>
-          </div>
         </div>
 
 
-        <div className={`${style.heightList} pt-4`}>
-          <ul className='list-unstyled'>
+          <ul className='list-unstyled mb-5 pb-5 pe-5'>
             <div className="accordion accordion-flush" id="accordionFlushExample">
 
 
@@ -68,8 +65,12 @@ export default function SideBar() {
                 <div id="flush-collapseOne" className='ps-5 ms-3 accordion-collapse collapse' data-bs-parent="#accordionFlushExample">
                   <div className="accordion-body p-0 pt-1">
                     <ul className='list-unstyled ps-4'>
-                      <li className={`${style.textSub} py-1`}><NavLink to={'/users/customers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink></li>
-                      <li className={`${style.textSub} py-1`}><NavLink to={'/users/moderators'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المشرفين</NavLink></li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/users/customers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive" >العملاء</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/users/moderators'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المشرفين</NavLink>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -195,7 +196,6 @@ export default function SideBar() {
 
             </div>
           </ul>
-        </div>
 
 
         {/* logout */}

@@ -53,7 +53,7 @@
   }
 }
 
-@media screen and (min-height: 720px) and (max-height: 750px) {
+/* @media screen and (min-height: 720px) and (max-height: 750px) {
   .heightItems {
     height: 53% !important;
   }
@@ -109,11 +109,13 @@
   }
 }
 @media screen and (min-height: 1051px) and (max-height: 1080px) {
-  .heightItems {
-    height: 83% !important;
-  }
-}
+} */
 
+
+
+.heightItems {
+  height: 83.5% !important;
+}
 
 .flexNone {
   flex: none !important;

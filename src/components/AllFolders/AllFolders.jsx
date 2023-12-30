@@ -158,7 +158,7 @@ export default function AllFolders() {
   return (
     <>
       <div className={`${style.heightItems}`}>
-        {/* items nav links */}
+        {/* all folders nav links */}
         <div className='pt-5 mt-3 ps-3'>
           <Navbar>
             <Nav className="w-100 px-2 flex-wrap">
@@ -205,7 +205,7 @@ export default function AllFolders() {
               data={rows}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-2`}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />

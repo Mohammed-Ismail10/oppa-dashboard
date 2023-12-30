@@ -1,6 +1,6 @@
-.fs15 {
+/* .fs15 {
   font-size: 15px !important;
-}
+} */
 
 .accordionN {
   border: none !important;
@@ -21,9 +21,9 @@
   content: url('../../Assets/Images/Vector\ \(4\).png');
 }
 
-.heightList{
+/* .heightList{
   height: 60% !important;
-}
+} */
 
 .logoutImg{
   content: url('../../Assets/Images/logout.png');

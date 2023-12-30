@@ -28,7 +28,7 @@
   border-collapse: separate !important;
 }
 
-@media screen and (min-height: 720px) and (max-height: 750px) {
+/* @media screen and (min-height: 720px) and (max-height: 750px) {
   .heightItems {
     height: 53% !important;
   }
@@ -87,8 +87,12 @@
   .heightItems {
     height: 83% !important;
   }
-}
+} */
 
+
+.heightItems {
+  height: 83.5% !important;
+}
 .rowShadow:hover{
   box-shadow: 0 0 0.625rem 0.00625rem gray !important;
 }

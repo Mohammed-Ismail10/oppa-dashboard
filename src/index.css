@@ -6,35 +6,23 @@
   --bg-green: #0fe50b;
   --text-input: #c2c2c2;
   --gray: #8d98aa;
+  --title-chart: #9a9a9a;
 }
 
-html {
+/* html {
   position: fixed !important;
   height: 100% !important;
   width: 100% !important;
-}
-
-/* .tooltip-hover:hover {
-  overflow: visible !important;
 } */
-
 
 .selection-cell {
   padding-block: 0.875rem !important;
   padding-inline: 0 !important;
-  /* text-overflow: st !important; */
-  /* white-space: ; */
-  /* white-space: nowrap !important;
-  width: 30px !important; */
 }
 
 body {
   font-family: "Cairo", sans-serif !important;
   font-weight: bold !important;
-  /* position: fixed !important; */
-  /* background-color: red !important; */
-  /* width: 100vw !important; */
-  /* height: 100% !important; */
 }
 
 ::placeholder {
@@ -48,16 +36,15 @@ body {
   text-align: right !important;
 }
 
-.table-responsive tbody {
-  height: 25rem !important;
-  overflow-y: auto !important;
-}
-
 .loginEmail::placeholder {
   font-size: 0.875rem !important;
   font-weight: 700 !important;
   direction: rtl !important;
   text-align: right !important;
+}
+
+.title-chart{
+  color: var(--title-chart) !important;
 }
 
 .text-main {
@@ -147,6 +134,14 @@ body {
 }
 .fs12 {
   font-size: 0.75rem !important;
+}
+
+.fs9{
+  font-size: 9px !important;
+}
+
+.chartWidth{
+  width: 100% !important;
 }
 
 .fs20 {
