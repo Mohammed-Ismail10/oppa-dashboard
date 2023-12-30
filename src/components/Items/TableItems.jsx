@@ -237,7 +237,6 @@ export default function TableItems() {
                 classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
                 selectRow={selectRow}
                 rowClasses={`${style.rowShadow} `}
-                wrapperClasses="table-responsive"
               />
             </div>
 

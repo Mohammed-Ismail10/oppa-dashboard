@@ -42,7 +42,7 @@ export default function Home() {
     },
     data: [{
       type: "line",
-      toolTipContent: "{y} users :{x} days",
+      toolTipContent: "{y} مستخدمين :{x} ايام",
       dataPoints: [
         { x: 0, y: 0 },
         { x: 10, y: 20 },
@@ -60,14 +60,14 @@ export default function Home() {
     animationEnabled: true,
     theme: "light2", // "light1", "dark1", "dark2"
     title: {
-      text: "المستخدمين",
+      text: "الغرف",
       fontSize: 30,
       fontColor: "#9A9A9A",
       fontWeight: "bold",
       horizontalAlign: "right",
     },
     axisY: {
-      title: "المستخدمين",
+      title: "الغرف",
       titleFontColor: "black",
       titleFontSize: 20,
       titleFontWeight: "bold",
@@ -85,16 +85,16 @@ export default function Home() {
     },
     data: [{
       type: "line",
-      toolTipContent: "{y} users :{x} days",
+      toolTipContent: "{y} غرف :{x} ايام",
       dataPoints: [
         { x: 0, y: 0 },
-        { x: 10, y: 20 },
-        { x: 70, y: 40 },
-        { x: 140, y: 64 },
-        { x: 210, y: 62 },
-        { x: 370, y: 64 },
-        { x: 350, y: 30 },
-        { x: 460, y: 60 },
+        { x: 30, y: 100 },
+        { x: 60, y: 200 },
+        { x: 90, y: 300 },
+        { x: 120, y: 450 },
+        { x: 140, y: 600 },
+        { x: 180, y: 1000 },
+        { x: 460, y: 1500 },
       ]
     }],
     height: 300
@@ -103,14 +103,14 @@ export default function Home() {
     animationEnabled: true,
     theme: "light2", // "light1", "dark1", "dark2"
     title: {
-      text: "المستخدمين",
+      text: "الكوينز",
       fontSize: 30,
       fontColor: "#9A9A9A",
       fontWeight: "bold",
       horizontalAlign: "right",
     },
     axisY: {
-      title: "المستخدمين",
+      title: "الكوينز",
       titleFontColor: "black",
       titleFontSize: 20,
       titleFontWeight: "bold",
@@ -128,7 +128,7 @@ export default function Home() {
     },
     data: [{
       type: "line",
-      toolTipContent: "{y} users :{x} days",
+      toolTipContent: "{y} كوينز :{x} ايام",
       dataPoints: [
         { x: 0, y: 0 },
         { x: 10, y: 20 },
@@ -146,14 +146,14 @@ export default function Home() {
     animationEnabled: true,
     theme: "light2", // "light1", "dark1", "dark2"
     title: {
-      text: "المستخدمين",
+      text: "المباع VIP الــ ",
       fontSize: 30,
       fontColor: "#9A9A9A",
       fontWeight: "bold",
       horizontalAlign: "right",
     },
     axisY: {
-      title: "المستخدمين",
+      title: "VIP",
       titleFontColor: "black",
       titleFontSize: 20,
       titleFontWeight: "bold",
@@ -171,7 +171,7 @@ export default function Home() {
     },
     data: [{
       type: "line",
-      toolTipContent: "{y} users :{x} days",
+      toolTipContent: "{y} VIP :{x} ايام",
       dataPoints: [
         { x: 0, y: 0 },
         { x: 10, y: 20 },
@@ -204,7 +204,7 @@ export default function Home() {
         </div>
 
 
-        <div className="row">
+        <div className={`row `}>
           <div className="col-6 my-4 px-4">
             <div className={`${style.roundedChart}`}>
               <CanvasJSChart options={options1} />

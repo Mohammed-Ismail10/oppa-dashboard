@@ -23,9 +23,10 @@ export default function Layout() {
             </div>}
 
 
-            <div className={`${pathname == '/login' ? 'col-xxl-12 col-lg-12' : 'col-xxl-10 col-lg-9'} overflow-scroll h-100 bg-success`}>
+            <div className={`${pathname == '/login' ? 'col-xxl-12 col-lg-12' : 'col-xxl-10 col-lg-9'}`}>
               <Outlet />
             </div>
+
 
           </div>
         </div>
