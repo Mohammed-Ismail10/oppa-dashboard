@@ -13,7 +13,6 @@ import dollar from '../../Assets/Images/dollarC.png'
 // For column checkbox
 const selectRow = {
   mode: 'checkbox',
-  // clickToSelect: true,
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
     <div className="border badge p-0">
       <input
@@ -24,7 +23,7 @@ const selectRow = {
         }}
         {...rest}
 
-        onChange={(e) => console.log(e.target)}
+        onChange={(e) => e}
       />
       <span className="py-2 badge text-main rounded fs15 border">
         #
@@ -35,7 +34,7 @@ const selectRow = {
     <>
       {/* {console.log('rest: ', rest)} */}
       <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
-        onChange={(e) => console.log(e.target.checked)} />
+        onChange={(e) => e} />
       <span className='text-main fs15 py-'>{rest.rowIndex + 1}</span>
     </>
   ),
@@ -43,11 +42,7 @@ const selectRow = {
 };
 
 
-// const rows = [
-//   { id: 1, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
-//   { id: 2, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'غير نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
-//   { id: 3, title_ar: 'سيارة', getGift: 'شراء', gift_type: 'هدية دخول خاصة', price: 10000, active: 'غير نشيط', image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", created_at: '7 أيام' },
-// ];
+
 
 
 
@@ -99,7 +94,7 @@ export default function TableItems() {
     {
       dataField: 'active', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
         حالة الهدايا
       </span>,
@@ -169,9 +164,12 @@ export default function TableItems() {
 
 
 
-  // ${baseUrl}/gifts/dashboard?limit=9&page=${page}
+  let [limit, setLimit] = useState(10);
+
+
+
   function getItem() {
-    return axios.get(`${Url}/gifts/dashboard?limit=20&page=${currentPage}`);
+    return axios.get(`${Url}/gifts/dashboard?limit=${limit}&page=${currentPage}`);
   }
   let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
     cacheTime: 60000,
@@ -254,12 +252,12 @@ export default function TableItems() {
               <div className='mx-2'>
                 <Dropdown>
                   <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                    30
+                    {limit}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item >25</Dropdown.Item>
-                    <Dropdown.Item >20</Dropdown.Item>
-                    <Dropdown.Item >10</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { limit = 30; setLimit(limit); refetch() }}>30</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { limit = 20; setLimit(limit); refetch() }}>20</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { limit = 10; setLimit(limit); refetch() }}>10</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>

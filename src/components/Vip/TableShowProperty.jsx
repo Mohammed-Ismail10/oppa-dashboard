@@ -177,7 +177,7 @@ export default function TableShowProperty() {
 
   return (
     <>
-      <div className={`${style.heightItems} d-flex flex-column justify-content-between`}>
+      <div className={` d-flex flex-column justify-content-between h-100`}>
 
         {/* table */}
         {/* {isLoading ? <></> :

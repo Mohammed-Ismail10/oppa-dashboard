@@ -165,9 +165,9 @@ export default function Coins() {
 
 
         {/* nav */}
-        <div className='pt-5 mt-3 ps-3'>
-          <Navbar>
-            <Nav className="w-100 pe-2 flex-wrap ps-xl- ps-4">
+        <div className='pt-5 mt-3 ms-3 ms-xxl-4'>
+          <Navbar className={`justify-content-between align-items-start ${style.navWidth}`}>
+            <Nav className="flex-wrap">
               <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover}  mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
@@ -185,8 +185,8 @@ export default function Coins() {
                 <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
             </Nav>
-            <Nav className={`${style.flexNone} align-items-start mb-5  mb-xl-0 pb-1 pb-xl-0 ms-xxl-auto`}>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
+            <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>

@@ -168,7 +168,7 @@ export default function TableEnableFeature() {
 
       {/* table */}
       {isLoading ? <></> :
-        <div className={`${style.heightItems} d-flex flex-column justify-content-between`}>
+        <div className={`d-flex flex-column justify-content-between h-100`}>
 
           <div className={`${style.heightTable} overflow-auto`}>
             <BootstrapTable

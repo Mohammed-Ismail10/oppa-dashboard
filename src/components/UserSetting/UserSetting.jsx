@@ -8,6 +8,8 @@ export default function UserSetting() {
   let navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
+    // let data = new FormData();
+    // data.append('image', values.image);
     console.log(values);
     navigate('/');
   }
@@ -47,8 +49,8 @@ export default function UserSetting() {
 
   return (
     <>
-      <div className={`container-fluid ${style.heightAddPro} pt-5 h-100 d-flex aligin-items-end bg-inf mt-`}>
-        <form onSubmit={formik.handleSubmit} className='w-75 mx-auto d-flex flex-column justify-content-between h-100 mt- pt-5 bg-dange'>
+      <div className={`container-fluid ${style.heightAddPro} pt-5 h-100`}>
+        <form onSubmit={formik.handleSubmit} className='w-75 mx-auto d-flex flex-column justify-content-between h-100 pt-5'>
           <div>
             {/* upload image */}
             <div className='d-flex justify-content-start'>
@@ -62,7 +64,7 @@ export default function UserSetting() {
                     onChange={(event) => {
                       formik.setFieldValue('image', event.currentTarget.files[0]);
                       setUploadImage(true);
-                      console.log(event.currentTarget.files[0])
+                      // console.log(event.currentTarget.files[0])
                     }}
                     name='image' type="file" accept='image/*' id="addImage" />
                 </label>

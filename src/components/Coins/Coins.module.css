@@ -130,3 +130,11 @@
     border-collapse: separate !important;
   }
 }
+
+
+
+@media screen and (min-width: 1400px) and (max-width: 1480px) {
+  .navWidth {
+    margin-right: 1rem !important;
+  }
+}
