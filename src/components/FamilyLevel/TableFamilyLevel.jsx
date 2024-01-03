@@ -25,7 +25,7 @@ const selectRow = {
         }}
         {...rest}
 
-        onChange={(e) => console.log(e.target)}
+        onChange={(e) => e}
       />
       <span className="py-2 badge text-main rounded fs15 border">
         #
@@ -34,9 +34,8 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
-      {/* {console.log('rest: ', rest)} */}
       <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
-        onChange={(e) => console.log(e.target.checked)} />
+        onChange={(e) => e} />
       <span className='text-main fs15 py-'>{rest.rowIndex + 1}</span>
     </>
   ),

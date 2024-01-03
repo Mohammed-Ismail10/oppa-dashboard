@@ -27,7 +27,7 @@ const selectRow = {
           if (input) input.indeterminate = indeterminate;
         }}
         {...rest}
-        onChange={(e) => console.log(e.target)}
+        onChange={(e) => e}
       />
       <span className="py-2 badge text-main rounded fs13 border">
         #
@@ -37,7 +37,7 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
-      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => console.log(e.target)} />
+      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => e} />
       {rest.rowIndex + 1}
     </>
   )
