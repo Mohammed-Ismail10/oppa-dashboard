@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap");
+
 .fs5 {
   font-size: 5px !important;
 }
@@ -9,6 +11,18 @@
   color: #ed785e !important;
 }
 
-.bgOrange{
+.bgOrange {
   background-color: #fbe4df !important;
+}
+
+.alertWidth {
+  width: 93% !important;
+}
+
+.fontCairo {
+  font-family: "Cairo", sans-serif !important;
+}
+
+.colorUpdate {
+  color: #6c6685 !important;
 }

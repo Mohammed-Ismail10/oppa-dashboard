@@ -36,7 +36,7 @@ export default function SideBar() {
             <div className='text-center mt-3'>
               <img className='h-50 w-50' src={image} alt="personal img" loading='lazy' />
             </div>
-            <div className='d-flex justify-content-around align-items-center'>
+            <div className='d-flex justify-content-around align-items-center pt-2'>
               <span></span>
               <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
               <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
@@ -45,7 +45,7 @@ export default function SideBar() {
 
 
           <ul className='list-unstyled mb-5 pb-5 pe-5'>
-            <div className="accordion accordion-flush" id="accordionFlushExample">
+            <div className="accordion accordion-flush mb-5 pb-2" id="accordionFlushExample">
 
 
               <div className='py-2 mt-1'>
