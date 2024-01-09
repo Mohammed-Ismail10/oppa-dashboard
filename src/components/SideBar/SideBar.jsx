@@ -29,7 +29,7 @@ export default function SideBar() {
   return (
     <>
 
-      <div className="h-100 shadow d-flex flex-column justify-content-between pt-3 position-fixed">
+      <div className="bottom-0 top-0 shadow d-flex flex-column justify-content-between pt-3 position-fixed">
 
 
         <div className='pb-2'>

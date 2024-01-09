@@ -291,9 +291,6 @@ export default function Customers() {
 
 
 
-
-
-
             {/* pagination */}
             <div className='d-flex justify-content-center align-items-center '>
               <div className='mx-2'>

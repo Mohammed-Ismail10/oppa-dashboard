@@ -166,7 +166,7 @@ export default function Otp() {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
-  console.log(data?.data.data)
+  // console.log(data?.data.data)
 
   async function updateActive(id) {
     let { data } = await axios.patch(`${Url}/admins/dashboard/${id}`);
@@ -256,11 +256,6 @@ export default function Otp() {
                 rowClasses={`${style.rowShadow} `}
               />
             </div>
-
-
-
-
-
 
 
 

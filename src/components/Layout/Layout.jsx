@@ -18,7 +18,7 @@ export default function Layout() {
         <div className="container-fluid ps-0 h-100">
           <div className="d-flex h-100">
 
-            {pathname == '/login' ? null : <div className="col-xxl-2 col-lg-3 vh-100">
+            {pathname == '/login' ? null : <div className="col-xxl-2 col-lg-3 vh-10">
               <SideBar />
             </div>}
 
