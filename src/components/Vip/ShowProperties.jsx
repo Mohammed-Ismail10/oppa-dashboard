@@ -39,10 +39,10 @@ export default function ShowProperties() {
     <div className={`${style.heightItems}`}>
 
       {/* nav links of show property */}
-      <div className='pt-5 mt-3 ms-3 ms-xxl-4'>
-        <Navbar className={`justify-content-between align-items-start ${style.navWidth}`}>
+      <div className='pt-5 mt-3 ms-4'>
+        <Navbar className='justify-content-between align-items-start'>
           <Nav className="flex-wrap">
-            <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+            <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
               <i className="bi bi-plus-circle me-2"></i>
               إضافة خاصية
             </NavLink>

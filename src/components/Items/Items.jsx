@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import ModalChange from '../ModalChange/ModalChange.jsx';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { handleShowChangeId, handleShowDelete, handleShowUserQuery } from '../Redux/ModalsSlice.js';
@@ -10,8 +10,9 @@ import style from './Items.module.css';
 import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 export default function Items() {
-  let { showChangeId, showDelete,showUserQuery } = useSelector(({ modals }) => modals);
+  let { showChangeId, showDelete, showUserQuery } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
+  let { pathname } = useLocation();
 
 
 
@@ -21,33 +22,36 @@ export default function Items() {
       <div className={`${style.heightItems}`}>
 
         {/* items nav links */}
-        <div className='pt-5 mt-3 ps-3'>
-          <Navbar className=''>
-              <Nav className="w-100 pe-2 flex-wrap">
-              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
+        <div className='pt-5 mt-3 ms-4'>
+          <Navbar className={`justify-content-between align-items-start`}>
+            <Nav className="flex-wrap">
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-0 me-xl-2 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-                <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  سجل الهدايا
-                </NavLink>
-                <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  تغير المعرف (ID)
-                </NavLink>
-                <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
-                  <i className="bi bi-funnel me-2"></i>
-                  فلتر
-                </NavLink>
-                <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover}  mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-                  <i className="bi bi-plus-circle me-2"></i>
-                  إضافة
-                </NavLink>
-                <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-0 px-3 me-xl-4 rounded-3 ms-auto border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white`}>
-                  مسح الكل
-                </NavLink>
-              </Nav>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                سجل الهدايا
+              </NavLink>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                تغير المعرف (ID)
+              </NavLink>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                <i className="bi bi-funnel me-2"></i>
+                فلتر
+              </NavLink>
+              <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover}  mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
+                <i className="bi bi-plus-circle me-2"></i>
+                إضافة
+              </NavLink>
+
+            </Nav>
+            {pathname == '/gift/items/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
+                مسح الكل
+              </NavLink>
+            </Nav>}
           </Navbar>
         </div>
 
@@ -56,7 +60,7 @@ export default function Items() {
           <Outlet />
         </div>
 
-        {/* modals: first => (تغير المعرف). second => (مسح الكل). */}
+        {/* modals: first => (تغير المعرف). second => (مسح الكل). 3 => استعلام المستخدم*/}
         <ModalChange />
         <ModalDelete />
         <ModalUserQuery />

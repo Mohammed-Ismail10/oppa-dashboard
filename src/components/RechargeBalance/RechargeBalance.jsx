@@ -196,18 +196,17 @@ export default function RechargeBalance() {
       <div className={`${style.heightItems}`}>
 
         {/* nav */}
-        <div className='pt-5 mt-3 ps-3'>
+        <div className='pt-5 mt-3 ms-4'>
           <Navbar>
-            <Nav className="w-100 pe-2">
-              <NavLink onClick={() => dispatch(handleShowAddBalance())} className={`${style.shadowBtn} ${style.addItemHover}  me-3 border-0 btn fs15 text-main fw-bold nav-link ${showAddBalance ? 'addActive' : ''} bg-white`}>
+            <Nav className="">
+              <NavLink onClick={() => dispatch(handleShowAddBalance())} className={`${style.shadowBtn} ${style.addItemHover} me-2 border-0 btn fs15 text-main fw-bold nav-link ${showAddBalance ? 'addActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة الرصيد
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-
             </Nav>
           </Navbar>
         </div>
@@ -225,7 +224,7 @@ export default function RechargeBalance() {
                 data={rows}
                 columns={columns}
                 bordered={false}
-                classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+                classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-4`}
                 selectRow={selectRow}
                 rowClasses={`${style.rowShadow} `}
               />

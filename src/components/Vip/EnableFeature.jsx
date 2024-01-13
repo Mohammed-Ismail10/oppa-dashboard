@@ -40,10 +40,10 @@ export default function EnableFeature() {
       <div className={`${style.heightItems}`}>
 
         {/* Nav links for Vip enable feature */}
-        <div className='pt-5 mt-3 ms-3 ms-xxl-4'>
-          <Navbar className={`justify-content-between align-items-start ${style.navWidth}`}>
+        <div className='pt-5 mt-3 ms-4'>
+          <Navbar className='justify-content-between align-items-start'>
             <Nav className="flex-wrap">
-              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-0 me-xl-2 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>

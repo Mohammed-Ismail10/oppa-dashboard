@@ -206,22 +206,22 @@ export default function Target() {
 
 
         {/* nav */}
-        <div className='pt-5 mt-3 ms-3 ms-xxl-4'>
-          <Navbar className={`justify-content-between align-items-start ${style.navWidth}`}>
+        <div className='pt-5 mt-3 ms-4'>
+          <Navbar className={`justify-content-between align-items-start`}>
             <Nav className="flex-wrap">
-              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover}  mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-0 me-xl-2 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover}  mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn}  mt-3 mt-xxl-0 mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mt-3 mt-xxl-0 mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`${style.searchWidth} position-relative mt-3 mt-xl- mt-xxl-0`}>
+              <div className={`${style.searchWidth} position-relative mt-3 mt-xxl-0 ms-2`}>
                 <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
                 <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
@@ -245,7 +245,7 @@ export default function Target() {
                 data={rows}
                 columns={columns}
                 bordered={false}
-                classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+                classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-4`}
                 selectRow={selectRow}
                 rowClasses={`${style.rowShadow} `}
               />

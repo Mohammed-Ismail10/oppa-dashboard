@@ -201,37 +201,37 @@ export default function Otp() {
     <>
       <div className={`${style.heightItems}`}>
         {/* moderators nav links */}
-        <div className='pt-5 mt-3 ps-3'>
-          <Navbar >
-            <Nav className="pe-2 flex-wrap">
-              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
+        <div className='pt-5 mt-3 ms-4'>
+          <Navbar className={`justify-content-between align-items-start`}>
+            <Nav className="flex-wrap">
+              <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} me-2 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إستعلام المستخدم
               </NavLink>
-              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 سجل الهدايا
               </NavLink>
-              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
+              <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تغير المعرف (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} ${style.itemsHover} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 تحديد شارة (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-1 mx-xl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>
-              <div className={`${style.searchWidth} position-relative mt-3 mt-xl- mt-xxl-0`}>
+              <div className={`${style.searchWidth} position-relative mt-3 mt-xxl-0 ms-2`}>
                 <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
                 <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-0 bg-search border-0 ps-5`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>
             </Nav>
 
-            <Nav className={`${style.flexNone} align-items-start mb-5 mb-xxl-1 pb-1 pb-xxl-0 ms-xxl-auto`}>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-1 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
+            <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>
@@ -251,7 +251,7 @@ export default function Otp() {
                 data={data?.data?.data}
                 columns={columns}
                 bordered={false}
-                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-4`}
                 selectRow={selectRow}
                 rowClasses={`${style.rowShadow} `}
               />

@@ -1,7 +1,3 @@
-/* .fs15 {
-  font-size: 15px !important;
-} */
-
 .accordionN {
   border: none !important;
   box-shadow: none !important;
@@ -27,4 +23,9 @@
 
 .logoutImg{
   content: url('../../Assets/Images/logout.png');
+}
+
+
+.sideBarWidth{
+  width: inherit !important;
 }

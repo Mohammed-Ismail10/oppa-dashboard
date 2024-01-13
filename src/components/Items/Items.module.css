@@ -115,3 +115,7 @@
     border-collapse: separate !important;
   }
 }
+
+.flexNone {
+  flex: none !important;
+}

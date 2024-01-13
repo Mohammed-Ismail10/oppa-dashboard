@@ -29,20 +29,22 @@ export default function SideBar() {
   return (
     <>
 
-      <div className="bottom-0 top-0 shadow d-flex flex-column justify-content-between pt-3 position-fixed">
+      <div className={`bottom-0 top-0 shadow d-flex flex-column justify-content-between pt-3 position-fixed ${style.sideBarWidth}`}>
 
 
         <div className='pb-2'>
-            <div className='text-center mt-3'>
-              <img className='h-50 w-50' src={image} alt="personal img" loading='lazy' />
-            </div>
-            <div className='d-flex justify-content-around align-items-center pt-2'>
-              <span></span>
-              <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
-              <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
-            </div>
+          <div className='text-center mt-3'>
+            <img className='h-50 w-50' src={image} alt="personal img" loading='lazy' />
+          </div>
+          <div className='d-flex justify-content-around align-items-center pt-2'>
+            <span></span>
+            <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
+            <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
+          </div>
         </div>
 
+
+        <div className='overflow-auto'>
 
           <ul className='list-unstyled mb-5 pb-5 pe-5'>
             <div className="accordion accordion-flush mb-5 pb-2" id="accordionFlushExample">
@@ -108,6 +110,7 @@ export default function SideBar() {
                       <li className={`${style.textSub} py-1`}>
                         <NavLink to={'/app/exchangecurrencies'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">تبديل العملات</NavLink>
                       </li>
+
                       <div className='accordion accordion-flush py-2 pe-0 d-flex' id="accordionFlushExample">
                         <div className='accordion-item'>
                           <h4 className='accordion-header'>
@@ -121,11 +124,39 @@ export default function SideBar() {
                                 <li className={`${style.textSub} py-1`}>
                                   <NavLink to={'/app/rooms/backgrounds'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الخلفيات</NavLink>
                                 </li>
+                                <li className={`${style.textSub} py-1`}>
+                                  <NavLink to={'/app/rooms/emoji'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الرموز التعبيرية</NavLink>
+                                </li>
+                                <li className={`${style.textSub} py-1`}>
+                                  <NavLink to={'/app/rooms/rooms'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الغرف</NavLink>
+                                </li>
+                                <li className={`${style.textSub} py-1`}>
+                                  <NavLink to={'/app/rooms/gifts'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">الهدايا</NavLink>
+                                </li>
                               </ul>
                             </div>
                           </div>
                         </div>
                       </div>
+
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/app/transfers'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">التحويلات</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/app/families'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">العائلات</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/app/listlevels'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">قائمة المستويات</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/app/blacklist'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">القائمة السوداء</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/app/phonecodes'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">اكواد الهواتف</NavLink>
+                      </li>
+                      <li className={`${style.textSub} py-1`}>
+                        <NavLink to={'/app/store'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">المتجر</NavLink>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -196,6 +227,8 @@ export default function SideBar() {
 
             </div>
           </ul>
+
+        </div>
 
 
         {/* logout */}

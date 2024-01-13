@@ -216,7 +216,6 @@ export default function TableItems() {
     <>
 
       {/* table */}
-      {/* Check if data is loading */}
       {isLoading ? (
         <></>
       ) : (
@@ -231,7 +230,7 @@ export default function TableItems() {
                 data={data?.data?.data}
                 columns={columns}
                 bordered={false}
-                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+                classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-4`}
                 selectRow={selectRow}
                 rowClasses={`${style.rowShadow} `}
               />
@@ -244,7 +243,7 @@ export default function TableItems() {
                 <span className='text-main fs15'>الصفحة</span>
               </div>
               <div className='mx-2 d-flex align-items-center'>
-                <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+                <i onClick={() => { increase(); limit = 10; setLimit(10); }} className="fa-solid fa-caret-right curser-pointer"></i>
                 <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
                 <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
               </div>

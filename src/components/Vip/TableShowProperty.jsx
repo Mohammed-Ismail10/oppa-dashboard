@@ -188,7 +188,7 @@ export default function TableShowProperty() {
             data={rows}
             columns={columns}
             bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidthShowProperties} ms-3`}
+            classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidthShowProperties} ms-4`}
             selectRow={selectRow}
             rowClasses={`${style.rowShadow} `}
           />

@@ -179,7 +179,7 @@ export default function TableVip() {
               data={rows}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-3`}
+              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-4`}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />

@@ -176,7 +176,7 @@ export default function TableEnableFeature() {
               data={rows}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthEnable} ms-3`}
+              classes={`${style.tableHeader} text-center table-borderless my-4 ${style.tableWidthEnable} ms-4`}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />

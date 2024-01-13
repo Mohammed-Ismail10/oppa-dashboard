@@ -14,16 +14,16 @@ export default function Layout() {
 
   return (
     <>
-      <section className='h-100'>
-        <div className="container-fluid ps-0 h-100">
-          <div className="d-flex h-100">
+      <section className=''>
+        <div className="container-fluid ps-0">
+          <div className="row g-0">
 
-            {pathname == '/login' ? null : <div className="col-xxl-2 col-lg-3 vh-10">
+            {pathname == '/login' ? null : <div className="col-xxl-2 col-lg-3" >
               <SideBar />
             </div>}
 
 
-            <div className={`${pathname == '/login' ? 'col-lg-12' : 'col-xxl-10 col-lg-9'} vh-100`}>
+            <div className={`${pathname == '/login' ? 'col-lg-12' : 'col-xxl-10 col-lg-9 '} vh-100 `}>
               <Outlet />
             </div>
 

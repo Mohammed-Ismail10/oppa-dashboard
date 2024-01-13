@@ -174,7 +174,7 @@ export default function TableSilverCoins() {
               data={rows}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-3`}
+              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-4`}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />

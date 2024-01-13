@@ -44,6 +44,15 @@ import { useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import InverseProtected from './components/InverseProtected/InverseProtected.jsx';
+import Emoji from './components/Emoji/Emoji.jsx';
+import Rooms from './components/Rooms/Rooms.jsx';
+import Gifts from './components/Gifts/Gifts.jsx';
+import Transfers from './components/Transfers/Transfers.jsx';
+import Families from './components/Families/Families.jsx';
+import ListLevels from './components/ListLevels/ListLevels.jsx';
+import BlackList from './components/BlackList/BlackList.jsx';
+import PhoneCodes from './components/PhoneCodes/PhoneCodes.jsx';
+import Store from './components/Store/Store.jsx';
 
 
 
@@ -57,14 +66,7 @@ let queryClient = new QueryClient();
 function App() {
 
 
-  // const [userToken, setUserToken] = useState(null);
 
-  // function saveToken() {
-  //   let encode = localStorage.getItem('accessToken');
-  //   let decode = jwtDecode(encode);
-  //   setUserToken(decode);
-  //   console.log(userToken)
-  // }
 
 
 
@@ -123,6 +125,15 @@ function App() {
         },
         { path: 'pages', element: <ProtectedRoute><Pages /></ProtectedRoute> },
         { path: 'notifications', element: <ProtectedRoute><Notifications /></ProtectedRoute> },
+        { path: '/app/rooms/emoji', element: <ProtectedRoute><Emoji /></ProtectedRoute> },
+        { path: '/app/rooms/rooms', element: <ProtectedRoute><Rooms /></ProtectedRoute> },
+        { path: '/app/rooms/gifts', element: <ProtectedRoute><Gifts /></ProtectedRoute> },
+        { path: '/app/transfers', element: <ProtectedRoute><Transfers /></ProtectedRoute> },
+        { path: '/app/families', element: <ProtectedRoute><Families /></ProtectedRoute> },
+        { path: '/app/listlevels', element: <ProtectedRoute><ListLevels /></ProtectedRoute> },
+        { path: '/app/blacklist', element: <ProtectedRoute><BlackList /></ProtectedRoute> },
+        { path: '/app/phonecodes', element: <ProtectedRoute><PhoneCodes /></ProtectedRoute> },
+        { path: '/app/store', element: <ProtectedRoute><Store /></ProtectedRoute> },
         { path: 'ay', element: <MyComponent /> },
       ]
     }
