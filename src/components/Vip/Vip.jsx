@@ -1,5 +1,4 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,7 +44,7 @@ export default function Vip() {
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة VIP
               </NavLink>
-              {pathname == '/gift/vip/add' ? null : <>
+              {pathname === '/gift/vip/add' ? null : <>
                 <NavLink to={'/gift/vip/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-1 mx-xxl-2 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
                   <i className="bi bi-plus-circle me-2"></i>
                   عرض الخصائص
@@ -57,7 +56,7 @@ export default function Vip() {
               </>}
 
             </Nav>
-            {pathname == '/gift/vip/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+            {pathname === '/gift/vip/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
               <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>

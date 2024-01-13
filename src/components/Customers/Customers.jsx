@@ -10,7 +10,7 @@ import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowEditRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { Url, baseUrl } from '../../helpers/constant.js';
+import { Url } from '../../helpers/constant.js';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
@@ -116,8 +116,8 @@ export default function Customers() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) => data?.data?.data.map((customer) => {
-        if (id == customer.id) {
-          if (customer.suspend == 1) {
+        if (id === customer.id) {
+          if (customer.suspend === 1) {
             return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
           }
           else {
@@ -181,7 +181,7 @@ export default function Customers() {
   function getCustomers() {
     return axios.get(`${Url}/users/dashboard?limit=20&page=${currentPage}`);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('customer', getCustomers, {
+  let { data, isLoading, refetch } = useQuery('customer', getCustomers, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
@@ -328,102 +328,3 @@ export default function Customers() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <div className='pt-4 pb-3'>
-          <Table hover className='text-center table-borderless'>
-            <thead>
-              <tr>
-                <th className='p-0 '>
-                  <div className="border badge p-0">
-                    <input className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none' type="checkbox" />
-                    <span className="py-2 badge text-main rounded fs13 border">
-                      #
-                    </span>
-                  </div>
-                </th>
-
-                <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
-                  <i className="fa-solid fa-user me-2"></i>
-                  الإسم
-                </span></th>
-                <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
-                  <i className="bi bi-telephone-plus me-2"></i>
-                  رقم الهاتف
-                </span></th>
-                <th className='p-0 '><span className="w-100 py-2 badge text-main rounded fs13 border">
-                  <i className="fa-regular fa-envelope-open me-2"></i>
-                  البريد الإلكتروني
-                </span></th>
-                <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
-                  <i className="bi bi-exclamation-circle me-2"></i>
-                  حالة الحساب
-                </span></th>
-                <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
-                  <i className="fa-regular fa-clock me-2"></i>
-                  مدة الإيقاف
-                </span></th>
-                <th className='p-0 '><span className="w-100 py-2 badge text-main rounded fs13 border">
-                  <i className="fa-regular fa-calendar me-2"></i>
-                  تاريخ التسجيل
-                </span></th>
-                <th className='p-0 '><span className=" py-2 badge text-main rounded fs13 border">
-                  <i className="fa-solid fa-pen me-2"></i>
-                  التعديل والحذف والطباعة
-                </span></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td className='text-main fs15'>
-                  <input className='form-check-input me-3 shadow-none border-1 border-dark-subtle' type="checkbox" />
-                  1
-                </td>
-                <td className='text-main fs15'>يوسف رجب</td>
-                <td className='text-main fs15'>201234567890+</td>
-                <td className='text-main fs15'>yussif.ragab5522@gmail.com</td>
-                <td className='text-main fs15'><span className='badge bg-green py-2 px-4 fs12 fw-bold'>نشيط</span></td>
-                <td className='text-main fs15'><span className='badge bg-red py-2 px-4 fs12 fw-bold'>غير محددة</span></td>
-                <td dir='ltr' className='text-main fs15'>2023-11-21 T 08:13:16</td>
-                <td className='text-main fs15'>
-                  <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
-                  <i className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
-                  <i className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
-                </td>
-
-              </tr>
-            </tbody>
-          </Table>
-        </div> */}

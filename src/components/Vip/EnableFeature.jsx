@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
+import React from 'react'
+import { handleShowChangeId, handleShowDelete, handleShowUserQuery } from '../Redux/ModalsSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
-import Dropdown from 'react-bootstrap/Dropdown';
 import style from './Vip.module.css';
-import BootstrapTable from 'react-bootstrap-table-next';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import { useQuery } from 'react-query';
-import { baseUrl } from '../../helpers/constant.js';
 import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
 
@@ -76,7 +71,7 @@ export default function EnableFeature() {
                 إضافة تمكين خاصية
               </NavLink>
             </Nav>
-            {pathname == '/gift/vip/enablefeature/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+            {pathname === '/gift/vip/enablefeature/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
               <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>

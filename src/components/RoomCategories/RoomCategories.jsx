@@ -5,7 +5,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleShowDelete, handleShowDeleteRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
@@ -109,8 +108,8 @@ export default function RoomCategories() {
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
         data?.data?.data.map((room) => {
-          if (id == room.id) {
-            if (room.active == 1) {
+          if (id === room.id) {
+            if (room.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
             }
             else {
@@ -155,7 +154,7 @@ export default function RoomCategories() {
   function getRoomCategories() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('category', getRoomCategories, {
+  let { data, isLoading, refetch } = useQuery('category', getRoomCategories, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

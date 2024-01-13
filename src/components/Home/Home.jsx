@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from './Home.module.css';
 import Plot from 'react-plotly.js';
 import CanvasJSReact from '@canvasjs/react-charts';
@@ -121,7 +121,7 @@ export default function Home() {
 
   return (
     <>
-      <div className='container-xxl container-fluid'>
+      <div className='ms-4'>
 
         <div className={`position-relative pt-5 mt-3 mb-4 ps-4 w-50`}>
           <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
@@ -129,20 +129,22 @@ export default function Home() {
         </div>
 
 
-        <div className={`row `}>
-          <div className="col-12 col-xl-6 my-4 pe-4 ps-4 ps-xxl-5">
-            <div className={`${style.roundedChart}`}>
+        <div className='row '>
+
+          <div className="col-12 col-xl-6 my-4">
+            <div className={`${style.roundedChart} mx-4`}>
               <CanvasJSChart options={options1} />
             </div>
           </div>
-          <div className="col-12 col-xl-6 my-4  pe-4 ps-4 ps-xxl-5">
-            <div className={`${style.roundedChart}`}>
+
+          <div className="col-12 col-xl-6 my-4 ">
+            <div className={`${style.roundedChart} mx-4`}>
               <CanvasJSChart options={options2} />
             </div>
           </div>
 
-          <div className="col-12 col-xl-6 my-4 pe-4 ps-4 ps-xxl-5" >
-            <div className={`${style.roundedChart} pt-3 position-relative `}>
+          <div className="col-12 col-xl-6 my-4" >
+            <div className={`${style.roundedChart} pt-3 position-relative mx-4`}>
 
               <div className={`${style.headerChart} mb-2 w-100 d-flex justify-content-between`}>
                 <span className='fs15 fw-medium title-chart'>الــ VIP المباع</span>
@@ -160,8 +162,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="col-12 col-xl-6 my-4 pe-4 ps-4 ps-xxl-5">
-            <div className={`${style.roundedChart} bg-warnin pt-3`}>
+          <div className="col-12 col-xl-6 my-4">
+            <div className={`${style.roundedChart} position-relative pt-3 mx-4`}>
 
               <div className={`${style.headerChart} mb-2 w-100 d-flex justify-content-between`}>
                 <span className='fs15 fw-medium title-chart'>الــ VIP المباع</span>

@@ -6,7 +6,6 @@ import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { baseUrl } from '../../helpers/constant.js';
 
 
 // For column checkbox
@@ -131,7 +130,7 @@ export default function TableVip() {
   function getVip() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('vip', getVip, {
+  let { data, isLoading, refetch } = useQuery('vip', getVip, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
@@ -218,91 +217,3 @@ export default function TableVip() {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <div className='pt-4 pb-3'>
-        <Table hover className='text-center table-borderless'>
-          <thead>
-            <tr>
-              <th className='p-0 '>
-                <div className="border badge p-0">
-                  <input className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none' type="checkbox" />
-                  <span className={`py-2 badge text-main rounded fs13 border`}>
-                    #
-                  </span>
-                </div>
-              </th>
-
-              <th className='p-0'><span className=" py-2 badge text-main rounded fs13 border">
-                <i className="fa-solid fa-gift me-2"></i>
-                إسم الVIP
-              </span></th>
-              <th className='p-0'><span className=" py-2 badge text-main rounded fs13 border">
-                <i className="fa-solid fa-layer-group me-2"></i>
-                مستوى الVIP
-              </span></th>
-              <th className='p-0'><span className=" py-1 badge text-main rounded fs13 border">
-                <i className="fa-solid fa-dollar-sign me-1 fs12 rounded-circle border-1 border-dark border p-1 w-25 h-25"></i>
-                سعر الVIP
-              </span></th>
-              <th className='p-0'><span className=" py-2 badge text-main rounded fs13 border">
-                <i className="bi bi-file-image me-2"></i>
-                صورة الVIP
-              </span></th>
-              <th className='p-0'><span className=" py-2 badge text-main rounded fs13 border">
-                <i className="fa-regular fa-clock me-2"></i>
-                الوقت
-              </span></th>
-              <th className='p-0'><span className=" py-2 badge text-main rounded fs13 border">
-                <i className="fa-solid fa-pen me-2"></i>
-                التعديل والحذف والطباعة
-              </span></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td className='text-main fs15 px-0'>
-                <input className='form-check-input me-3 shadow-none border-1 border-dark-subtle' type="checkbox" />
-                1
-              </td>
-              <td className='text-main fs15 px-0'>سيارة</td>
-              <td className='text-main fs15 px-0'>شراء</td>
-              <td className='text-main fs15 px-0'>10000</td>
-              <td className='text-main fs15 px-0'><img src={image} alt="صور الهدايا" width={35} loading='lazy' /></td>
-              <td className='text-main fs15 px-0'>7 أيام</td>
-              <td className='text-main fs15 px-0'>
-                <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
-                <i className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
-                <i className="fa-regular fa-pen-to-square mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
-              </td>
-            </tr>
-
-          </tbody>
-        </Table>
-      </div> */}

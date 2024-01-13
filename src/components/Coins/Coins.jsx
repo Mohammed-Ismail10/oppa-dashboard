@@ -5,7 +5,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleShowDelete, handleShowDeleteRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
@@ -129,7 +128,7 @@ export default function Coins() {
   function getCoins() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('coins', getCoins, {
+  let { data, isLoading, refetch } = useQuery('coins', getCoins, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

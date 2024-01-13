@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from './Vip.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { handleShowDelete } from '../Redux/ModalsSlice.js';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
@@ -47,7 +47,7 @@ export default function ShowProperties() {
               إضافة خاصية
             </NavLink>
           </Nav>
-            {pathname == '/gift/vip/showproperties/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+            {pathname === '/gift/vip/showproperties/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
               <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>

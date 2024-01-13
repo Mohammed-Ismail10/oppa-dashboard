@@ -4,7 +4,7 @@ import style from './RechargeBalance.module.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowAddBalance, handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { handleShowAddBalance, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';

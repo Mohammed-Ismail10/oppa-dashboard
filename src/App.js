@@ -40,8 +40,6 @@ import AddSilverCoins from './components/SilverCoins/AddSilverCoins.jsx';
 import MyComponent from './components/compooo/MyComponent.jsx';
 import TableShowProperty from './components/Vip/TableShowProperty.jsx';
 import TableEnableFeature from './components/Vip/TableEnableFeature.jsx';
-import { useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import InverseProtected from './components/InverseProtected/InverseProtected.jsx';
 import Emoji from './components/Emoji/Emoji.jsx';

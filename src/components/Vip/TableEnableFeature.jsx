@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { handleShowChangeId, handleShowDelete, handleShowDeleteRow, handleShowUserQuery } from '../Redux/ModalsSlice.js';
-import { useDispatch, useSelector } from 'react-redux';
+import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { useDispatch } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import style from './Vip.module.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -78,8 +78,8 @@ export default function TableEnableFeature() {
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
         data?.data?.data.map((feature) => {
-          if (id == feature.id) {
-            if (feature.active == 1) {
+          if (id === feature.id) {
+            if (feature.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
             }
             else {
@@ -130,7 +130,7 @@ export default function TableEnableFeature() {
   function getFeature() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('feature', getFeature, {
+  let { data, isLoading, refetch } = useQuery('feature', getFeature, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

@@ -140,7 +140,7 @@ export default function TableFamilyLevel() {
   function getFamily() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('family', getFamily, {
+  let { data, isLoading, refetch } = useQuery('family', getFamily, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

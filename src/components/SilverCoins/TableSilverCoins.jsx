@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { Url, baseUrl } from '../../helpers/constant.js';
 import coins from '../../Assets/Images/coins.png';
 import layer from '../../Assets/Images/layers.png';
 
@@ -119,7 +118,7 @@ export default function TableSilverCoins() {
   function getSilverCoin() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('silverCoin', getSilverCoin, {
+  let { data, isLoading, refetch } = useQuery('silverCoin', getSilverCoin, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

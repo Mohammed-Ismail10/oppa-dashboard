@@ -1,17 +1,15 @@
 import image from '../../Assets/Images/Ellipse 2.png';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import style from './SideBar.module.css';
-import logoutIcon from '../../Assets/Images/logout.png';
 import home from '../../Assets/Images/home.png';
 import user from '../../Assets/Images/user.png';
 import allfiles from '../../Assets/Images/allfiles.png';
 import robot from '../../Assets/Images/robot1.png';
 import pages from '../../Assets/Images/pages.png';
 import notif from '../../Assets/Images/notif.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { handleShowLogOut } from '../Redux/ModalsSlice.js';
 import ModalLogout from '../ModalLogOut/ModalLogout.jsx';
-import { useEffect, useState } from 'react';
 
 
 

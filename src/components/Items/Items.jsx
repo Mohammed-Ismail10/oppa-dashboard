@@ -47,7 +47,7 @@ export default function Items() {
               </NavLink>
 
             </Nav>
-            {pathname == '/gift/items/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
+            {pathname === '/gift/items/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
               <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>

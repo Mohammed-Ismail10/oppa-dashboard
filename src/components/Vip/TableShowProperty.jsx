@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import style from './Vip.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { useDispatch } from 'react-redux';
+import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -86,8 +86,8 @@ export default function TableShowProperty() {
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
         data?.data?.data.map((pro) => {
-          if (id == pro.id) {
-            if (pro.active == 1) {
+          if (id === pro.id) {
+            if (pro.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
             }
             else {
@@ -139,7 +139,7 @@ export default function TableShowProperty() {
   function getProperty() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('property', getProperty, {
+  let { data, isLoading, refetch } = useQuery('property', getProperty, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
@@ -177,49 +177,51 @@ export default function TableShowProperty() {
 
   return (
     <>
-      <div className={` d-flex flex-column justify-content-between h-100`}>
 
-        {/* table */}
-        {/* {isLoading ? <></> :
-} */}
-        <div className={`${style.heightTable} overflow-auto`}>
-          <BootstrapTable
-            keyField="id"
-            data={rows}
-            columns={columns}
-            bordered={false}
-            classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidthShowProperties} ms-4`}
-            selectRow={selectRow}
-            rowClasses={`${style.rowShadow} `}
-          />
+      {/* table */}
+      {isLoading ? <></> :
+        <div className={` d-flex flex-column justify-content-between h-100`}>
+          <div className={`${style.heightTable} overflow-auto`}>
+            <BootstrapTable
+              keyField="id"
+              data={rows}
+              columns={columns}
+              bordered={false}
+              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidthShowProperties} ms-4`}
+              selectRow={selectRow}
+              rowClasses={`${style.rowShadow} `}
+            />
+          </div>
+
+
+          {/* pagination */}
+          <div className='d-flex justify-content-center align-items-center'>
+            <div className='mx-2'>
+              <span className='text-main fs15'>الصفحة</span>
+            </div>
+            <div className='mx-2 d-flex align-items-center'>
+              <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
+              <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
+              <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+            </div>
+            <div className='mx-2'>
+              <Dropdown>
+                <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                  30
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item >25</Dropdown.Item>
+                  <Dropdown.Item >20</Dropdown.Item>
+                  <Dropdown.Item >10</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
+
         </div>
 
+      }
 
-        {/* pagination */}
-        <div className='d-flex justify-content-center align-items-center'>
-          <div className='mx-2'>
-            <span className='text-main fs15'>الصفحة</span>
-          </div>
-          <div className='mx-2 d-flex align-items-center'>
-            <i onClick={increase} className="fa-solid fa-caret-right curser-pointer"></i>
-            <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
-            <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
-          </div>
-          <div className='mx-2'>
-            <Dropdown>
-              <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
-                30
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item >25</Dropdown.Item>
-                <Dropdown.Item >20</Dropdown.Item>
-                <Dropdown.Item >10</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        </div>
-
-      </div>
     </>
   )
 }

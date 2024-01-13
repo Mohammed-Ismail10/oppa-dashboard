@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { Url, baseUrl } from '../../helpers/constant.js';
+import { Url } from '../../helpers/constant.js';
 import dollar from '../../Assets/Images/dollarC.png'
 
 
@@ -100,8 +100,8 @@ export default function TableItems() {
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
         data?.data?.data.map((gift) => {
-          if (id == gift.id) {
-            if (gift.active == 1) {
+          if (id === gift.id) {
+            if (gift.active === 1) {
               return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
             }
             else {
@@ -170,7 +170,7 @@ export default function TableItems() {
   function getItem() {
     return axios.get(`${Url}/gifts/dashboard?limit=${limit}&page=${currentPage}`);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('item', getItem, {
+  let { data, isLoading, refetch } = useQuery('item', getItem, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

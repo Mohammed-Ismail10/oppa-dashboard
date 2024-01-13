@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import style from './AllFolders.module.css';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
@@ -108,7 +107,6 @@ export default function AllFolders() {
     const storedPage = localStorage.getItem('currentPageAllFolders');
     return storedPage ? parseInt(storedPage) : 0;
   });
-
   useEffect(() => {
     localStorage.setItem('currentPageAllFolders', currentPage);
   }, [currentPage]);
@@ -118,7 +116,7 @@ export default function AllFolders() {
   function getFolders() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch, isError, isFetching } = useQuery('folders', getFolders, {
+  let { data, isLoading, refetch } = useQuery('folders', getFolders, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
