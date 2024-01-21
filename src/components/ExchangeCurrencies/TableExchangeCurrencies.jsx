@@ -4,11 +4,10 @@ import { Dropdown } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
-import style from './FamilyLevel.module.css';
+import style from './ExchangeCurrencies.module.css';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import correct from '../../Assets/Images/correct.png';
-import layers from '../../Assets/Images/layers.png';
-import star from '../../Assets/Images/VectorEx.png';
+import calculator from '../../Assets/Images/calculator.png';
+
 
 
 // For column checkbox
@@ -44,11 +43,13 @@ const selectRow = {
 
 
 const rows = [
-  { id: 1, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
-  { id: 2, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 1, mid: 25, diamond: 1000000, value: 10000000000, currencyType: 'كوينز'},
+  { id: 2, mid: 25, diamond: 1000000, value: 10000000000, currencyType: 'كوينز'},
 ];
 
-export default function TableFamilyLevel() {
+
+
+export default function TableExchangeCurrencies() {
   const columns = [
     {
       dataField: 'mid', //must be same name of property in row which come from api
@@ -60,49 +61,29 @@ export default function TableFamilyLevel() {
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'familyLevel', //must be same name of property in row which come from api
+      dataField: 'diamond', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <img className='me-2' src={layers} alt="layers" width={16} />
-        مستوى العائلة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      // attrs: () => ({ 'dir': `ltr` }),
-    },
-    {
-      dataField: 'familyImg', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <i className="bi bi-file-image me-2"></i>
-        صورة العائلة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.familyImg} width={55} alt={`Flag of ${row.title_ar}`} />,
-    },
-    {
-      dataField: 'exp', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-75'>
-        <img className='me-1 p-1' src={star} alt="star" width={25} />
-        الخبرة
+        <i className="bi bi-gem me-2"></i>
+        الماس
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'users', //must be same name of property in row which come from api
+      dataField: 'value', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <i className="fa-solid fa-users me-2"></i>
-        الأعضاء
+        <img className='me-2' src={calculator} alt="calculator" width={14} />
+        القيمة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'officials', //must be same name of property in row which come from api
+      dataField: 'currencyType', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <img className='me-2' src={correct} alt="correct" width={17} />
-        المسؤولين
+        <i className="fa-solid fa-arrow-down-short-wide me-2"></i>
+        نوع العملة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
@@ -121,6 +102,7 @@ export default function TableFamilyLevel() {
       </>
     },
   ];
+
 
 
   let dispatch = useDispatch();
@@ -167,13 +149,8 @@ export default function TableFamilyLevel() {
   }
 
 
-
-
-
-
   return (
     <>
-
       {isLoading ? (
         <></>
         ) : (

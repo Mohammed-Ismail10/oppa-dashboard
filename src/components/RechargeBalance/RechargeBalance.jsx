@@ -4,7 +4,7 @@ import style from './RechargeBalance.module.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleShowAddBalance, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import { handleShowAddBalance, handleShowDelete, handleShowDeleteRow } from '../Redux/ModalsSlice.js';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
@@ -139,7 +139,7 @@ export default function RechargeBalance() {
   ];
 
 
-  let { showAddBalance } = useSelector(({ modals }) => modals);
+  let { showAddBalance, showDelete } = useSelector(({ modals }) => modals);
   let dispatch = useDispatch();
 
 
@@ -197,8 +197,9 @@ export default function RechargeBalance() {
 
         {/* nav */}
         <div className='pt-5 mt-3 ms-4'>
-          <Navbar>
-            <Nav className="">
+          <Navbar className={`justify-content-between align-items-start`}>
+
+            <Nav className="flex-wrap">
               <NavLink onClick={() => dispatch(handleShowAddBalance())} className={`${style.shadowBtn} ${style.addItemHover} me-2 border-0 btn fs15 text-main fw-bold nav-link ${showAddBalance ? 'addActive' : ''} bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة الرصيد
@@ -208,6 +209,17 @@ export default function RechargeBalance() {
                 فلتر
               </NavLink>
             </Nav>
+
+            <Nav className={`${style.widthNavDelete} justify-content-center pe-5`}>
+              <div className={`position-relative rounded-2 w-100`}>
+                <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
+                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-1 bg-search border-0 ps-5 h-100`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
+              </div>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} ${style.flexNone} ms-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
+                مسح الكل
+              </NavLink>
+            </Nav>
+
           </Navbar>
         </div>
 

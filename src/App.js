@@ -51,6 +51,10 @@ import ListLevels from './components/ListLevels/ListLevels.jsx';
 import BlackList from './components/BlackList/BlackList.jsx';
 import PhoneCodes from './components/PhoneCodes/PhoneCodes.jsx';
 import Store from './components/Store/Store.jsx';
+import TableComplaints from './components/Complaints/TableComplaints.jsx';
+import AddComplaints from './components/Complaints/AddComplaints.jsx';
+import TableExchangeCurrencies from './components/ExchangeCurrencies/TableExchangeCurrencies.jsx';
+import AddExchangeCurrencies from './components/ExchangeCurrencies/AddExchangeCurrencies.jsx';
 
 
 
@@ -106,8 +110,18 @@ function App() {
             { path: 'add', element: <ProtectedRoute><AddSilverCoins /></ProtectedRoute> },
           ]
         },
-        { path: '/app/complaints', element: <ProtectedRoute><Complaints /></ProtectedRoute> },
-        { path: '/app/exchangecurrencies', element: <ProtectedRoute><ExchangeCurrencies /></ProtectedRoute> },
+        {
+          path: '/app/complaints', element: <ProtectedRoute><Complaints /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableComplaints /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddComplaints /></ProtectedRoute> },
+          ]
+        },
+        {
+          path: '/app/exchangecurrencies', element: <ProtectedRoute><ExchangeCurrencies /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableExchangeCurrencies /> </ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddExchangeCurrencies /> </ProtectedRoute> },
+          ]
+        },
         { path: '/app/rooms/backgrounds', element: <ProtectedRoute><Backgrounds /></ProtectedRoute> },
         {
           path: '/gift/items', element: <ProtectedRoute><Items /></ProtectedRoute>, children: [

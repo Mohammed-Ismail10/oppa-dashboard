@@ -4,12 +4,9 @@ import { Dropdown } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
-import style from './FamilyLevel.module.css';
+import style from './Complaints.module.css';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import correct from '../../Assets/Images/correct.png';
-import layers from '../../Assets/Images/layers.png';
-import star from '../../Assets/Images/VectorEx.png';
-
+import notePhone from '../../Assets/Images/notePhone.png'
 
 // For column checkbox
 const selectRow = {
@@ -44,11 +41,12 @@ const selectRow = {
 
 
 const rows = [
-  { id: 1, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
-  { id: 2, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 1, mid: 25, connect: '+011122444477', problem: 'الهدية مش بتوصل والرسايل مش بتوصل', problemImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 2, mid: 25, connect: '+011122444477', problem: 'الهدية مش بتوصل والرسايل مش بتوصل', problemImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
 ];
 
-export default function TableFamilyLevel() {
+
+export default function TableComplaints() {
   const columns = [
     {
       dataField: 'mid', //must be same name of property in row which come from api
@@ -60,51 +58,33 @@ export default function TableFamilyLevel() {
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'familyLevel', //must be same name of property in row which come from api
+      dataField: 'connect', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <img className='me-2' src={layers} alt="layers" width={16} />
-        مستوى العائلة
+        <img className='me-2' src={notePhone} alt="notePhone" width={16} />
+        التواصل
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
-      dataField: 'familyImg', //must be same name of property in row which come from api
+      dataField: 'problem', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <i className="bi bi-question-circle me-2"></i>
+        المشكلة
+      </span>,
+      classes: 'text-main fs15 pt-3 px-0',
+    },
+    {
+      dataField: 'problemImg', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
-        صورة العائلة
+        صورة المشكلة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.familyImg} width={55} alt={`Flag of ${row.title_ar}`} />,
-    },
-    {
-      dataField: 'exp', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-75'>
-        <img className='me-1 p-1' src={star} alt="star" width={25} />
-        الخبرة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-    },
-    {
-      dataField: 'users', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <i className="fa-solid fa-users me-2"></i>
-        الأعضاء
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-    },
-    {
-      dataField: 'officials', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <img className='me-2' src={correct} alt="correct" width={17} />
-        المسؤولين
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
+      formatter: (cell, row) => <img loading='lazy' src={row.problemImg} width={55} alt={`Flag of ${row.title_ar}`} />,
     },
     {
       dataField: 'edit', //must be same name of property in row which come from api
@@ -122,25 +102,24 @@ export default function TableFamilyLevel() {
     },
   ];
 
-
   let dispatch = useDispatch();
 
 
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageFamily');
+    const storedPage = localStorage.getItem('currentPageComplaints');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPageFamily', currentPage);
+    localStorage.setItem('currentPageComplaints', currentPage);
   }, [currentPage]);
 
 
 
-  function getFamily() {
+  function getComplaints() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('family', getFamily, {
+  let { data, isLoading, refetch } = useQuery('complaints', getComplaints, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
@@ -170,16 +149,14 @@ export default function TableFamilyLevel() {
 
 
 
-
   return (
     <>
-
       {isLoading ? (
         <></>
-        ) : (
-          
-          
-          <div className='d-flex flex-column h-100 justify-content-between'>
+      ) : (
+
+
+        <div className='d-flex flex-column h-100 justify-content-between'>
 
           {/* table */}
           <div className={`${style.heightTable} overflow-auto `}>

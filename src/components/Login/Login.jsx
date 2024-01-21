@@ -6,15 +6,12 @@ import axios from 'axios';
 import { Url } from '../../helpers/constant.js';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { saveUsername } from '../Redux/UserSlice.js';
 
-export default function Login({ saveToken }) {
+export default function Login() {
 
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [dataLogin, setDataLogin] = useState(null);
-  let dispatch = useDispatch();
 
 
 

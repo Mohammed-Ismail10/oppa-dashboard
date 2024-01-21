@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Url } from '../../helpers/constant.js';
 import dollar from '../../Assets/Images/dollarC.png'
+import { saveData } from '../Redux/UserQuerySlice.js';
 
 
 // For column checkbox
@@ -174,10 +175,13 @@ export default function TableItems() {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
+  // console.log(data?.data.data);
+  dispatch(saveData(data?.data.data));
+
 
 
   async function updateActive(id) {
-    let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
+    await axios.patch(`${Url}/gifts/dashboard/${id}`);
     refetch();
   }
 
@@ -215,7 +219,6 @@ export default function TableItems() {
   return (
     <>
 
-      {/* table */}
       {isLoading ? (
         <></>
       ) : (
@@ -224,6 +227,7 @@ export default function TableItems() {
           <div className='d-flex flex-column h-100 justify-content-between'>
 
 
+            {/* table */}
             <div className={`${style.heightTable} overflow-auto`}>
               <BootstrapTable
                 keyField="id"
@@ -266,7 +270,6 @@ export default function TableItems() {
           </div>
         </>
       )}
-
 
     </>
   );
