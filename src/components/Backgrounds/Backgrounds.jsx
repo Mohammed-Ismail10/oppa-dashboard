@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import style from './FamilyLevel.module.css';
+import style from './Backgrounds.module.css';
 import { Nav, Navbar } from 'react-bootstrap';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
