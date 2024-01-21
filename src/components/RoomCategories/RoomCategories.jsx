@@ -151,10 +151,10 @@ export default function RoomCategories() {
 
 
 
-  function getRoomCategories() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('category', getRoomCategories, {
+  let { data, isLoading, refetch } = useQuery('roomCategory', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

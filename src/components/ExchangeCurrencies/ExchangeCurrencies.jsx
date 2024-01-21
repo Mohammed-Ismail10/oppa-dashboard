@@ -32,10 +32,6 @@ export default function ExchangeCurrencies() {
         <div className='pt-5 mt-3 ms-4'>
           <Navbar className={`justify-content-between align-items-start`}>
             <Nav className="flex-wrap">
-              {pathname === '/app/exchangecurrencies/add' ? null : <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-2 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
-                <i className="bi bi-plus-circle me-2"></i>
-                إستعلام المستخدم
-              </NavLink>}
               <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-2 border-0 btn fs15 text-main fw-bold nav-link bg-white addActive`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة

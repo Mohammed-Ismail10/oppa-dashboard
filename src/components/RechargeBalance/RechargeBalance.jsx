@@ -155,10 +155,10 @@ export default function RechargeBalance() {
 
 
 
-  function getRecharge() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('recharge', getRecharge, {
+  let { data, isLoading, refetch } = useQuery('recharge', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

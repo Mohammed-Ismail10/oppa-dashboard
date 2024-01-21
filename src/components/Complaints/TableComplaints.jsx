@@ -116,10 +116,10 @@ export default function TableComplaints() {
 
 
 
-  function getComplaints() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('complaints', getComplaints, {
+  let { data, isLoading, refetch } = useQuery('complaint', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

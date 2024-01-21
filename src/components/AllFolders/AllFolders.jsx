@@ -113,10 +113,10 @@ export default function AllFolders() {
 
 
 
-  function getFolders() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('folders', getFolders, {
+  let { data, isLoading, refetch } = useQuery('folders', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

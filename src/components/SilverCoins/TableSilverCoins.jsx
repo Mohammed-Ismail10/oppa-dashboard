@@ -115,10 +115,10 @@ export default function TableSilverCoins() {
   }, [currentPage]);
 
 
-  function getSilverCoin() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('silverCoin', getSilverCoin, {
+  let { data, isLoading, refetch } = useQuery('silverCoin', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

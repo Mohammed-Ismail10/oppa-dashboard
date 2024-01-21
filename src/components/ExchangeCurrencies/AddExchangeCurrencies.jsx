@@ -44,7 +44,7 @@ export default function AddExchangeCurrencies() {
                 <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال عدد الماس' />
               </div>
               <div className="col-6 pb-4">
-                <label className='fs20 pb-2' htmlFor="type">النوع</label>
+                <label className='fs15 pb-2' htmlFor="type">النوع</label>
                 <select name='type' value={formik.values.type} onChange={formik.handleChange} className={`text-input selCustom fs15 form-select py-3 curser-pointer fw-medium`} id="type">
                   {/* <option hidden selected >الرجاء إدخال نوع المعرف</option> */}
                   <option className={`text-main`} value="normal">كوينز</option>

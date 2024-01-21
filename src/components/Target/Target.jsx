@@ -153,10 +153,10 @@ export default function Target() {
 
 
 
-  function getTarget() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('target', getTarget, {
+  let { data, isLoading, refetch } = useQuery('target', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

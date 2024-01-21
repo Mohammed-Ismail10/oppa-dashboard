@@ -55,6 +55,7 @@ import TableComplaints from './components/Complaints/TableComplaints.jsx';
 import AddComplaints from './components/Complaints/AddComplaints.jsx';
 import TableExchangeCurrencies from './components/ExchangeCurrencies/TableExchangeCurrencies.jsx';
 import AddExchangeCurrencies from './components/ExchangeCurrencies/AddExchangeCurrencies.jsx';
+import TableBackgrounds from './components/Backgrounds/TableBackgrounds.jsx';
 
 
 
@@ -122,7 +123,12 @@ function App() {
             { path: 'add', element: <ProtectedRoute><AddExchangeCurrencies /> </ProtectedRoute> },
           ]
         },
-        { path: '/app/rooms/backgrounds', element: <ProtectedRoute><Backgrounds /></ProtectedRoute> },
+        {
+          path: '/app/rooms/backgrounds', element: <ProtectedRoute><Backgrounds /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableBackgrounds /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><TableBackgrounds /></ProtectedRoute> },
+          ]
+        },
         {
           path: '/gift/items', element: <ProtectedRoute><Items /></ProtectedRoute>, children: [
             { index: true, element: <ProtectedRoute><TableItems /></ProtectedRoute> },

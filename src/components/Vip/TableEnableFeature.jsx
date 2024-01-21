@@ -127,10 +127,10 @@ export default function TableEnableFeature() {
   }, [currentPage]);
 
 
-  function getFeature() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('feature', getFeature, {
+  let { data, isLoading, refetch } = useQuery('feature', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

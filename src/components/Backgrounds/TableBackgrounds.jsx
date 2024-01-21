@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import Dropdown from 'react-bootstrap/Dropdown';
-import style from './Vip.module.css';
-import { useDispatch } from 'react-redux';
-import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
+import BootstrapTable from 'react-bootstrap-table-next';
 import { useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
+import style from './Backgrounds.module.css';
+import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
+import correct from '../../Assets/Images/correct.png';
+import layers from '../../Assets/Images/layers.png';
+import star from '../../Assets/Images/VectorEx.png';
+
 
 
 // For column checkbox
@@ -21,73 +25,92 @@ const selectRow = {
           if (input) input.indeterminate = indeterminate;
         }}
         {...rest}
+
         onChange={(e) => e}
       />
-      <span className="py-2 badge text-main rounded fs13 border">
+      <span className="py-2 badge text-main rounded fs15 border">
         #
       </span>
     </div>
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
-      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest} onChange={(e) => e} />
-      <span className='text-main fs15'>{rest.rowIndex + 1}</span>
+      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
+        onChange={(e) => e} />
+      <span className='text-main fs15 py-'>{rest.rowIndex + 1}</span>
     </>
-  )
+  ),
+
 };
 
 
 const rows = [
-  { id: 1, arName: 'أيقونة VIP', enName: 'VIP ICON', privImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", time: '2023-11-21 T 08:13:16' },
-  { id: 2, arName: 'أيقونة VIP', enName: 'VIP ICON', privImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", time: '2023-11-21 T 08:13:16' },
+  { id: 1, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 2, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
 ];
 
 
-
-
-export default function TableShowProperty() {
+export default function TableBackgrounds() {
   const columns = [
     {
-      dataField: 'arName', //must be same name of property in row which come from api
+      dataField: 'mid', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <i className="fa-solid fa-crown me-2"></i>
-        إسم الـ Privileges بالعربي
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <i className="fa-solid fa-user me-2"></i>
+        معرف ال (ID)
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'enName', //must be same name of property in row which come from api
+      dataField: 'familyLevel', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <i className="fa-solid fa-crown me-2"></i>
-        إسم الـ Privileges بالــ EN
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <img className='me-2' src={layers} alt="layers" width={16} />
+        مستوى العائلة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       // attrs: () => ({ 'dir': `ltr` }),
     },
     {
-      dataField: 'privImg', //must be same name of property in row which come from api
+      dataField: 'familyImg', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
-        صورة الـ Privileges
+        صورة العائلة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.privImg} width={55} alt={`Flag of ${row.vipName}`} />,
+      formatter: (cell, row) => <img loading='lazy' src={row.familyImg} width={55} alt={`Flag of ${row.title_ar}`} />,
     },
     {
-      dataField: 'giftState', //must be same name of property in row which come from api
-      text: 'giftState',
+      dataField: 'exp', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-75'>
+        <img className='me-1 p-1' src={star} alt="star" width={25} />
+        الخبرة
+      </span>,
+      classes: 'text-main fs15 pt-3 px-0',
+    },
+    {
+      dataField: 'users', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <i className="fa-solid fa-users me-2"></i>
+        الأعضاء
+      </span>,
+      classes: 'text-main fs15 pt-3 px-0',
+    },
+    {
+      dataField: 'active', //must be same name of property in row which come from api
+      text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
         <i className="bi bi-exclamation-circle me-2"></i>
-        حالة الحساب
+        الحالة 
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-        data?.data?.data.map((pro) => {
-          if (id === pro.id) {
-            if (pro.active === 1) {
+        data?.data?.data.map((background) => {
+          if (id === background.id) {
+            if (background.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
             }
             else {
@@ -97,23 +120,13 @@ export default function TableShowProperty() {
         })
     },
     {
-      dataField: 'time', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-100'>
-        <i className="fa-regular fa-clock me-2"></i>
-        أنشئت في
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      attrs: () => ({ 'dir': `ltr` }),
-    },
-    {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
-      classes: 'text-main fs15 pt-3 px-0',
+      classes: 'text-main fs15 pt-3 px-0 ',
       formatter: (_, { id }) => <>
         <i className="fa-regular fa-eye mx-2 bg-dark-subtle p-1 rounded-circle curser-pointer"></i>
         <i onClick={() => dispatch(handleShowDeleteRow(id))} className="fa-regular fa-trash-can mx-2 bg-danger-subtle text-red p-1 rounded-circle curser-pointer"></i>
@@ -125,13 +138,14 @@ export default function TableShowProperty() {
 
   let dispatch = useDispatch();
 
+
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageShowProperty');
+    const storedPage = localStorage.getItem('currentPageBackgrounds');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPageShowProperty', currentPage);
+    localStorage.setItem('currentPageBackgrounds', currentPage);
   }, [currentPage]);
 
 
@@ -139,16 +153,12 @@ export default function TableShowProperty() {
   function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('property', getData, {
+  let { data, isLoading, refetch } = useQuery('background', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
 
 
-  // async function updateActive(id) {
-  //   let { data } = await axios.patch(`${Url}/gifts/dashboard/${id}`);
-  //   refetch();
-  // }
 
   function increase() {
     currentPage += 1;
@@ -173,26 +183,27 @@ export default function TableShowProperty() {
 
 
 
-
-
   return (
     <>
+      {isLoading ? (
+        <></>
+      ) : (
 
-      {/* table */}
-      {isLoading ? <></> :
-        <div className={` d-flex flex-column justify-content-between h-100`}>
-          <div className={`${style.heightTable} overflow-auto`}>
+
+        <div className='d-flex flex-column h-100 justify-content-between'>
+
+          {/* table */}
+          <div className={`${style.heightTable} overflow-auto `}>
             <BootstrapTable
               keyField="id"
               data={rows}
               columns={columns}
               bordered={false}
-              classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidthShowProperties} ms-4`}
+              classes={`${style.tableHeader} ${style.tableWidth} text-center table-borderless mt-2 mt-xl-4 ms-4`}
               selectRow={selectRow}
               rowClasses={`${style.rowShadow} `}
             />
           </div>
-
 
           {/* pagination */}
           <div className='d-flex justify-content-center align-items-center'>
@@ -206,7 +217,7 @@ export default function TableShowProperty() {
             </div>
             <div className='mx-2'>
               <Dropdown>
-                <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0  border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
+                <Dropdown.Toggle className={`${style.borderDropdown} px-2 pb-0 border-top-0 border-start-0 border-end-0 border-2 rounded-0 fw-bold fs15`} variant="white" id="dropdown-basic">
                   30
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -219,9 +230,7 @@ export default function TableShowProperty() {
           </div>
 
         </div>
-
-      }
-
+      )}
     </>
   )
 }

@@ -109,20 +109,20 @@ export default function TableExchangeCurrencies() {
 
 
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageFamily');
+    const storedPage = localStorage.getItem('currentPageExchange');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPageFamily', currentPage);
+    localStorage.setItem('currentPageExchange', currentPage);
   }, [currentPage]);
 
 
 
-  function getFamily() {
+  function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('family', getFamily, {
+  let { data, isLoading, refetch } = useQuery('exchange', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });

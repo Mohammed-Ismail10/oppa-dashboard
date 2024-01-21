@@ -168,10 +168,10 @@ export default function TableItems() {
 
 
 
-  function getItem() {
+  function getData() {
     return axios.get(`${Url}/gifts/dashboard?limit=${limit}&page=${currentPage}`);
   }
-  let { data, isLoading, refetch } = useQuery('item', getItem, {
+  let { data, isLoading, refetch } = useQuery('item', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
