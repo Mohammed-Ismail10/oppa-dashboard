@@ -1,12 +1,15 @@
 import { useFormik } from 'formik';
 import React, { useRef, useState } from 'react'
 import style from './AddComplaints.module.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AddComplaints() {
+  const navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
     console.log(values);
+    navigate('/app/complaints');
   }
 
   let formik = useFormik({
@@ -68,8 +71,8 @@ export default function AddComplaints() {
             {/* the rest of form */}
             <div className="row">
               <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="fullName">معرف الــ ID</label>
-                <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='ID الرجاء إدخال معرف الــ' />
+                <label className='fs15 pb-2' htmlFor="fullName">معرف الــ (ID)</label>
+                <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='(ID) الرجاء إدخال معرف الــ' />
               </div>
               <div className="col-6 pb-4">
                 <label className='fs15 pb-2' htmlFor="userName">التواصل</label>

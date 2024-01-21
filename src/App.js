@@ -56,6 +56,13 @@ import AddComplaints from './components/Complaints/AddComplaints.jsx';
 import TableExchangeCurrencies from './components/ExchangeCurrencies/TableExchangeCurrencies.jsx';
 import AddExchangeCurrencies from './components/ExchangeCurrencies/AddExchangeCurrencies.jsx';
 import TableBackgrounds from './components/Backgrounds/TableBackgrounds.jsx';
+import AddBackgrounds from './components/Backgrounds/AddBackgrounds.jsx';
+import TableEmoji from './components/Emoji/TableEmoji.jsx';
+import AddEmoji from './components/Emoji/AddEmoji.jsx';
+import TableRooms from './components/Rooms/TableRooms.jsx';
+import AddRooms from './components/Rooms/AddRooms.jsx';
+import TableGifts from './components/Gifts/TableGifts.jsx';
+import AddGifts from './components/Gifts/AddGifts.jsx';
 
 
 
@@ -126,7 +133,7 @@ function App() {
         {
           path: '/app/rooms/backgrounds', element: <ProtectedRoute><Backgrounds /></ProtectedRoute>, children: [
             { index: true, element: <ProtectedRoute><TableBackgrounds /></ProtectedRoute> },
-            { path: 'add', element: <ProtectedRoute><TableBackgrounds /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddBackgrounds /></ProtectedRoute> },
           ]
         },
         {
@@ -143,9 +150,24 @@ function App() {
         },
         { path: 'pages', element: <ProtectedRoute><Pages /></ProtectedRoute> },
         { path: 'notifications', element: <ProtectedRoute><Notifications /></ProtectedRoute> },
-        { path: '/app/rooms/emoji', element: <ProtectedRoute><Emoji /></ProtectedRoute> },
-        { path: '/app/rooms/rooms', element: <ProtectedRoute><Rooms /></ProtectedRoute> },
-        { path: '/app/rooms/gifts', element: <ProtectedRoute><Gifts /></ProtectedRoute> },
+        {
+          path: '/app/rooms/emoji', element: <ProtectedRoute><Emoji /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableEmoji /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddEmoji /></ProtectedRoute> },
+          ]
+        },
+        {
+          path: '/app/rooms/rooms', element: <ProtectedRoute><Rooms /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableRooms /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddRooms /></ProtectedRoute> },
+          ]
+        },
+        {
+          path: '/app/rooms/gifts', element: <ProtectedRoute><Gifts /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableGifts /></ProtectedRoute> },
+            { path:'add', element: <ProtectedRoute><AddGifts /></ProtectedRoute> },
+          ]
+        },
         { path: '/app/transfers', element: <ProtectedRoute><Transfers /></ProtectedRoute> },
         { path: '/app/families', element: <ProtectedRoute><Families /></ProtectedRoute> },
         { path: '/app/listlevels', element: <ProtectedRoute><ListLevels /></ProtectedRoute> },

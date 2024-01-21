@@ -45,8 +45,8 @@ const selectRow = {
 
 
 const rows = [
-  { id: 1, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
-  { id: 2, mid: 25, familyLevel: 'ماسي', exp: 800000, users: 490, officials: 27, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 1, mid: 25, backgroundImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", active: 1 },
+  { id: 2, mid: 25, backgroundImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", active: 1 },
 ];
 
 
@@ -62,47 +62,19 @@ export default function TableBackgrounds() {
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'familyLevel', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <img className='me-2' src={layers} alt="layers" width={16} />
-        مستوى العائلة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      // attrs: () => ({ 'dir': `ltr` }),
-    },
-    {
-      dataField: 'familyImg', //must be same name of property in row which come from api
+      dataField: 'backgroundImg', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
-        صورة العائلة
+        صورة الخلفية
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.familyImg} width={55} alt={`Flag of ${row.title_ar}`} />,
-    },
-    {
-      dataField: 'exp', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-75'>
-        <img className='me-1 p-1' src={star} alt="star" width={25} />
-        الخبرة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-    },
-    {
-      dataField: 'users', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <i className="fa-solid fa-users me-2"></i>
-        الأعضاء
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
+      formatter: (cell, row) => <img loading='lazy' src={row.backgroundImg} width={55} alt={`Flag of ${row.title_ar}`} />,
     },
     {
       dataField: 'active', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-100'>
         <i className="bi bi-exclamation-circle me-2"></i>
         الحالة 
       </span>,

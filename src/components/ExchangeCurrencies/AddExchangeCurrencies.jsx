@@ -1,14 +1,17 @@
 import React, { useRef, useState } from 'react'
 import style from './AddExchangeCurrencies.module.css';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function AddExchangeCurrencies() {
+  const navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
     console.log(values);
+    navigate('/app/exchangecurrencies');
   }
 
   let formik = useFormik({

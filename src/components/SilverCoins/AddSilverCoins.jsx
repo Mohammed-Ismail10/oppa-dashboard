@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import style from './AddSilverCoins.module.css';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddSilverCoins() {
+  const navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
     console.log(values);
+    navigate('/app/silvercoins');
   }
 
   let formik = useFormik({
@@ -27,8 +30,8 @@ export default function AddSilverCoins() {
           {/* the rest of form */}
           <div className="row">
             <div className="col-6 pb-4">
-              <label className='fs15 pb-2' htmlFor="fullName">معرف الــ ID</label>
-              <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='ID الرجاء إدخال معرف الــ' />
+              <label className='fs15 pb-2' htmlFor="fullName">معرف الــ (ID)</label>
+              <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='(ID) الرجاء إدخال معرف الــ' />
             </div>
             <div className="col-6 pb-4">
               <label className='fs15 pb-2' htmlFor="userName">الكوينز</label>

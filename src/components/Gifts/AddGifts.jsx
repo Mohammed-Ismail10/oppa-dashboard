@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import style from './AddItems.module.css';
 import { useFormik } from 'formik';
-import img from '../../Assets/Images/uploadImage.png';
-import svga from '../../Assets/Images/uploadSvga.png';
+import React, { useRef, useState } from 'react'
+import style from './AddGifts.module.css';
 import { useNavigate } from 'react-router-dom';
+import svga from '../../Assets/Images/uploadSvga.png'
+import img from '../../Assets/Images/uploadImage.png';
+
+export default function AddGifts() {
 
 
-
-export default function AddItems() {
   let navigate = useNavigate();
-  
+
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/items')
+    navigate('/app/rooms/gifts')
   }
 
   let formik = useFormik({
@@ -57,12 +57,14 @@ export default function AddItems() {
 
 
 
+
   return (
     <>
-      <div className="container-fluid pt-5 h-100">
-        <form className='w-75 mx-auto d-flex flex-column justify-content-between h-100 ' onSubmit={formik.handleSubmit}>
+      <div className="container-fluid h-100 pt-5">
+
+        <form onSubmit={formik.handleSubmit} className='w-75 mx-auto d-flex flex-column justify-content-between h-100'>
           <div>
-            {/* upload images */}
+            {/* upload image */}
             <div className='d-flex justify-content-center me-5'>
 
               <div className='text-center d-flex flex-column align-items-center mx-4'>
@@ -108,82 +110,33 @@ export default function AddItems() {
             {/* the rest of form */}
             <div className="row">
               <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="nameGift">إسم الهدية</label>
-                <input className={`${style.holder} form-control py-3`}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.giftName}
-                  name='giftName'
-                  type="text"
-                  id='nameGift'
-                  placeholder='الرجاء إدخال إسم الهدية' />
+                <label className='fs15 pb-2' htmlFor="fullName">معرف الــ (ID)</label>
+                <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='(ID) الرجاء إدخال معرف الــ' />
               </div>
-
               <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="expired">مدة الإنتهاء</label>
-                <input className={`${style.holder} py-3 form-control`} name='time' type="text" id='expired' placeholder='0' />
+                <label className='fs15 pb-2' htmlFor="userName">اسم الهدية</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="tel" id='userName' placeholder='سيارة' />
               </div>
-
               <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="price">السعر</label>
-                <input className={`${style.holder} py-3 form-control`} name='price' type="number" id='price' placeholder='0.00' />
+                <label className='fs15 pb-2' htmlFor="userName">سعر الهدية</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='0.00' />
               </div>
-
               <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="getGift">الحصول على الهدايا</label>
-                <input className={`${style.holder} py-3 form-control`} name='getgift' type="text" id='getGift' placeholder='شراء' />
+                <label className='fs15 pb-2' htmlFor="userName">نوع الهدية</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='Hot' />
               </div>
-
-              <div className="col-6 pb-4">
-                <label className='fs15 pb-1' htmlFor="typeGift">نوع الهدايا</label>
-                <select className={`text-gray fs15 fw-medium form-select py-3`} id="inputGroupSelect01">
-                  <option selected>Hot</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-
             </div>
           </div>
 
 
-          <div dir='ltr' className="col-12 py-1 mt-5">
+          <div dir='ltr' className="col-12 py-1">
             <button className={`${style.addBtnWidth} btn text-white px-4 fs15 fw-bold`} type="submit">إضافة</button>
             <button onClick={() => reset()} className='btn bg-white text-red me-4 fs15 fw-bold' type="button">إعادة ضبط</button>
           </div>
 
-
         </form>
+
       </div>
     </>
-  );
+  )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <div className="col-12 py-1">
-              {activeState ? <input onClick={() => setActiveState(!activeState)} className='btn bg-green px-4 text-white rounded-4 fs15 fw-bold' name='act' type="button" value="نشيط" /> :
-                <input onClick={() => setActiveState(!activeState)} className='btn bg-red text-white rounded-4 fs15 fw-bold' name='act' type="button" value="غير نشيط" />}
-            </div> */}

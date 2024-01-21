@@ -49,7 +49,7 @@ export default function ModalUserQuery() {
           <form>
             <div className="row px-5 pb-4">
               <div className="col-12 py-2">
-                <label className='fs15 pb-2' htmlFor="normalId">بالبحث بال(ID)</label>
+                <label className='fs15 pb-2' htmlFor="normalId">البحث بال(ID)</label>
                 <input className="form-control py-2 fs15 fw-bold" type="number" id='normalId' onChange={({ target }) => setValue(target.value)} />
               </div>
             </div>

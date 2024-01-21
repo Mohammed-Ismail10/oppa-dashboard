@@ -4,9 +4,10 @@ import { Dropdown } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
-import style from './Complaints.module.css';
+import style from './Emoji.module.css';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import notePhone from '../../Assets/Images/notePhone.png';
+import handAnimal from '../../Assets/Images/handAnimal.png';
+
 
 // For column checkbox
 const selectRow = {
@@ -41,55 +42,66 @@ const selectRow = {
 
 
 const rows = [
-  { id: 1, mid: 25, connect: '+011122444477', problem: 'الهدية مش بتوصل والرسايل مش بتوصل', problemImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
-  { id: 2, mid: 25, connect: '+011122444477', problem: 'الهدية مش بتوصل والرسايل مش بتوصل', problemImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 1, emojiName: 'رمز', emojiImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", active: 1, time: '5 ث'},
+  { id: 2, emojiName: 'رمز', emojiImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", active: 1, time: '5 ث'},
 ];
 
 
-export default function TableComplaints() {
+
+export default function TableEmoji() {
   const columns = [
     {
-      dataField: 'mid', //must be same name of property in row which come from api
+      dataField: 'emojiName', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <i className="fa-solid fa-user me-2"></i>
-        معرف ال (ID)
+        <img className='me-2' src={handAnimal} alt="handAnimal" width={16} />
+        اسم الرمز
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'connect', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <img className='me-2' src={notePhone} alt="notePhone" width={16} />
-        التواصل
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      // attrs: () => ({ 'dir': `ltr` }),
-    },
-    {
-      dataField: 'problem', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
-        <i className="bi bi-question-circle me-2"></i>
-        المشكلة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-    },
-    {
-      dataField: 'problemImg', //must be same name of property in row which come from api
+      dataField: 'emojiImg', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
-        صورة المشكلة
+        صورة الرمز
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.problemImg} width={55} alt={`Flag of ${row.title_ar}`} />,
+      formatter: (cell, row) => <img loading='lazy' src={row.emojiImg} width={55} alt={`Flag of ${row.title_ar}`} />,
+    },
+    {
+      dataField: 'active', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-100'>
+        <i className="bi bi-exclamation-circle me-2"></i>
+        الحالة
+      </span>,
+      classes: 'text-main fs15 pt-3 px-0',
+      formatter: (_, { id }) =>
+        data?.data?.data.map((emoji) => {
+          if (id === emoji.id) {
+            if (emoji.active === 1) {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
+            }
+            else {
+              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+            }
+          }
+        })
+    },
+    {
+      dataField: 'time', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 w-75 badge text-main rounded fs15 border'>
+        <i className="fa-regular fa-clock me-2"></i>
+        الوقت
+      </span>,
+      classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-100'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
@@ -102,16 +114,17 @@ export default function TableComplaints() {
     },
   ];
 
+
   let dispatch = useDispatch();
 
 
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageComplaints');
+    const storedPage = localStorage.getItem('currentPageEmoji');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPageComplaints', currentPage);
+    localStorage.setItem('currentPageEmoji', currentPage);
   }, [currentPage]);
 
 
@@ -119,7 +132,7 @@ export default function TableComplaints() {
   function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('complaint', getData, {
+  let { data, isLoading, refetch } = useQuery('emoji', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
@@ -144,8 +157,6 @@ export default function TableComplaints() {
       refetch();
     }
   }
-
-
 
 
 

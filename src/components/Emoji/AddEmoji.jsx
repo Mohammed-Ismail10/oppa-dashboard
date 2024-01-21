@@ -1,16 +1,17 @@
-import React, { useRef, useState } from 'react'
-import style from './AddFamilyLevel.module.css';
 import { useFormik } from 'formik';
+import React, { useRef, useState } from 'react'
+import style from './AddEmoji.module.css';
 import { useNavigate } from 'react-router-dom';
 
 
 
 
-export default function AddFamilyLevel() {
+export default function AddEmoji() {
   const navigate = useNavigate();
+
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/app/familylevel');
+    navigate('/app/rooms/emoji');
   }
 
   let formik = useFormik({
@@ -19,7 +20,6 @@ export default function AddFamilyLevel() {
     },
     onSubmit: uploadItemsSubmit
   });
-
 
 
   const [uploadImage, setUploadImage] = useState(false);
@@ -39,7 +39,6 @@ export default function AddFamilyLevel() {
 
 
 
-
   return (
     <>
       <div className="container-fluid h-100 pt-5">
@@ -49,7 +48,7 @@ export default function AddFamilyLevel() {
             {/* upload image */}
             <div className='d-flex justify-content-start'>
               <div className='text-center d-flex flex-column align-items-center mx-4'>
-                <span className='fs15 pb-2'>إضافة الصورة</span>
+                <span className='fs15 pb-2'>إضافة صورة الخلفية</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
                   <img className={`${uploadImage ? `${style.uploadImgDone}` : `${style.uploadImg}`}`} src={``} alt="" />
                   <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
@@ -70,28 +69,12 @@ export default function AddFamilyLevel() {
             {/* the rest of form */}
             <div className="row">
               <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="fullName">معرف الــ (ID)</label>
-                <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='(ID) الرجاء إدخال معرف الــ' />
+                <label className='fs15 pb-2' htmlFor="userName">الوقت</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='' />
               </div>
               <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">إسم العائلة</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='ماكسيم' />
-              </div>
-              <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">الخبرة</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='1000000.00' />
-              </div>
-              <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">مستوى العائلة</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='1000000.00' />
-              </div>
-              <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">المسؤولين</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='4' />
-              </div>
-              <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">الأعضاء</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='5' />
+                <label className='fs15 pb-2' htmlFor="userName">اسم الرمز</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال اسم الرمز' />
               </div>
             </div>
           </div>
@@ -105,7 +88,6 @@ export default function AddFamilyLevel() {
         </form>
 
       </div>
-
     </>
   )
 }

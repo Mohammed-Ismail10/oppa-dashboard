@@ -33,13 +33,13 @@ export default function Backgrounds() {
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة
               </NavLink>
-              {pathname === '/app/backgrounds/add' ? null : <NavLink to={'العملاء'} className={`${style.shadowBtn} mt-3 mt-xxl-0 mx-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+              {pathname === '/app/rooms/backgrounds/add' ? null : <NavLink to={'العملاء'} className={`${style.shadowBtn} mt-3 mt-xxl-0 mx-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
                 <i className="bi bi-funnel me-2"></i>
                 فلتر
               </NavLink>}
             </Nav>
 
-            {pathname === '/app/backgrounds/add' ? null : <Nav className={`${style.widthNavDelete} justify-content-center pe-5 mt-3 mt-xxl-0`}>
+            {pathname === '/app/rooms/backgrounds/add' ? null : <Nav className={`${style.widthNavDelete} justify-content-center pe-5 mt-3 mt-xxl-0`}>
               <div className={`position-relative rounded-2 w-100`}>
                 <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
                 <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-1 bg-search border-0 ps-5 h-100`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />

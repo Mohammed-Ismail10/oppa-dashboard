@@ -90,7 +90,7 @@ export default function ModalAddBalance() {
 
               <div className="col-12 py-4 mt-5 pe-5">
                 <div dir='ltr' className="py- me-5">
-                  <button className={`${style.addBtnWidth} btn text-white px-4 fs20 fw-bold`} type="submit">إرسال</button>
+                  <button onClick={() => handleCloseAddBalanceBig()} className={`${style.addBtnWidth} btn text-white px-4 fs20 fw-bold`} type="submit">إرسال</button>
                   <button onClick={() => formik.resetForm()} className='btn bg-white text-red me-4 fs20 fw-bold' type="button">إعادة ضبط</button>
                 </div>
               </div>

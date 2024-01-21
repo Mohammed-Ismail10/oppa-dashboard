@@ -1,0 +1,79 @@
+.shadowBtn {
+  box-shadow: 0 0 3px 0.1px gray !important;
+}
+
+.borderDropdown {
+  border-bottom: 3px solid #1c274c !important;
+}
+
+.itemsHover:hover {
+  background-color: #0b6ac8 !important;
+  color: white !important;
+}
+.addItemHover:hover {
+  background-color: #27ae61 !important;
+  color: white !important;
+}
+
+.tableHeader th {
+  padding: 0px !important;
+  margin-bottom: 24px !important;
+}
+
+.tableWidth {
+  width: 90% !important;
+  border-spacing: 0 10px !important;
+  border-collapse: separate !important;
+}
+
+.rowShadow:hover{
+  box-shadow: 0 0 10px 0.1px gray !important;
+}
+
+
+.flexNone {
+  flex: none !important;
+}
+
+
+.heightItems {
+  height: 83.5% !important;
+}
+
+
+@media screen and (min-width: 1024px) and (max-height: 1400px) {
+  .heightTable {
+    height: 51rem !important;
+  }
+}
+@media screen and (min-width: 1401px) {
+  .heightTable {
+    height: 57rem !important;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .tableWidth {
+    width: 80rem !important;
+    border-spacing: 0 0.625rem !important;
+    border-collapse: separate !important;
+  }
+}
+
+/* .widthNavDelete{
+  width: 33rem !important;
+} */
+
+.searchWidth {
+  width: 20rem !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 0.0625rem 0px gray !important;
+}
+
+.searchInput::placeholder {
+  color: #1c274c !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+}

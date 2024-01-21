@@ -86,7 +86,7 @@ export default function TableItems() {
       dataField: 'price', //must be same name of property in row which come from api
       text: '',
       headerFormatter: () => <span className='py-1 badge text-main rounded fs15 border w-'>
-        <img className='me-2' src={dollar} alt="dollar" />
+        <img className='me-2' src={dollar} alt="dollar" width={23} />
         سعر الهدية
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
