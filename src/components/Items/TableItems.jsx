@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from './Items.module.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -11,7 +11,9 @@ import dollar from '../../Assets/Images/dollarC.png'
 import { saveData } from '../Redux/UserQuerySlice.js';
 
 
-// For column checkbox
+
+let headerChecked = false;
+
 const selectRow = {
   mode: 'checkbox',
   selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
@@ -24,7 +26,15 @@ const selectRow = {
         }}
         {...rest}
 
-        onChange={(e) => e}
+        onChange={(e) => {
+          if (rest.checked === false) {
+            headerChecked = true;
+          }
+          else {
+            headerChecked = false;
+          }
+
+        }}
       />
       <span className="py-2 badge text-main rounded fs15 border">
         #
@@ -33,8 +43,9 @@ const selectRow = {
   ),
   selectionRenderer: ({ mode, ...rest }) => (
     <>
+      {headerChecked ? console.log(rest.rowKey) : null}
       <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
-        onChange={(e) => e} />
+        onChange={(e) => console.log(rest.rowKey)} />
       <span className='text-main fs15'>{rest.rowIndex + 1}</span>
     </>
   ),
@@ -43,7 +54,42 @@ const selectRow = {
 
 
 
+// const selectRow = {
+//   mode: 'checkbox',
+//   selectionHeaderRenderer: ({ indeterminate, ...rest }) => {
+//     const handleHeaderCheckboxChange = (e) => {
+//       const checkboxes = document.querySelectorAll('[name="dataApi"]');
+//       const ids = Array.from(checkboxes).map((checkbox) => checkbox.id);
+//       console.log(ids);
+//     };
 
+//     return (
+//       <div className="border badge p-0">
+//         <input
+//           type="checkbox"
+//           className="form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none"
+//           ref={(input) => {
+//             if (input) input.indeterminate = indeterminate;
+//           }}
+//           {...rest}
+//           onChange={handleHeaderCheckboxChange}
+//         />
+//         <span className="py-2 badge text-main rounded fs15 border">#</span>
+//       </div>
+//     );
+//   },
+//   selectionRenderer: ({ mode, ...rest }) => (
+//     <>
+//       <input
+//         className="form-check-input shadow-none border-1 border-dark-subtle me-3"
+//         type={mode}
+//         {...rest}
+//         onChange={(e) => console.log(rest)}
+//       />
+//       <span className="text-main fs15">{rest.rowIndex + 1}</span>
+//     </>
+//   ),
+// };
 
 
 
@@ -146,27 +192,18 @@ export default function TableItems() {
     },
   ];
 
-
-
   let dispatch = useDispatch();
-
-
-
 
   let [currentPage, setCurrentPage] = useState(() => {
     const storedPage = localStorage.getItem('currentPageItems');
     return storedPage ? parseInt(storedPage) : 0;
   });
-
   useEffect(() => {
     localStorage.setItem('currentPageItems', currentPage);
   }, [currentPage]);
 
-
-
   let [limit, setLimit] = useState(10);
-
-
+  const [dataObj, setDataObj] = useState([]);
 
   function getData() {
     return axios.get(`${Url}/gifts/dashboard?limit=${limit}&page=${currentPage}`);
@@ -174,11 +211,14 @@ export default function TableItems() {
   let { data, isLoading, refetch } = useQuery('item', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
+    onSuccess: (data) => {
+      setDataObj(data?.data?.data);
+      dispatch(saveData(data?.data.data));
+    }
   });
   // console.log(data?.data.data);
-  dispatch(saveData(data?.data.data));
 
-
+  let { dataApi, resultSearch } = useSelector(({ userQuery }) => userQuery);
 
   async function updateActive(id) {
     await axios.patch(`${Url}/gifts/dashboard/${id}`);
@@ -205,14 +245,12 @@ export default function TableItems() {
     }
   }
 
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    setDataObj(resultSearch);
+    return () => {
+      headerChecked = false;
+    }
+  }, [resultSearch]);
 
 
 
@@ -231,7 +269,7 @@ export default function TableItems() {
             <div className={`${style.heightTable} overflow-auto`}>
               <BootstrapTable
                 keyField="id"
-                data={data?.data?.data}
+                data={dataObj}
                 columns={columns}
                 bordered={false}
                 classes={`${style.tableHeader} text-center table-borderless mt-2 mt-xl-4 ${style.tableWidth} ms-4`}

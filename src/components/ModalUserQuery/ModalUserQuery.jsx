@@ -12,7 +12,7 @@ export default function ModalUserQuery() {
 
   let dispatch = useDispatch();
   let { showUserQuery } = useSelector(({ modals }) => modals);
-  let { data } = useSelector(({ userQuery }) => userQuery);
+  let { dataApi } = useSelector(({ userQuery }) => userQuery);
   function handleCloseUserQueryBig() {
     dispatch(handleCloseUserQuery());
   }
@@ -24,9 +24,9 @@ export default function ModalUserQuery() {
   function search() {
     console.log('helloo');
     console.log(value);
-    console.log(data);
+    console.log(dataApi);
 
-    resultSearch = data.filter((obj) => obj.id === parseInt(value));
+    resultSearch = dataApi.filter((obj) => obj.id === parseInt(value));
     console.log(resultSearch);
 
     handleCloseUserQueryBig();

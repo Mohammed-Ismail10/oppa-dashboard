@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-let initialState = { data: [] };
+let initialState = { dataApi: [], resultSearch: [] };
 
 
 
@@ -10,8 +10,10 @@ let userQuerySlice = createSlice({
   initialState,
   reducers: {
     saveData: (initialState, { payload }) => {
-      initialState.data = payload;
-      // console.log(initialState.data);
+      initialState.dataApi = payload;
+    },
+    search: (initialState, { payload }) => {
+      initialState.resultSearch = initialState.dataApi.filter((obj) => obj.title_ar.toLowerCase().includes(payload.toLowerCase()));
     }
 
   }
@@ -19,4 +21,4 @@ let userQuerySlice = createSlice({
 
 
 export let userQueryReducer = userQuerySlice.reducer;
-export let { saveData } = userQuerySlice.actions;
+export let { saveData, search } = userQuerySlice.actions;

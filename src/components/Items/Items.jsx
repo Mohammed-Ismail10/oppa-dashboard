@@ -6,6 +6,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import ModalChange from '../ModalChange/ModalChange.jsx';
 import ModalDelete from '../ModalDelete/ModalDelete.jsx';
 import { handleShowChangeId, handleShowDelete, handleShowUserQuery } from '../Redux/ModalsSlice.js';
+import { search } from '../Redux/UserQuerySlice.js';
 import style from './Items.module.css';
 import ModalUserQuery from '../ModalUserQuery/ModalUserQuery.jsx';
 
@@ -50,7 +51,7 @@ export default function Items() {
             {pathname === '/gift/items/add' ? null : <Nav className={`${style.widthNavDelete} justify-content-center pe-5 mt-3 mt-xxl-0`}>
               <div className={`position-relative rounded-2 w-100`}>
                 <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
-                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-1 bg-search border-0 ps-5 h-100`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
+                <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-1 bg-search border-0 ps-5 h-100`} type="search" name="" id="" placeholder='يمكنك البحث هنا' onChange={({target})=>dispatch(search(target.value))}/>
               </div>
               <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} ${style.flexNone} ms-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
