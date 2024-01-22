@@ -54,7 +54,7 @@
 
 @media screen and (max-width: 1920px) {
   .tableWidth {
-    width: 97rem !important;
+    width: 80rem !important;
     border-spacing: 0 0.625rem !important;
     border-collapse: separate !important;
   }

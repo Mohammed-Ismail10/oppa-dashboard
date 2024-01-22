@@ -14,7 +14,7 @@ export default function AddEnableFeature() {
 
   function enableFeatureSubmit(values) {
     console.log(values);
-    navigate('/enablefeature');
+    navigate('/gift/vip/enablefeature');
   }
 
 

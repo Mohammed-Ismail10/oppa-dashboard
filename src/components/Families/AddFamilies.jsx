@@ -1,16 +1,19 @@
 import { useFormik } from 'formik';
 import React, { useRef, useState } from 'react'
-import style from './AddComplaints.module.css';
+import style from './AddFamilies.module.css';
 import { useNavigate } from 'react-router-dom';
-import img from '../../Assets/Images/uploadImage.png';
 
 
-export default function AddComplaints() {
+
+
+
+export default function AddFamilies() {
+
   const navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/app/complaints');
+    navigate('/app/families');
   }
 
   let formik = useFormik({
@@ -42,6 +45,7 @@ export default function AddComplaints() {
 
 
 
+
   return (
     <>
       <div className="container-fluid h-100 pt-5">
@@ -51,9 +55,9 @@ export default function AddComplaints() {
             {/* upload image */}
             <div className='d-flex justify-content-start'>
               <div className='text-center d-flex flex-column align-items-center mx-4'>
-                <span className='fs15 pb-2'>إضافة صورة المشكلة</span>
+                <span className='fs15 pb-2'>إضافة صورة العائلة</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
-                  <img className={`${uploadImage ? `${style.uploadImgDone}` : ``}`} src={img} alt="" />
+                  <img className={`${uploadImage ? `${style.uploadImgDone}` : `${style.uploadImg}`}`} src={``} alt="" />
                   <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
                   <input className="d-none"
                     ref={imageInputRef}
@@ -76,12 +80,20 @@ export default function AddComplaints() {
                 <input className={`${style.holder} py-3 form-control`} name='fullName' type="number" id='fullName' placeholder='(ID) الرجاء إدخال معرف الــ' />
               </div>
               <div className="col-6 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">التواصل</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="tel" id='userName' placeholder='+20 1115462123' />
+                <label className='fs15 pb-2' htmlFor="userName">اسم العائلة</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='غارة علي' />
               </div>
-              <div className="col-12 pb-4">
-                <label className='fs15 pb-2' htmlFor="userName">المشكلة</label>
-                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الهدية مش بتوصل والرسايل مش بتوصل' />
+              <div className="col-6 pb-4">
+                <label className='fs15 pb-2' htmlFor="userName">التنويه</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="text" id='userName' placeholder='الرجاء إدخال التنويه' />
+              </div>
+              <div className="col-6 pb-4">
+                <label className='fs15 pb-2' htmlFor="userName">عدد الأشخاص</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='الرجاء إدخال عدد الأشخاص' />
+              </div>
+              <div className="col-6 pb-4">
+                <label className='fs15 pb-2' htmlFor="userName">حظر الأشخاص</label>
+                <input className={`${style.holder} py-3 form-control`} name='userName' type="number" id='userName' placeholder='الرجاء إدخال حظر الأشخاص' />
               </div>
 
             </div>

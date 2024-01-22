@@ -10,7 +10,7 @@ let navigate = useNavigate();
 
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/vip');
+    navigate('/gift/vip');
   }
 
   let formik = useFormik({

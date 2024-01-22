@@ -92,4 +92,20 @@
   }
 }
 
+.widthNavDelete{
+  width: 33rem !important;
+}
 
+.searchWidth {
+  width: 20rem !important;
+}
+
+.shadowSearch {
+  box-shadow: 0 0 0.0625rem 0px gray !important;
+}
+
+.searchInput::placeholder {
+  color: #1c274c !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+}

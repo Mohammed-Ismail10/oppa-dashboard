@@ -1,5 +1,5 @@
 .shadowBtn {
-  box-shadow: 0 0 3px 0px gray !important;
+  box-shadow: 0 0 3px 0.1px gray !important;
 }
 
 .borderDropdown {
@@ -10,13 +10,14 @@
   background-color: #0b6ac8 !important;
   color: white !important;
 }
-
-.fs5 {
-  font-size: 5px !important;
+.addItemHover:hover {
+  background-color: #27ae61 !important;
+  color: white !important;
 }
 
 .tableHeader th {
   padding: 0px !important;
+  margin-bottom: 24px !important;
 }
 
 .tableWidth {
@@ -25,12 +26,9 @@
   border-collapse: separate !important;
 }
 
-
-
-.rowShadow:hover {
+.rowShadow:hover{
   box-shadow: 0 0 10px 0.1px gray !important;
 }
-
 
 
 .flexNone {
@@ -61,16 +59,6 @@
     border-collapse: separate !important;
   }
 }
-
-
-
-@media screen and (min-width: 1400px) and (max-width: 1480px) {
-  .navWidth {
-    margin-right: 1rem !important;
-  }
-}
-
-
 
 .widthNavDelete{
   width: 33rem !important;

@@ -63,6 +63,12 @@ import TableRooms from './components/Rooms/TableRooms.jsx';
 import AddRooms from './components/Rooms/AddRooms.jsx';
 import TableGifts from './components/Gifts/TableGifts.jsx';
 import AddGifts from './components/Gifts/AddGifts.jsx';
+import TableFamilies from './components/Families/TableFamilies.jsx';
+import AddFamilies from './components/Families/AddFamilies.jsx';
+import TableListLevels from './components/ListLevels/TableListLevels.jsx';
+import AddListLevels from './components/ListLevels/AddListLevels.jsx';
+import TableBlackList from './components/BlackList/TableBlackList.jsx';
+import AddBlackList from './components/BlackList/AddBlackList.jsx';
 
 
 
@@ -165,13 +171,28 @@ function App() {
         {
           path: '/app/rooms/gifts', element: <ProtectedRoute><Gifts /></ProtectedRoute>, children: [
             { index: true, element: <ProtectedRoute><TableGifts /></ProtectedRoute> },
-            { path:'add', element: <ProtectedRoute><AddGifts /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddGifts /></ProtectedRoute> },
           ]
         },
         { path: '/app/transfers', element: <ProtectedRoute><Transfers /></ProtectedRoute> },
-        { path: '/app/families', element: <ProtectedRoute><Families /></ProtectedRoute> },
-        { path: '/app/listlevels', element: <ProtectedRoute><ListLevels /></ProtectedRoute> },
-        { path: '/app/blacklist', element: <ProtectedRoute><BlackList /></ProtectedRoute> },
+        {
+          path: '/app/families', element: <ProtectedRoute><Families /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableFamilies /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddFamilies /></ProtectedRoute> },
+          ]
+        },
+        {
+          path: '/app/listlevels', element: <ProtectedRoute><ListLevels /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableListLevels /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddListLevels /></ProtectedRoute> },
+          ]
+        },
+        {
+          path: '/app/blacklist', element: <ProtectedRoute><BlackList /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableBlackList /></ProtectedRoute> },
+            { path:'add', element: <ProtectedRoute><AddBlackList /></ProtectedRoute> },
+          ]
+        },
         { path: '/app/phonecodes', element: <ProtectedRoute><PhoneCodes /></ProtectedRoute> },
         { path: '/app/store', element: <ProtectedRoute><Store /></ProtectedRoute> },
         { path: 'ay', element: <MyComponent /> },

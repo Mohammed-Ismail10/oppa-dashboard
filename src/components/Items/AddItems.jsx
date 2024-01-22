@@ -12,7 +12,7 @@ export default function AddItems() {
   
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/items')
+    navigate('/gift/items')
   }
 
   let formik = useFormik({

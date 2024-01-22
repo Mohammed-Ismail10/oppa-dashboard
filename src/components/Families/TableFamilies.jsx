@@ -4,11 +4,10 @@ import { Dropdown } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
-import style from './Rooms.module.css';
+import style from './Families.module.css';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import notePhone from '../../Assets/Images/notePhone.png';
-import correct from '../../Assets/Images/correct.png';
-import layers from '../../Assets/Images/layers.png';
+import speaker from '../../Assets/Images/speaker.png';
+
 
 // For column checkbox
 const selectRow = {
@@ -43,114 +42,75 @@ const selectRow = {
 
 
 const rows = [
-  { id: 1, mid: 25, roomName: 'غارة علي', active: 1,topRoom: 1, roomImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", frontRoom:'ارحب وابشر', passwordRoom: '0000', roomType: 'شعر'  },
-  { id: 2, mid: 25, roomName: 'غارة علي', active: 1,topRoom: 1, roomImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", frontRoom:'ارحب وابشر', passwordRoom: '0000', roomType: 'شعر'  },
+  { id: 1, mid: 25, familyName: 'غارة علي', alert: 'ارحب وابشر', usersNum: 120, block: 3, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 2, mid: 25, familyName: 'غارة علي', alert: 'ارحب وابشر', usersNum: 120, block: 3, familyImg: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
 ];
 
 
 
 
-export default function TableRooms() {
+
+export default function TableFamilies() {
   const columns = [
     {
       dataField: 'mid', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-user me-2"></i>
         معرف ال (ID)
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'roomName', //must be same name of property in row which come from api
+      dataField: 'familyName', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <i className="bi bi-door-open"></i>
-        اسم الغرفة
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <i className="fa-solid fa-user me-2"></i>
+        اسم العائلة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'active', //must be same name of property in row which come from api
+      dataField: 'familyImg', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <i className="bi bi-exclamation-circle me-2"></i>
-        حالة الغرفة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) =>
-        data?.data?.data.map((room) => {
-          if (id === room.id) {
-            if (room.active === 1) {
-              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
-            }
-            else {
-              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
-            }
-          }
-        })
-    },
-    {
-      dataField: 'topRoom', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <img className='me-2' src={layers} alt="layers" width={16} />
-        Top room
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) =>
-        data?.data?.data.map((room) => {
-          if (id === room.id) {
-            if (room.active === 1) {
-              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>Yes</span>
-            }
-            else {
-              return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>No</span>
-            }
-          }
-        })
-    },
-    {
-      dataField: 'roomImg', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="bi bi-file-image me-2"></i>
-        صورة الغرفة
+        صورة العائلة
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (cell, row) => <img loading='lazy' src={row.roomImg} width={55} alt={`Flag of ${row.title_ar}`} />,
+      formatter: (cell, row) => <img loading='lazy' src={row.familyImg} width={55} alt={`Flag of ${row.title_ar}`} />,
     },
     {
-      dataField: 'frontRoom', //must be same name of property in row which come from api
+      dataField: 'alert', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <i className="fa-solid fa-pen me-2"></i>
-        مقدمة الغرفة
-      </span>,
-      classes: 'text-main fs15 pt-3 px-0',
-    },
-    {
-      dataField: 'passwordRoom', //must be same name of property in row which come from api
-      text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <img className='me-2' src={correct} alt="correct" width={16} />
-        كلمة مرور الغرفة
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <img className='me-2' src={speaker} alt="speaker" width={16} />
+        تنويه
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
-      dataField: 'roomType', //must be same name of property in row which come from api
+      dataField: 'usersNum', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
-        <i className="fa-solid fa-arrow-down-short-wide me-2"></i>
-        نوع الغرفة
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <i className="fa-solid fa-users me-2"></i>
+        عدد الأشخاص
+      </span>,
+      classes: 'text-main fs15 pt-3 px-0',
+    },
+    {
+      dataField: 'block', //must be same name of property in row which come from api
+      text: '',
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
+        <i className="fa-solid fa-ban me-2"></i>
+        حظر الأشخاص
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
     },
     {
       dataField: 'edit', //must be same name of property in row which come from api
       text: '',
-      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border'>
+      headerFormatter: () => <span className='py-2 badge text-main rounded fs15 border w-75'>
         <i className="fa-solid fa-pen me-2"></i>
         التعديل والحذف والطباعة
       </span>,
@@ -164,16 +124,17 @@ export default function TableRooms() {
   ];
 
 
+
   let dispatch = useDispatch();
 
 
   let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageRooms');
+    const storedPage = localStorage.getItem('currentPageFamilies');
     return storedPage ? parseInt(storedPage) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem('currentPageRooms', currentPage);
+    localStorage.setItem('currentPageFamilies', currentPage);
   }, [currentPage]);
 
 
@@ -181,7 +142,7 @@ export default function TableRooms() {
   function getData() {
     return axios.get(``);
   }
-  let { data, isLoading, refetch } = useQuery('room', getData, {
+  let { data, isLoading, refetch } = useQuery('families', getData, {
     cacheTime: 60000,
     refetchInterval: 300000,
   });
@@ -206,6 +167,9 @@ export default function TableRooms() {
       refetch();
     }
   }
+
+
+
 
 
 

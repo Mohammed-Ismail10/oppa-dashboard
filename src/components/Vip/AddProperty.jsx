@@ -11,7 +11,7 @@ export default function AddProperty() {
 
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/showproperties');
+    navigate('/gift/vip/showproperties');
   }
 
   let formik = useFormik({

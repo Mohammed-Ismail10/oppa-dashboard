@@ -36,10 +36,6 @@ export default function Vip() {
                 <i className="bi bi-plus-circle me-2"></i>
                 تغير المعرف (ID)
               </NavLink>
-              <NavLink to={'العملاء'} className={`${style.shadowBtn} mt-3 mt-xxl-0 mx-1 mx-xxl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
-                <i className="bi bi-funnel me-2"></i>
-                فلتر
-              </NavLink>
               <NavLink to={'add'} className={`${style.shadowBtn} ${style.addItemHover} mt-3 mt-xxl-0 mx-1 mx-xxl-2 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
                 <i className="bi bi-plus-circle me-2"></i>
                 إضافة VIP
@@ -53,11 +49,15 @@ export default function Vip() {
                   <i className="bi bi-plus-circle me-2"></i>
                   تمكين خاصية
                 </NavLink>
+                <NavLink to={'العملاء'} className={`${style.shadowBtn} mt-3 mt-xxl-0 mx-1 mx-xxl-2 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
+                  <i className="bi bi-funnel me-2"></i>
+                  فلتر
+                </NavLink>
               </>}
 
             </Nav>
-            {pathname === '/gift/vip/add' ? null : <Nav className={`${style.flexNone} mt-3 mt-xxl-0`}>
-              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} me-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
+            {pathname === '/gift/vip/add' ? null : <Nav className={`${style.widthNavDelete} justify-content-end pe-5 mt-3 mt-xxl-0`}>
+              <NavLink onClick={() => dispatch(handleShowDelete())} className={`deleteHover ${style.shadowBtn} ${style.flexNone} ms-3 px-3 rounded-3 border-0 btn fs15 text-main fw-bold nav-link ${showDelete ? 'deleteActive' : ''} bg-white `}>
                 مسح الكل
               </NavLink>
             </Nav>}
