@@ -75,7 +75,7 @@ export default function Home() {
     },
     data: [{
       type: "line",
-      toolTipContent: " عدد المستخدمين {y} : عدد الأيام {x}",
+      // toolTipContent: " عدد المستخدمين {y} : عدد الأيام {x}",
       dataPoints: [
         { x: 0, y: 0 },
         { x: 40, y: 20 },
@@ -104,7 +104,7 @@ export default function Home() {
     },
     data: [{
       type: "line",
-      toolTipContent: " عدد الغرف {y} : عدد الأيام {x}",
+      // toolTipContent: " عدد الغرف {y} : عدد الأيام {x}",
       dataPoints: [
         { x: 0, y: 0 },
         { x: 40, y: 20 },

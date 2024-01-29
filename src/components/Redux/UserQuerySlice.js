@@ -13,6 +13,7 @@ let userQuerySlice = createSlice({
       initialState.dataApi = payload;
     },
     search: (initialState, { payload }) => {
+      initialState.resultSearch = [];
       initialState.resultSearch = initialState.dataApi.filter((obj) => obj.title_ar.toLowerCase().includes(payload.toLowerCase()));
     }
 

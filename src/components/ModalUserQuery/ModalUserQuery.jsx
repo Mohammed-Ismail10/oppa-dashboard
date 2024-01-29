@@ -55,6 +55,7 @@ export default function ModalUserQuery() {
             </div>
 
 
+
             <div className="col-12 py-1 mt-5 px-2">
               <button onClick={() => search()} type='button' className='btn bg-blue text-white w-100 fs-5 fw-bold'>
                 <i className="fa-solid fa-magnifying-glass me-3 fs-4"></i>

@@ -214,7 +214,7 @@ export default function TableItems() {
     onSuccess: (data) => {
       setDataObj(data?.data?.data);
       dispatch(saveData(data?.data.data));
-    }
+    },
   });
   // console.log(data?.data.data);
 
@@ -227,16 +227,16 @@ export default function TableItems() {
 
 
   function increase() {
-    currentPage += 1;
-    setCurrentPage(currentPage);
+    // currentPage += 1;
+    setCurrentPage(currentPage += 1);
     refetch();
   }
 
   function decrease() {
     currentPage -= 1;
     if (currentPage < 0) {
-      currentPage = 0;
-      setCurrentPage(currentPage);
+      // currentPage = 0;
+      setCurrentPage(currentPage = 0);
       refetch();
     }
     else {
@@ -280,12 +280,12 @@ export default function TableItems() {
 
 
             {/* pagination */}
-            <div className='d-flex justify-content-center align-items-center'>
+            <div className='d-flex justify-content-center align-items-center pb-5 pb-xxl-0'>
               <div className='mx-2'>
                 <span className='text-main fs15'>الصفحة</span>
               </div>
               <div className='mx-2 d-flex align-items-center'>
-                <i onClick={() => { increase(); limit = 10; setLimit(10); }} className="fa-solid fa-caret-right curser-pointer"></i>
+                <i onClick={() => { increase(); setLimit(10); }} className="fa-solid fa-caret-right curser-pointer"></i>
                 <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
                 <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
               </div>
@@ -295,9 +295,9 @@ export default function TableItems() {
                     {limit}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => { limit = 30; setLimit(limit); refetch() }}>30</Dropdown.Item>
-                    <Dropdown.Item onClick={() => { limit = 20; setLimit(limit); refetch() }}>20</Dropdown.Item>
-                    <Dropdown.Item onClick={() => { limit = 10; setLimit(limit); refetch() }}>10</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { setLimit(limit = 30); refetch() }}>30</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { setLimit(limit = 20); refetch() }}>20</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { setLimit(limit = 10); refetch() }}>10</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
