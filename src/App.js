@@ -69,6 +69,8 @@ import TableListLevels from './components/ListLevels/TableListLevels.jsx';
 import AddListLevels from './components/ListLevels/AddListLevels.jsx';
 import TableBlackList from './components/BlackList/TableBlackList.jsx';
 import AddBlackList from './components/BlackList/AddBlackList.jsx';
+import TableStore from './components/Store/TableStore.jsx';
+import AddStore from './components/Store/AddStore.jsx';
 
 
 
@@ -190,11 +192,16 @@ function App() {
         {
           path: '/app/blacklist', element: <ProtectedRoute><BlackList /></ProtectedRoute>, children: [
             { index: true, element: <ProtectedRoute><TableBlackList /></ProtectedRoute> },
-            { path:'add', element: <ProtectedRoute><AddBlackList /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddBlackList /></ProtectedRoute> },
           ]
         },
         { path: '/app/phonecodes', element: <ProtectedRoute><PhoneCodes /></ProtectedRoute> },
-        { path: '/app/store', element: <ProtectedRoute><Store /></ProtectedRoute> },
+        {
+          path: '/app/store', element: <ProtectedRoute><Store /></ProtectedRoute>, children: [
+            { index: true, element: <ProtectedRoute><TableStore /></ProtectedRoute> },
+            { path: 'add', element: <ProtectedRoute><AddStore /></ProtectedRoute> },
+          ]
+        },
         { path: 'ay', element: <MyComponent /> },
       ]
     }

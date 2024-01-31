@@ -10,7 +10,7 @@ import notif from '../../Assets/Images/notif.png';
 import { useDispatch } from 'react-redux';
 import { handleShowLogOut } from '../Redux/ModalsSlice.js';
 import ModalLogout from '../ModalLogOut/ModalLogout.jsx';
-import { Accordion, AccordionItem } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 
 
 
@@ -106,7 +106,7 @@ export default function SideBar() {
                     </li>
 
                     <Accordion>
-                      <Accordion.Item className='border-0'>
+                      <Accordion.Item eventKey='4' className='border-0'>
                         <Accordion.Header onClick={() => navigate('/app/rooms/backgrounds')}>
                           <NavLink to={'/app/rooms/backgrounds'} className="fs12 nav-link fw-semibold">
                             <span className={`${style.textSub}`}>إدارة الغرف</span>

@@ -1,0 +1,47 @@
+.imgPick {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 2px dashed gray;
+}
+
+.holder::placeholder {
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  color: #c2c2c2 !important;
+  direction: rtl !important;
+}
+
+.addBtnWidth {
+  width: 18.5% !important;
+  background-color: #27ae61 !important;
+  padding-block: 12px !important;
+}
+
+.textGreen{
+  color: #27ae61 !important;
+}
+
+.textRed{
+  color: red !important;
+}
+
+.uploadImg {
+  content: url("../../Assets/Images/uploadImage.png");
+}
+
+.uploadImgDone {
+  content: url("../../Assets/Images/imgDone.png");
+}
+
+.uploadSvga {
+  content: url("../../Assets/Images/uploadSvga.png");
+}
+
+.uploadSvgaDone {
+  content: url('../../Assets/Images/svgaDone.png');
+}
+
+.uploadSvgaError {
+  content: url("../../Assets/Images/svgaError.png");
+}
