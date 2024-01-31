@@ -9,7 +9,6 @@
   --title-chart: #9a9a9a;
 }
 
-
 .selection-cell {
   padding-block: 0.875rem !important;
   padding-inline: 0 !important;
@@ -38,7 +37,7 @@ body {
   text-align: right !important;
 }
 
-.title-chart{
+.title-chart {
   color: var(--title-chart) !important;
 }
 
@@ -87,10 +86,11 @@ body {
 
 .accordion-button::after {
   margin-right: 0 !important;
+  background-image: url('./Assets/Images/newDownArr.png') !important;
+  background-size: 50% !important;
+  background-position: center !important;
 }
-[data-bs-target="#flush-collapseSix"]::after {
-  background-image: url("./Assets/Images/coins.png") !important;
-}
+
 
 .sideBarActive.active::before {
   content: "";
@@ -131,10 +131,9 @@ body {
   font-size: 0.75rem !important;
 }
 
-.fs9{
+.fs9 {
   font-size: 9px !important;
 }
-
 
 .fs20 {
   font-size: 1.25rem !important;
@@ -158,10 +157,13 @@ body {
   max-width: 70.625rem;
 }
 
-/* .modal-content {
-  border-radius: 0 !important;
-} */
-
 .custom-modal-change .modal-dialog {
   max-width: 37.5rem;
+}
+
+.accordion-button {
+  border: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }

@@ -17,9 +17,6 @@
   content: url('../../Assets/Images/Vector\ \(4\).png');
 }
 
-/* .heightList{
-  height: 60% !important;
-} */
 
 .logoutImg{
   content: url('../../Assets/Images/logout.png');
@@ -29,3 +26,6 @@
 .sideBarWidth{
   width: inherit !important;
 }
+
+
+
