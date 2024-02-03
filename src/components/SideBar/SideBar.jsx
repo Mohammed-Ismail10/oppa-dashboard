@@ -20,7 +20,7 @@ export default function SideBar() {
   const navigate = useNavigate();
   let dispatch = useDispatch();
 
-
+  const { pathname } = useLocation();
 
 
   return (
@@ -36,7 +36,10 @@ export default function SideBar() {
           <div className='d-flex justify-content-around align-items-center pt-2'>
             <span></span>
             <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
-            <Link to={'/setting/usersetting'} ><i className="fa-regular fa-pen-to-square text-main"></i></Link>
+            {pathname === '/setting/usersetting' ? <span></span> : <Link to={'/setting/usersetting'} >
+              <i className="fa-regular fa-pen-to-square text-main"></i>
+            </Link>}
+
           </div>
         </div>
 
@@ -105,7 +108,7 @@ export default function SideBar() {
                       <NavLink to={'/app/exchangecurrencies'} className="fs12 nav-link text-decoration-none fw-semibold subSideBarActive">تبديل العملات</NavLink>
                     </li>
 
-                    <Accordion>
+                    <Accordion className='accRoom'>
                       <Accordion.Item eventKey='4' className='border-0'>
                         <Accordion.Header onClick={() => navigate('/app/rooms/backgrounds')}>
                           <NavLink to={'/app/rooms/backgrounds'} className="fs12 nav-link fw-semibold">
