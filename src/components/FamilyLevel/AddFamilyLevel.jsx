@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import style from './AddFamilyLevel.module.css';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import img from '../../Assets/Images/uploadImage.png';
 
 
 
@@ -51,7 +52,7 @@ export default function AddFamilyLevel() {
               <div className='text-center d-flex flex-column align-items-center mx-4'>
                 <span className='fs15 pb-2'>إضافة الصورة</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
-                  <img className={`${uploadImage ? `${style.uploadImgDone}` : `${style.uploadImg}`}`} src={``} alt="" />
+                <img className={`${uploadImage ? `${style.uploadImgDone}` : ``}`} src={img} alt="" />
                   <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
                   <input className="d-none"
                     ref={imageInputRef}

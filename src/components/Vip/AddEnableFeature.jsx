@@ -36,48 +36,6 @@ export default function AddEnableFeature() {
 
   return (
     <>
-
-      {/* Nav links for Vip */}
-      {/* <div className='pt-5 mt-3 ps-3'>
-        <Navbar>
-          <Nav className="w-100 px-2">
-            <NavLink onClick={() => dispatch(handleShowUserQuery())} className={`${style.shadowBtn} ${style.itemsHover} mt-3 mt-xxl-0 me-0 me-xl-3 border-0 btn fs15 text-main fw-bold nav-link ${showUserQuery ? 'itemsActive' : ''}  bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              إستعلام المستخدم
-            </NavLink>
-            <NavLink to={'/allfolders'} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              سجل الهدايا
-            </NavLink>
-            <NavLink onClick={() => dispatch(handleShowChangeId())} className={`${style.shadowBtn} ${style.itemsHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link ${showChangeId ? 'itemsActive' : ''} bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              تغير المعرف (ID)
-            </NavLink>
-            <NavLink to={'العملاء'} className={`${style.shadowBtn} mx-3 border-0 btn fs15 text-main fw-bold nav-link itemsActive bg-white`}>
-              <i className="bi bi-funnel me-2"></i>
-              فلتر
-            </NavLink>
-            <NavLink to={'/vip/add'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              إضافة VIP
-            </NavLink>
-            <NavLink to={'/showproperties'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              عرض الخصائص
-            </NavLink>
-            <NavLink to={'/enablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              تمكين خاصية
-            </NavLink>
-            <NavLink to={'/addenablefeature'} className={`${style.shadowBtn} ${style.addItemHover} mx-3 border-0 btn fs15 text-main fw-bold nav-link addActive bg-white`}>
-              <i className="bi bi-plus-circle me-2"></i>
-              إضافة تمكين خاصية
-            </NavLink>
-          </Nav>
-        </Navbar>
-
-      </div> */}
-
       <div className='w-75 d-flex justify-content-center py-5 mt-2'>
         <h2 className='fs-4 fw-bold'>إضافة تمكين خاصية</h2>
       </div>
