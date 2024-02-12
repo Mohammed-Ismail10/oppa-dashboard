@@ -1,11 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import style from './UserSetting.module.css';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImageFalse, uploadImageTrue } from '../Redux/ResetSlice.js';
 
 export default function UserSetting() {
 
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { uploadImage } = useSelector(({ reset }) => reset);
 
   function uploadItemsSubmit(values) {
     // let data = new FormData();
@@ -23,14 +27,13 @@ export default function UserSetting() {
 
 
 
-  const [uploadImage, setUploadImage] = useState(false);
 
 
 
   const imageInputRef = useRef(null);
 
   function reset() {
-    setUploadImage(false);
+    dispatch(uploadImageFalse());
     formik.resetForm();
     // Reset file inputs
     if (imageInputRef.current) {
@@ -63,7 +66,7 @@ export default function UserSetting() {
                     ref={imageInputRef}
                     onChange={(event) => {
                       formik.setFieldValue('image', event.currentTarget.files[0]);
-                      setUploadImage(true);
+                      dispatch(uploadImageTrue());
                       // console.log(event.currentTarget.files[0])
                     }}
                     name='image' type="file" accept='image/*' id="addImage" />

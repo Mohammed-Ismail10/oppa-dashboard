@@ -1,14 +1,17 @@
 import { useFormik } from 'formik';
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import style from './AddEmoji.module.css';
 import { useNavigate } from 'react-router-dom';
 import img from '../../Assets/Images/uploadImage.png';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImageFalse, uploadImageTrue } from '../Redux/ResetSlice.js';
 
 
 
 export default function AddEmoji() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { uploadImage } = useSelector(({ reset }) => reset);
 
   function uploadItemsSubmit(values) {
     console.log(values);
@@ -23,14 +26,13 @@ export default function AddEmoji() {
   });
 
 
-  const [uploadImage, setUploadImage] = useState(false);
 
 
 
   const imageInputRef = useRef(null);
 
   function reset() {
-    setUploadImage(false);
+    dispatch(uploadImageFalse());
     formik.resetForm();
     // Reset file inputs
     if (imageInputRef.current) {
@@ -51,13 +53,13 @@ export default function AddEmoji() {
               <div className='text-center d-flex flex-column align-items-center mx-4'>
                 <span className='fs15 pb-2'>إضافة صورة الخلفية</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
-                <img className={`${uploadImage ? `${style.uploadImgDone}` : ``}`} src={img} alt="" />
+                  <img className={`${uploadImage ? `${style.uploadImgDone}` : ``}`} src={img} alt="" />
                   <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
                   <input className="d-none"
                     ref={imageInputRef}
                     onChange={(event) => {
                       formik.setFieldValue('image', event.currentTarget.files[0]);
-                      setUploadImage(true);
+                      dispatch(uploadImageTrue());
                       console.log(event.currentTarget.files[0])
                     }}
                     name='image' type="file" accept='image/*' id="addImage" />

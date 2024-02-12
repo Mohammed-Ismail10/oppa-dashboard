@@ -1,14 +1,16 @@
 import { useFormik } from 'formik';
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import style from './AddGifts.module.css';
 import { useNavigate } from 'react-router-dom';
 import svga from '../../Assets/Images/uploadSvga.png'
 import img from '../../Assets/Images/uploadImage.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImageFalse, uploadImageTrue, uploadSvgaErrorFalse, uploadSvgaErrorTrue, uploadSvgaFalse, uploadSvgaTrue } from '../Redux/ResetSlice.js';
 
 export default function AddGifts() {
-
-
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { uploadImage, uploadSvga, uploadSvgaError } = useSelector(({ reset }) => reset);
 
   function uploadItemsSubmit(values) {
     console.log(values);
@@ -26,9 +28,7 @@ export default function AddGifts() {
 
 
 
-  const [uploadImage, setUploadImage] = useState(false);
-  const [uploadSvga, setUploadSvga] = useState(false);
-  const [uploadSvgaError, setUploadSvgaError] = useState(false);
+
 
 
   const imageInputRef = useRef(null);
@@ -37,9 +37,9 @@ export default function AddGifts() {
 
 
   function reset() {
-    setUploadImage(false);
-    setUploadSvga(false);
-    setUploadSvgaError(false);
+    dispatch(uploadImageFalse());
+    dispatch(uploadSvgaFalse());
+    dispatch(uploadSvgaErrorFalse());
     formik.resetForm();
     // Reset file inputs
     if (imageInputRef.current) {
@@ -76,7 +76,7 @@ export default function AddGifts() {
                     ref={imageInputRef}
                     onChange={(event) => {
                       formik.setFieldValue('image', event.currentTarget.files[0]);
-                      setUploadImage(true);
+                      dispatch(uploadImageTrue());
                       console.log(event.currentTarget.files[0])
                     }}
                     name='image' type="file" accept='image/*' id="addImage" />
@@ -93,11 +93,11 @@ export default function AddGifts() {
                     onChange={(event) => {
                       if (event.currentTarget.files[0].name.endsWith('.svga')) {
                         formik.setFieldValue('svga', event.currentTarget.files[0]);
-                        setUploadSvga(true);
-                        setUploadSvgaError(false);
+                        dispatch(uploadSvgaTrue());
+                        dispatch(uploadSvgaErrorFalse());
                       }
                       else {
-                        setUploadSvgaError(true);
+                        dispatch(uploadSvgaErrorTrue());
                       }
                     }}
                     name='svga' type="file" id="addSVGA" />

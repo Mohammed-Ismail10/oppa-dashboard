@@ -1,16 +1,17 @@
 import { useFormik } from 'formik';
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import style from './AddBackgrounds.module.css';
 import { useNavigate } from 'react-router-dom';
 import img from '../../Assets/Images/uploadImage.png';
-
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImageFalse, uploadImageTrue } from '../Redux/ResetSlice.js';
 
 
 
 export default function AddBackgrounds() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { uploadImage } = useSelector(({ reset }) => reset);
 
   function uploadItemsSubmit(values) {
     console.log(values);
@@ -26,14 +27,13 @@ export default function AddBackgrounds() {
 
 
 
-  const [uploadImage, setUploadImage] = useState(false);
 
 
 
   const imageInputRef = useRef(null);
 
   function reset() {
-    setUploadImage(false);
+    dispatch(uploadImageFalse());
     formik.resetForm();
     // Reset file inputs
     if (imageInputRef.current) {
@@ -63,7 +63,7 @@ export default function AddBackgrounds() {
                     ref={imageInputRef}
                     onChange={(event) => {
                       formik.setFieldValue('image', event.currentTarget.files[0]);
-                      setUploadImage(true);
+                      dispatch(uploadImageTrue());
                       console.log(event.currentTarget.files[0])
                     }}
                     name='image' type="file" accept='image/*' id="addImage" />
