@@ -70,3 +70,7 @@
 .widthNavDelete{
   width: 33rem !important;
 }
+
+.searchWidth {
+  width: 20rem !important;
+}

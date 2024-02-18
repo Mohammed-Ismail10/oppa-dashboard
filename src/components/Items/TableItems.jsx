@@ -10,94 +10,146 @@ import { Url } from '../../helpers/constant.js';
 import dollar from '../../Assets/Images/dollarC.png'
 import { saveData } from '../Redux/UserQuerySlice.js';
 
-
-
-let headerChecked = false;
-
-const selectRow = {
-  mode: 'checkbox',
-  selectionHeaderRenderer: ({ indeterminate, ...rest }) => (
-    <div className="border badge p-0">
-      <input
-        type="checkbox"
-        className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none'
-        ref={(input) => {
-          if (input) input.indeterminate = indeterminate;
-        }}
-        {...rest}
-
-        onChange={(e) => {
-          if (rest.checked === false) {
-            headerChecked = true;
-          }
-          else {
-            headerChecked = false;
-          }
-
-        }}
-      />
-      <span className="py-2 badge text-main rounded fs15 border">
-        #
-      </span>
-    </div>
-  ),
-  selectionRenderer: ({ mode, ...rest }) => (
-    <>
-      {headerChecked ? console.log(rest.rowKey) : null}
-      <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
-        onChange={(e) => console.log(rest.rowKey)} />
-      <span className='text-main fs15'>{rest.rowIndex + 1}</span>
-    </>
-  ),
-
-};
-
-
-
-// const selectRow = {
+// const selectRowtest = {
 //   mode: 'checkbox',
 //   selectionHeaderRenderer: ({ indeterminate, ...rest }) => {
-//     const handleHeaderCheckboxChange = (e) => {
-//       const checkboxes = document.querySelectorAll('[name="dataApi"]');
-//       const ids = Array.from(checkboxes).map((checkbox) => checkbox.id);
-//       console.log(ids);
-//     };
-
+//     if (rest.checked === true) {
+//       headerInputChecked = true
+//     } else {
+//       headerInputChecked = false
+//     }
 //     return (
 //       <div className="border badge p-0">
-//         <input
-//           type="checkbox"
-//           className="form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none"
+//         <input type="checkbox" className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none'
 //           ref={(input) => {
 //             if (input) input.indeterminate = indeterminate;
 //           }}
 //           {...rest}
-//           onChange={handleHeaderCheckboxChange}
+//           onChange={(e) => {
+//             if (headerInputChecked === false) {
+//               singleInputs = []
+//             }
+//           }}
 //         />
 //         <span className="py-2 badge text-main rounded fs15 border">#</span>
 //       </div>
-//     );
+//     )
 //   },
-//   selectionRenderer: ({ mode, ...rest }) => (
-//     <>
-//       <input
-//         className="form-check-input shadow-none border-1 border-dark-subtle me-3"
-//         type={mode}
-//         {...rest}
-//         onChange={(e) => console.log(rest)}
-//       />
-//       <span className="text-main fs15">{rest.rowIndex + 1}</span>
-//     </>
-//   ),
+//   selectionRenderer: ({ mode, ...rest }) => {
+//     if (headerInputChecked) {
+//       checkedInputs.push(rest.rowKey)
+//       newCheckedInputs = checkedInputs.slice(0, rest.rowIndex + 1)
+//     }
+//     else {
+//       newCheckedInputs = []
+//     }
+
+//     return (
+//       <>
+//         <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
+//           onChange={(e) => {
+//             if (rest.checked === false) {
+//               singleInputs.push(rest.rowKey)
+//             }
+//             else {
+//               if (singleInputs.length) {
+//                 for (let i = 0; i < singleInputs.length; i++) {
+//                   if (rest.rowKey === singleInputs[i]) {
+//                     singleInputs.splice(i, 1)
+//                   }
+//                 }
+//               }
+//               else {
+//                 for (let i = 0; i < newCheckedInputs.length; i++) {
+//                   if (rest.rowKey === newCheckedInputs[i]) {
+//                     newCheckedInputs.splice(i, 1)
+//                   }
+//                 }
+//               }
+//             }
+//           }} />
+//         <span className='text-main fs15'>{rest.rowIndex + 1}</span>
+//       </>
+//     )
+//   },
 // };
 
 
-
-
-
-
+let headerInputChecked = false;
 
 export default function TableItems() {
+  let [limit, setLimit] = useState(10);
+  const [dataObj, setDataObj] = useState([]);
+
+  let dispatch = useDispatch();
+  let { resultSearch } = useSelector(({ userQuery }) => userQuery);
+
+
+  let checkedInputs = [];
+  var newCheckedInputs = [];
+  let singleInputs = [];
+
+
+
+
+
+
+
+
+
+
+  const selectRow = {
+    mode: 'checkbox',
+    selectionHeaderRenderer: ({ indeterminate, ...rest }) => {
+
+      return (
+        <div className="border badge p-0"> <input type="checkbox" className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none' ref={(input) => { if (input) input.indeterminate = indeterminate; }}{...rest}
+          onChange={(e) => e}
+        />
+          <span className="py-2 badge text-main rounded fs15 border">#</span>
+        </div>
+      )
+    },
+    selectionRenderer: ({ mode, ...rest }) => {
+      return (
+        <>
+          <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
+            onChange={(e) => e}
+          />
+          <span className='text-main fs15'>{rest.rowIndex + 1}</span>
+        </>
+      )
+    },
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const columns = [
     {
       dataField: 'title_ar', //must be same name of property in row which come from api
@@ -192,18 +244,19 @@ export default function TableItems() {
     },
   ];
 
-  let dispatch = useDispatch();
 
-  let [currentPage, setCurrentPage] = useState(() => {
-    const storedPage = localStorage.getItem('currentPageItems');
-    return storedPage ? parseInt(storedPage) : 0;
-  });
-  useEffect(() => {
-    localStorage.setItem('currentPageItems', currentPage);
-  }, [currentPage]);
 
-  let [limit, setLimit] = useState(10);
-  const [dataObj, setDataObj] = useState([]);
+  let [currentPage, setCurrentPage] = useState(0);
+  // let [currentPage, setCurrentPage] = useState(() => {
+  //   const storedPage = localStorage.getItem('currentPageItems');
+  //   return storedPage ? parseInt(storedPage) : 0;
+  // });
+  // useEffect(() => {
+  //   localStorage.setItem('currentPageItems', currentPage);
+  // }, [currentPage]);
+
+
+
 
   function getData() {
     return axios.get(`${Url}/gifts/dashboard?limit=${limit}&page=${currentPage}`);
@@ -216,9 +269,7 @@ export default function TableItems() {
       dispatch(saveData(data?.data.data));
     },
   });
-  // console.log(data?.data.data);
 
-  let { dataApi, resultSearch } = useSelector(({ userQuery }) => userQuery);
 
   async function updateActive(id) {
     await axios.patch(`${Url}/gifts/dashboard/${id}`);
@@ -227,7 +278,6 @@ export default function TableItems() {
 
 
   function increase() {
-    // currentPage += 1;
     setCurrentPage(currentPage += 1);
     refetch();
   }
@@ -235,7 +285,6 @@ export default function TableItems() {
   function decrease() {
     currentPage -= 1;
     if (currentPage < 0) {
-      // currentPage = 0;
       setCurrentPage(currentPage = 0);
       refetch();
     }
@@ -245,10 +294,14 @@ export default function TableItems() {
     }
   }
 
+
+
+
+
   useEffect(() => {
     setDataObj(resultSearch);
     return () => {
-      headerChecked = false;
+      headerInputChecked = false;
     }
   }, [resultSearch]);
 

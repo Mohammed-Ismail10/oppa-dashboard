@@ -216,7 +216,7 @@ export default function RoomCategories() {
               </NavLink>
             </Nav>
             <Nav className={`${style.widthNavDelete} justify-content-center pe-5 mt-3 mt-xxl-0`}>
-              <div className={`position-relative rounded-2 w-100`}>
+              <div className={`position-relative rounded-2 ${style.searchWidth}`}>
                 <i className="fa-solid fa-magnifying-glass position-absolute pt-2 mt-1 ps-3 h-100"></i>
                 <input className={`${style.shadowSearch} ${style.searchInput} form-control rounded-1 bg-search border-0 ps-5 h-100`} type="search" name="" id="" placeholder='يمكنك البحث هنا' />
               </div>

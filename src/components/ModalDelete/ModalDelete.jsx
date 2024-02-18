@@ -19,6 +19,7 @@ export default function ModalDelete() {
 
 
   async function deleteRow(rowId) {
+    console.log(rowId);
     let { data } = await axios.delete(``);
   }
   async function deleteAll() {

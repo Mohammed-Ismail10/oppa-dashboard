@@ -23,7 +23,7 @@ export default function Layout() {
             </div>}
 
 
-            <div className={`${pathname === '/login' ? 'col-lg-12' : 'col-xxl-10 col-9 '} vh-100 `}>
+            <div className={`${pathname === '/login' ? 'col-lg-12' : 'col-xxl-10 col-12 col-md-9 '} vh-100 `}>
               <Outlet />
             </div>
 
