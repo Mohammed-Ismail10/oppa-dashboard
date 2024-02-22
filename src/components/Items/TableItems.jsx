@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import style from './Items.module.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
@@ -9,147 +9,12 @@ import { useQuery } from 'react-query';
 import { Url } from '../../helpers/constant.js';
 import dollar from '../../Assets/Images/dollarC.png'
 import { saveData } from '../Redux/UserQuerySlice.js';
-
-// const selectRowtest = {
-//   mode: 'checkbox',
-//   selectionHeaderRenderer: ({ indeterminate, ...rest }) => {
-//     if (rest.checked === true) {
-//       headerInputChecked = true
-//     } else {
-//       headerInputChecked = false
-//     }
-//     return (
-//       <div className="border badge p-0">
-//         <input type="checkbox" className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none'
-//           ref={(input) => {
-//             if (input) input.indeterminate = indeterminate;
-//           }}
-//           {...rest}
-//           onChange={(e) => {
-//             if (headerInputChecked === false) {
-//               singleInputs = []
-//             }
-//           }}
-//         />
-//         <span className="py-2 badge text-main rounded fs15 border">#</span>
-//       </div>
-//     )
-//   },
-//   selectionRenderer: ({ mode, ...rest }) => {
-//     if (headerInputChecked) {
-//       checkedInputs.push(rest.rowKey)
-//       newCheckedInputs = checkedInputs.slice(0, rest.rowIndex + 1)
-//     }
-//     else {
-//       newCheckedInputs = []
-//     }
-
-//     return (
-//       <>
-//         <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
-//           onChange={(e) => {
-//             if (rest.checked === false) {
-//               singleInputs.push(rest.rowKey)
-//             }
-//             else {
-//               if (singleInputs.length) {
-//                 for (let i = 0; i < singleInputs.length; i++) {
-//                   if (rest.rowKey === singleInputs[i]) {
-//                     singleInputs.splice(i, 1)
-//                   }
-//                 }
-//               }
-//               else {
-//                 for (let i = 0; i < newCheckedInputs.length; i++) {
-//                   if (rest.rowKey === newCheckedInputs[i]) {
-//                     newCheckedInputs.splice(i, 1)
-//                   }
-//                 }
-//               }
-//             }
-//           }} />
-//         <span className='text-main fs15'>{rest.rowIndex + 1}</span>
-//       </>
-//     )
-//   },
-// };
+import { useTable } from './../../Hooks/useTable';
+import { decreasePage, increasePage } from '../Redux/TableSlice.js';
 
 
-let headerInputChecked = false;
 
 export default function TableItems() {
-  let [limit, setLimit] = useState(10);
-  const [dataObj, setDataObj] = useState([]);
-
-  let dispatch = useDispatch();
-  let { resultSearch } = useSelector(({ userQuery }) => userQuery);
-
-
-  let checkedInputs = [];
-  var newCheckedInputs = [];
-  let singleInputs = [];
-
-
-
-
-
-
-
-
-
-
-  const selectRow = {
-    mode: 'checkbox',
-    selectionHeaderRenderer: ({ indeterminate, ...rest }) => {
-
-      return (
-        <div className="border badge p-0"> <input type="checkbox" className='form-check-input border-1 border-dark-subtle p-2 mt-2 mx-1 shadow-none' ref={(input) => { if (input) input.indeterminate = indeterminate; }}{...rest}
-          onChange={(e) => e}
-        />
-          <span className="py-2 badge text-main rounded fs15 border">#</span>
-        </div>
-      )
-    },
-    selectionRenderer: ({ mode, ...rest }) => {
-      return (
-        <>
-          <input className='form-check-input shadow-none border-1 border-dark-subtle me-3' type={mode} {...rest}
-            onChange={(e) => e}
-          />
-          <span className='text-main fs15'>{rest.rowIndex + 1}</span>
-        </>
-      )
-    },
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const columns = [
     {
       dataField: 'title_ar', //must be same name of property in row which come from api
@@ -244,17 +109,34 @@ export default function TableItems() {
     },
   ];
 
+  // let [currentPage, setCurrentPage] = useState(0);
+  // function increase() {
+  //   setCurrentPage(currentPage += 1);
+  //   refetch();
+  // }
+  // function decrease() {
+  //   currentPage -= 1;
+  //   if (currentPage < 0) {
+  //     setCurrentPage(currentPage = 0);
+  //     refetch();
+  //   }
+  //   else {
+  //     setCurrentPage(currentPage);
+  //     refetch();
+  //   }
+  // }
 
-
-  let [currentPage, setCurrentPage] = useState(0);
-  // let [currentPage, setCurrentPage] = useState(() => {
-  //   const storedPage = localStorage.getItem('currentPageItems');
-  //   return storedPage ? parseInt(storedPage) : 0;
-  // });
-  // useEffect(() => {
-  //   localStorage.setItem('currentPageItems', currentPage);
-  // }, [currentPage]);
-
+  let { currentPage } = useSelector(({ table }) => table);
+  function increase() {
+    dispatch(increasePage())
+    currentPage++
+    refetch();
+  }
+  function decrease() {
+    dispatch(decreasePage())
+    currentPage--
+    refetch()
+  }
 
 
 
@@ -269,41 +151,17 @@ export default function TableItems() {
       dispatch(saveData(data?.data.data));
     },
   });
-
-
   async function updateActive(id) {
     await axios.patch(`${Url}/gifts/dashboard/${id}`);
     refetch();
   }
 
-
-  function increase() {
-    setCurrentPage(currentPage += 1);
-    refetch();
-  }
-
-  function decrease() {
-    currentPage -= 1;
-    if (currentPage < 0) {
-      setCurrentPage(currentPage = 0);
-      refetch();
-    }
-    else {
-      setCurrentPage(currentPage);
-      refetch();
-    }
-  }
+  let { dispatch, limit, setLimit, dataObj, setDataObj, checkedInputs, selectRow } = useTable(refetch);
 
 
-
-
-
-  useEffect(() => {
-    setDataObj(resultSearch);
-    return () => {
-      headerInputChecked = false;
-    }
-  }, [resultSearch]);
+  // useEffect(() => {
+  //   console.log(checkedInputs);
+  // }, [checkedInputs]);
 
 
 
@@ -340,7 +198,7 @@ export default function TableItems() {
               <div className='mx-2 d-flex align-items-center'>
                 <i onClick={() => { increase(); setLimit(10); }} className="fa-solid fa-caret-right curser-pointer"></i>
                 <div className="numPage text-center p-1 fs15 text-white mx-1 rounded-circle bg-main">{currentPage + 1}</div>
-                <i onClick={decrease} className="fa-solid fa-caret-left curser-pointer"></i>
+                <i onClick={() => { decrease(); }} className="fa-solid fa-caret-left curser-pointer"></i>
               </div>
               <div className='mx-2'>
                 <Dropdown>
@@ -349,8 +207,8 @@ export default function TableItems() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => { setLimit(limit = 30); refetch() }}>30</Dropdown.Item>
-                    <Dropdown.Item onClick={() => { setLimit(limit = 20); refetch() }}>20</Dropdown.Item>
-                    <Dropdown.Item onClick={() => { setLimit(limit = 10); refetch() }}>10</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { setLimit(limit = 20); checkedInputs.splice(20, 10); refetch() }}>20</Dropdown.Item>
+                    <Dropdown.Item onClick={() => { setLimit(limit = 10); checkedInputs.splice(10, 20); refetch() }}>10</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>

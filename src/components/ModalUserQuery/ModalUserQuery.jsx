@@ -19,15 +19,15 @@ export default function ModalUserQuery() {
 
   const [value, setValue] = useState(0);
 
-  let resultSearch = [];
+  let resultQuery = [];
 
   function search() {
     console.log('helloo');
     console.log(value);
     console.log(dataApi);
 
-    resultSearch = dataApi.filter((obj) => obj.id === parseInt(value));
-    console.log(resultSearch);
+    resultQuery = dataApi.filter((obj) => obj.id === parseInt(value));
+    console.log(resultQuery);
 
     handleCloseUserQueryBig();
   }
