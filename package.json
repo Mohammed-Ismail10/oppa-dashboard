@@ -2,7 +2,7 @@
   "name": "oppa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": "https://Mohammed-Ismail10.github.io/oppa-dashboard",
   "dependencies": {
     "@canvasjs/charts": "^3.7.32",
     "@canvasjs/react-charts": "^1.0.0",
