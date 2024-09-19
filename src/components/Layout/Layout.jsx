@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import SideBar from '../SideBar/SideBar.jsx'
-import style from './Layout.module.css';
+// import style from './Layout.module.css';
 
 
 export default function Layout() {
@@ -14,8 +14,8 @@ export default function Layout() {
 
   return (
     <>
-      <section className=''>
-        <div className="container-fluid ps-0">
+      <section>
+        <div className="container-fluid px-0">
           <div className="row g-0">
 
             {pathname === '/login' ? null : <div className="col-xxl-2 col-3" >
@@ -23,7 +23,7 @@ export default function Layout() {
             </div>}
 
 
-            <div className={`${pathname === '/login' ? 'col-lg-12' : 'col-xxl-10 col-12 col-md-9 '} vh-100 `}>
+            <div className={`${pathname === '/login' ? 'col-lg-12' : 'col-xxl-10 col-12 col-md-9 '} vh-100`}>
               <Outlet />
             </div>
 

@@ -172,9 +172,9 @@ export default function Customers() {
     return storedPage ? parseInt(storedPage) : 0;
   });
 
-  useEffect(() => {
-    localStorage.setItem('currentPageCustomers', currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   localStorage.setItem('currentPageCustomers', currentPage);
+  // }, [currentPage]);
 
 
 

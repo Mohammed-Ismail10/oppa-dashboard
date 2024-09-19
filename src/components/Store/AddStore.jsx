@@ -15,7 +15,7 @@ export default function AddStore() {
 
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/app/blacklist');
+    navigate('/app/store');
   }
 
   let formik = useFormik({
@@ -58,7 +58,7 @@ export default function AddStore() {
                 <span className='fs15 pb-2'>إضافة صورة الهدايا</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
                   <img className={`${uploadImage ? `${style.uploadImgDone}` : ``}`} src={img} alt="" />
-                  <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
+                  <span className={`${uploadImage ? `${style.textGreen}` : ''} text-gray fs15 pt-3 d-block`}>رفع الصورة</span>
                   <input className="d-none"
                     ref={imageInputRef}
                     onChange={(event) => {

@@ -12,6 +12,9 @@ let userQuerySlice = createSlice({
     saveData: (initialState, { payload }) => {
       initialState.dataApi = payload;
     },
+    emptyData: (initialState) => {
+      initialState.dataApi = [];
+    },
     search: (initialState, { payload }) => {
       initialState.resultSearch = [];
       initialState.resultSearch = initialState.dataApi.filter((obj) => obj.title_ar.toLowerCase().includes(payload.toLowerCase()));
@@ -22,4 +25,4 @@ let userQuerySlice = createSlice({
 
 
 export let userQueryReducer = userQuerySlice.reducer;
-export let { saveData, search } = userQuerySlice.actions;
+export let { saveData, search, emptyData } = userQuerySlice.actions;

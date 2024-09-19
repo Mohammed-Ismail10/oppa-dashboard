@@ -9,6 +9,9 @@ let tableSlice = createSlice({
   name: 'table',
   initialState,
   reducers: {
+    resetPage: (state) => {
+      state.currentPage = 0;
+    },
     increasePage: (state) => {
       state.currentPage += 1;
     },
@@ -22,4 +25,4 @@ let tableSlice = createSlice({
 });
 
 export let tableReducer = tableSlice.reducer;
-export let { increasePage, decreasePage } = tableSlice.actions;
+export let { increasePage, decreasePage, resetPage } = tableSlice.actions;

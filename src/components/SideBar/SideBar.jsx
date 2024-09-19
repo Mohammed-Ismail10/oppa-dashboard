@@ -249,12 +249,13 @@ export default function SideBar() {
       </Drawer>
 
 
-      <div className={`bottom-0 top-0 shadow d-flex flex-column justify-content-between pt-3 position-fixed ${style.sideBarWidth} d-none d-md-block overflow-auto`}>
+      <div className={`h-100 shadow d-flex flex-column justify-content-between pt-3 position-fixed ${style.sideBarWidth} d-none d-md-block overflow-auto`}>
 
         <div className='pb-2'>
           <div className='text-center mt-3'>
             <img className='h-50 w-50' src={image} alt="personal img" loading='lazy' />
           </div>
+
           <div className='d-flex justify-content-around align-items-center pt-2'>
             <span></span>
             <h2 className='mb-0 text-main h4 fw-bold'>{localStorage.getItem('username')}</h2>
@@ -262,11 +263,12 @@ export default function SideBar() {
               <i className="fa-regular fa-pen-to-square text-main"></i>
             </Link>}
           </div>
+
         </div>
 
 
         <div className='overflow-auto mt-5 pt-5'>
-          <ul className='list-unstyled mb-5 pb-5 pe-'>
+          <ul className='list-unstyled mb-5 pb-5'>
             <Accordion>
 
               <div className='py-2 mt-'>
@@ -442,10 +444,10 @@ export default function SideBar() {
 
 
         <div className="mb-4 pb-1 mt-5 pt-5">
-          <Link onClick={() => dispatch(handleShowLogOut())} className={`text-red fs15 text-decoration-none ${style.logoutHover} d-block py-2 ps-5`}>
+          <div onClick={() => dispatch(handleShowLogOut())} className={`text-red fs15 text-decoration-none ${style.logoutHover} d-block py-2 ps-5 curser-pointer`}>
             <img className={`${style.logoutImg} me-2 ps-2`} alt="logout" />
             تسجيل الخروج
-          </Link>
+          </div>
         </div>
       </div>
 

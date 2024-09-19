@@ -107,9 +107,9 @@ export default function AllFolders() {
     const storedPage = localStorage.getItem('currentPageAllFolders');
     return storedPage ? parseInt(storedPage) : 0;
   });
-  useEffect(() => {
-    localStorage.setItem('currentPageAllFolders', currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   localStorage.setItem('currentPageAllFolders', currentPage);
+  // }, [currentPage]);
 
 
 

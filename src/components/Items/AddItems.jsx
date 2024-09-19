@@ -17,12 +17,13 @@ export default function AddItems() {
 
   function uploadItemsSubmit(values) {
     console.log(values);
-    navigate('/gift/items')
+    // navigate('/gift/items')
   }
 
   let formik = useFormik({
     initialValues: {
       giftName: "",
+      typeGift:'',
       image: null,
       svga: null
     },
@@ -54,17 +55,17 @@ export default function AddItems() {
 
   return (
     <>
-      <div className="container-fluid pt-5 h-100">
-        <form className='w-75 mx-auto d-flex flex-column justify-content-between h-100 ' onSubmit={formik.handleSubmit}>
+      <div className="container pt-5 h-100">
+        <form className='d-flex flex-column justify-content-between h-100 ' onSubmit={formik.handleSubmit}>
           <div>
             {/* upload images */}
-            <div className='d-flex justify-content-center me-5'>
+            <div className='d-flex justify-content-center'>
 
               <div className='text-center d-flex flex-column align-items-center mx-4'>
                 <span className='fs15 pb-2'>إضافة الصورة</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addImage">
                   <img className={`${uploadImage ? `${style.uploadImgDone}` : `${style.uploadImg}`}`} src={img} alt="" />
-                  <span className={`${uploadImage ? `${style.textGreen}` : 'text-gray'} fs15 pt-3 d-block`}>رفع الصورة</span>
+                  <span className={`${uploadImage ? `${style.textGreen}` : ''} text-gray fs15 pt-3 d-block`}>رفع الصورة</span>
                   <input className="d-none"
                     ref={imageInputRef}
                     onChange={(event) => {
@@ -80,7 +81,7 @@ export default function AddItems() {
                 <span className='fs15 pb-2'>إضافة ملف الSVGA</span>
                 <label className={`${style.imgPick} pt-4 curser-pointer d-inline`} htmlFor="addSVGA">
                   <img className={`${uploadSvga ? `${style.uploadSvgaDone}` : uploadSvgaError ? `${style.uploadSvgaError}` : ``}`} src={svga} alt="" />
-                  <span className={`${uploadSvga ? `${style.textGreen}` : uploadSvgaError ? `${style.textRed}` : `text-gray`} text-gray fs15 pt-3 d-block`}>رفع الSVGA</span>
+                  <span className={`${uploadSvga ? `${style.textGreen}` : uploadSvgaError ? `${style.textRed}` : ``} text-gray fs15 pt-3 d-block`}>رفع الSVGA</span>
                   <input className="d-none"
                     ref={svgaInputRef}
                     onChange={(event) => {
@@ -131,7 +132,15 @@ export default function AddItems() {
 
               <div className="col-6 pb-4">
                 <label className='fs15 pb-1' htmlFor="typeGift">نوع الهدايا</label>
-                <select className={`text-gray fs15 fw-medium form-select py-3`} id="inputGroupSelect01">
+                <select
+                  className={`text-gray fs15 fw-medium form-select py-3`}
+                  id="inputGroupSelect01"
+                  name="typeGift"
+                  value={formik.values.typeGift}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                >
+
                   <option selected>Hot</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
@@ -144,8 +153,8 @@ export default function AddItems() {
 
 
           <div dir='ltr' className="col-12 py-1 mt-5">
-            <button className={`${style.addBtnWidth} btn text-white px-4 fs15 fw-bold`} type="submit">إضافة</button>
-            <button onClick={() => reset()} className='btn bg-white text-red me-4 fs15 fw-bold' type="button">إعادة ضبط</button>
+            <button className={`${style.addBtnWidth} btn text-white px-5 fs15 fw-bold`} type="submit">إضافة</button>
+            <button onClick={() => reset()} className='btn bg-white text-red me-4 fs15 fw-bold border-0' type="button">إعادة ضبط</button>
           </div>
 
 

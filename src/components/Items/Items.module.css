@@ -28,12 +28,10 @@
   border-collapse: separate !important;
 }
 
-
-
 .heightItems {
   height: 83.5% !important;
 }
-.rowShadow:hover{
+.rowShadow:hover {
   box-shadow: 0 0 0.625rem 0.00625rem gray !important;
 }
 
@@ -60,13 +58,18 @@
   flex: none !important;
 }
 
-
-.widthNavDelete{
-  width: 33rem !important;
+.widthNavDelete {
+  /* width: 33rem !important; */
 }
 
 .searchWidth {
   width: 20rem !important;
+}
+
+@media screen and (max-width: 992px) {
+  .searchWidth {
+    width: 100% !important;
+  }
 }
 
 .shadowSearch {

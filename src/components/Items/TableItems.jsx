@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import style from './Items.module.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { handleShowDeleteRow } from '../Redux/ModalsSlice.js';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -159,9 +159,9 @@ export default function TableItems() {
   let { dispatch, limit, setLimit, dataObj, setDataObj, checkedInputs, selectRow } = useTable(refetch);
 
 
-  // useEffect(() => {
-  //   console.log(checkedInputs);
-  // }, [checkedInputs]);
+
+
+
 
 
 

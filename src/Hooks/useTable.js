@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { resetPage } from "../components/Redux/TableSlice.js";
+import { emptyData } from "../components/Redux/UserQuerySlice.js";
 
 
 
@@ -59,6 +61,12 @@ export function useTable(){
   useEffect(() => {
     setDataObj(resultSearch);
   }, [resultSearch]);
+  useEffect(() => {
+    return () => {
+      dispatch(resetPage())
+      dispatch(emptyData())
+    }
+  }, []);
 
 
 

@@ -57,11 +57,11 @@ export default function AddVip() {
 
   return (
     <>
-      <div className="container-fluid pt-5 h-100">
-        <form className='w-75 mx-auto d-flex flex-column justify-content-between h-100' onSubmit={formik.handleSubmit}>
+      <div className="container pt-5 h-100">
+        <form className=' d-flex flex-column justify-content-between h-100' onSubmit={formik.handleSubmit}>
           <div>
             {/* upload images */}
-            <div className='d-flex justify-content-center me-5'>
+            <div className='d-flex justify-content-center'>
 
               <div className='text-center d-flex flex-column align-items-center mx-4'>
                 <span className='fs15 pb-2'>إضافة صورة</span>
@@ -128,8 +128,8 @@ export default function AddVip() {
 
 
           <div dir='ltr' className="col-12 py-1">
-            <button className={`${style.addBtnWidth} btn text-white px-4 fs15 fw-bold`} type="submit">إضافة</button>
-            <button onClick={() => reset()} className='btn bg-white text-red me-4 fs15 fw-bold' type="button">إعادة ضبط</button>
+            <button className={`${style.addBtnWidth} btn text-white px-5 fs15 fw-bold`} type="submit">إضافة</button>
+            <button onClick={() => reset()} className='btn bg-white text-red me-4 fs15 fw-bold border-0' type="button">إعادة ضبط</button>
           </div>
 
 

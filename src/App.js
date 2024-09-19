@@ -1,6 +1,5 @@
-// import logo from './logo.svg';
 import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout.jsx';
 import Home from './components/Home/Home.jsx';
 import Login from './components/Login/Login.jsx';
@@ -88,7 +87,7 @@ function App() {
 
 
 
-  let routers = createBrowserRouter([
+  let routers = createHashRouter([
     {
       path: '', element: <Layout />, children: [
         { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },

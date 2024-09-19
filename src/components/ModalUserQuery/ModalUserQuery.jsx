@@ -19,7 +19,7 @@ export default function ModalUserQuery() {
 
   const [value, setValue] = useState(0);
 
-  let resultQuery = [];
+  let [resultQuery, setResultQuery] = useState([])
 
   function search() {
     console.log('helloo');
@@ -40,7 +40,7 @@ export default function ModalUserQuery() {
       <Modal className='custom-modal-change' centered animation={false} show={showUserQuery} onHide={handleCloseUserQueryBig}>
         <Modal.Body className='position-relative '>
 
-          <img onClick={() => handleCloseUserQueryBig()} className='position-absolute end-0 me-3 curser-pointer' src={closeBtn} alt="closeBtn" />
+          <img onClick={handleCloseUserQueryBig} className='position-absolute end-0 me-3 curser-pointer' src={closeBtn} alt="closeBtn" />
 
           <div className={`${style.widthImg} text-center mx-auto ratio ratio-1x1 rounded-circle overflow-hidden mb-5`}>
             <img src={image} alt="personal img" loading='lazy' width={100} />
