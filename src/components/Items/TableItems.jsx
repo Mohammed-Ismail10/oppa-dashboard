@@ -62,17 +62,35 @@ export default function TableItems() {
         حالة الهدايا
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
-      formatter: (_, { id }) =>
-        data?.data?.data.map((gift) => {
+      formatter: (_, { id }) => {
+        return data?.data?.data.map((gift) => {
           if (id === gift.id) {
             if (gift.active === 1) {
-              return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
-            }
-            else {
-              return <span key={id} onClick={() => updateActive(id)} className={`badge py-2 fs15 px-4 curser-pointer bg-red`}>غير نشيط</span>
+              return (
+                <span
+                  key={id}
+                  onClick={() => updateActive(id)}
+                  className="badge py-2 fs15 px-4 curser-pointer bg-green"
+                >
+                  مُفعل
+                </span>
+              );
+            } else {
+              return (
+                <span
+                  key={id}
+                  onClick={() => updateActive(id)}
+                  className="badge py-2 fs15 px-4 curser-pointer bg-red"
+                >
+                  غير مُفعل
+                </span>
+              );
             }
           }
-        })
+          return null; // If id !== gift.id, return null
+        });
+      }
+
     },
     {
       dataField: 'image', //must be same name of property in row which come from api

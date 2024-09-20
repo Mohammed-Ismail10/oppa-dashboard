@@ -80,7 +80,7 @@ export default function TableBackgrounds() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-        data?.data?.data.map((background) => {
+        rows.map((background) => {
           if (id === background.id) {
             if (background.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>

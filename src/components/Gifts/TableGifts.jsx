@@ -89,7 +89,7 @@ export default function TableGifts() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-        data?.data?.data.map((gift) => {
+        rows.map((gift) => {
           if (id === gift.id) {
             if (gift.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>

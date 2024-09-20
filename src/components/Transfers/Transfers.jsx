@@ -102,7 +102,7 @@ export default function Transfers() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-        data?.data?.data.map((transfer) => {
+        rows.map((transfer) => {
           if (id === transfer.id) {
             if (transfer.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>

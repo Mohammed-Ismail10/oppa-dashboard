@@ -41,8 +41,8 @@ const selectRow = {
 
 
 const rows = [
-  { id: 1, mid: 25, recieveId: 254, block: 125, active: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
-  { id: 2, mid: 25, recieveId: 254, block: 125, active: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" },
+  { id: 1, mid: 25, recieveId: 254, block: 125, active: 1 },
+  { id: 2, mid: 25, recieveId: 254, block: 125, active: 1 },
 ];
 
 
@@ -87,7 +87,7 @@ export default function TableBlackList() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-        data?.data?.data.map((black) => {
+        rows.map((black) => {
           if (id === black.id) {
             if (black.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>

@@ -77,7 +77,7 @@ export default function TableEnableFeature() {
       </span>,
       classes: 'text-main fs15 pt-3 px-0',
       formatter: (_, { id }) =>
-        data?.data?.data.map((feature) => {
+        rows.map((feature) => {
           if (id === feature.id) {
             if (feature.active === 1) {
               return <span key={id} className={`badge py-2 fs15 px-4 curser-pointer bg-green`}>نشيط</span>
